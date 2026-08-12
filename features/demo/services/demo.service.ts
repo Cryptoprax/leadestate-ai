@@ -1,0 +1,1 @@
+import"server-only";import{createSupabaseServerClient}from"@/lib/supabase/server";export class DemoService{async generate(){const client=await createSupabaseServerClient(),{data,error}=await client.rpc("generate_demo_organization");if(error)throw error;return data as{organization_id:string;workspace_id:string}}}

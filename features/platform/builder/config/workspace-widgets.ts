@@ -1,0 +1,1 @@
+export const workspaceWidgetCatalog={property:["pricing","location","owner","specifications"],lead:["budget","source","priority","requirements"],deal:["stage","probability","revenue"],aiEmployee:["department","status","approval"]}as const;

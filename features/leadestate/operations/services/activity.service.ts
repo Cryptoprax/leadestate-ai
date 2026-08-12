@@ -1,0 +1,1 @@
+import"server-only";import{ActivityRepository}from"../repositories/activity.repository";import{operationsContext}from"./context";export class ActivityService{async list(limit=40){const c=await operationsContext();return new ActivityRepository(c.client,c.organizationId,c.workspaceId).list(limit)}}

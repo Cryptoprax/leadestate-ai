@@ -1,0 +1,1 @@
+"use server";import{redirect}from"next/navigation";import{DemoService}from"./services/demo.service";export async function generateDemoOrganizationAction(){await new DemoService().generate();redirect("/leadestate?demo=ready")}

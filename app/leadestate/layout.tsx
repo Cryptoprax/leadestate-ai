@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";import{LeadEstateShell}from"@/features/leadestate/components/LeadEstateShell";export default function Layout({children}:{children:ReactNode}){return <LeadEstateShell>{children}</LeadEstateShell>}

@@ -1,0 +1,1 @@
+import"server-only";import{IntegrationProviderRegistry}from"../provider/registry";export class ProviderRegistryService{constructor(private registry=new IntegrationProviderRegistry()){}list(){return this.registry.codes().map(code=>this.registry.resolve(code))}resolve(code:string){return this.registry.resolve(code)}async health(code:string){return this.resolve(code).health()}}

@@ -1,0 +1,54 @@
+# Domain Glossary
+
+- **Agency/Brokerage:** company authorized to represent parties in property transactions.
+- **Agent:** employee or external professional acting within assigned authority.
+- **AI Employee:** governed digital-worker configuration with explicit capabilities and approvals.
+- **Buyer/Seller:** contact roles in an acquisition/disposal.
+- **Tenant/Landlord:** contact or company roles in a lease.
+- **Contact:** canonical natural-person party.
+- **Company:** legal or operating business party; not the SaaS tenant.
+- **Organization:** contracting SaaS tenant and isolation boundary.
+- **Workspace:** tenant-owned operating partition.
+- **Branch/Department/Team:** organizational structures that scope responsibility.
+- **Lead:** commercial interest linked to a contact.
+- **Prospect/Customer:** relationship lifecycle classifications; not synonyms for Lead.
+- **Listing:** market-facing offer of a property for sale or rent.
+- **Property:** land, building, development, or unit represented as inventory.
+- **MLS:** external multiple-listing service; its ID is an integration alias.
+- **Owner:** contact/company holding an ownership interest in property.
+- **Developer:** company or contact responsible for a development.
+- **Investor:** contact/company seeking investment outcomes.
+- **Pipeline/Stage:** configurable progression model and one ordered state.
+- **Deal:** prospective or completed commercial transaction.
+- **Viewing:** scheduled inspection of a property.
+- **Offer:** proposed commercial terms for a deal.
+- **Reservation/Booking:** time-bound hold; Booking may also mean an appointment and must be qualified.
+- **Escrow:** third-party custody arrangement for funds/documents.
+- **Closing/Completion:** legal and financial finalization of a transaction.
+- **Commission:** compensation generated from a completed deal.
+- **Rental/Lease:** right to occupy/use property for a defined term/payment.
+- **Mandate:** authority granted to market or transact a property.
+- **Campaign:** coordinated marketing initiative.
+- **Attribution:** association of a business outcome with touchpoints.
+- **Activity:** operational timeline item.
+- **Audit Event:** immutable compliance evidence.
+- **Domain Event:** versioned statement that a business fact occurred.
+- **Task:** assignable unit of work.
+- **Calendar Event:** time-bound commitment or block.
+- **Document:** governed, versioned business content.
+- **Media Asset:** storage-independent binary descriptor.
+- **Consent:** evidence that a channel/purpose is permitted.
+- **Role/Permission:** configurable bundle and atomic capability.
+- **Workflow:** versioned graph of triggered steps.
+- **Approval:** human or policy decision required before governed action.
+- **Knowledge Base:** governed sources available to AI capabilities.
+- **Recommendation:** non-authoritative AI proposal with evidence/confidence.
+- **Entitlement:** capability or limit granted commercially.
+- **Usage:** measured consumption of an entitled capability.
+- **Metric:** governed quantitative definition.
+- **Report:** saved semantic query and presentation.
+- **Projection:** derived read model rebuilt from source facts/events.
+- **Idempotency:** repeated delivery produces one business effect.
+- **Correlation/Causation:** identifiers connecting a business journey and its direct trigger.
+- **Soft delete/Archive:** non-destructive removal from active operations.
+- **RPO/RTO:** acceptable data-loss window and recovery-time objective.

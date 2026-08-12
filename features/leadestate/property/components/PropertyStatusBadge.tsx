@@ -1,0 +1,1 @@
+import{propertyStatuses}from"../config/catalogs";export function PropertyStatusBadge({status}:{status:string}){const label=propertyStatuses.find(x=>x.code===status)?.label.default??status;return <span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.07] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-cyan-200">{label}</span>}

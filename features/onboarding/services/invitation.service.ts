@@ -1,0 +1,1 @@
+import"server-only";import type{OnboardingInput}from"../validation/onboarding";export class InvitationService{normalize(invitations:OnboardingInput["invitations"]){const seen=new Set<string>();return invitations.filter(item=>{const email=item.email.toLowerCase();if(seen.has(email))return false;seen.add(email);return true}).map(item=>({...item,email:item.email.toLowerCase()}))}}

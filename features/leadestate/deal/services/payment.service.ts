@@ -1,0 +1,1 @@
+import"server-only";import{createSupabaseServerClient}from"@/lib/supabase/server";export class PaymentService{async create(input:Record<string,unknown>){const client=await createSupabaseServerClient();const{data,error}=await client.rpc("create_payment",{p_input:input});if(error)throw error;return data}}

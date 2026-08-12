@@ -1,0 +1,1 @@
+"use client";import{useState}from"react";export function useWorkspacePanel(){const[rightPanelOpen,setRightPanelOpen]=useState(false);return{rightPanelOpen,setRightPanelOpen,toggleRightPanel:()=>setRightPanelOpen(value=>!value)}}

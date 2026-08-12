@@ -1,0 +1,1 @@
+import{getPrompt,promptRegistry,type PromptKey}from"../prompts/registry";export class PromptRegistryService{list(){return Object.values(promptRegistry)}resolve(key:PromptKey,employeeCode:string){return getPrompt(key,employeeCode)}}

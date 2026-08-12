@@ -1,0 +1,1 @@
+import"server-only";import{CustomerRepository}from"../repositories/customer.repository";import{platformStaffContext}from"./platform-context";export class CustomerService{async list(){const c=await platformStaffContext();return new CustomerRepository(c.client).list()}async detail(id:string){const c=await platformStaffContext();return new CustomerRepository(c.client).detail(id)}}

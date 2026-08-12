@@ -1,0 +1,1 @@
+import"server-only";import{integrationContext}from"./integration-context";import{HealthRepository}from"../repositories/health.repository";export class RetryQueueService{async retry(id:string,version:number){const c=await integrationContext();return new HealthRepository(c.client,c.organizationId,c.workspaceId).retry(id,version)}}

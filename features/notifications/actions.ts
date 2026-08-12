@@ -1,0 +1,1 @@
+"use server";import{revalidatePath}from"next/cache";import{NotificationService}from"./services/notification.service";export async function dismissNotificationAction(form:FormData){await new NotificationService().dismiss(String(form.get("notificationId")??""));revalidatePath("/leadestate/notifications")}

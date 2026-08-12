@@ -1,0 +1,1 @@
+import"server-only";import{UsageRepository}from"../repositories/usage.repository";import{billingContext}from"./billing-context";export class UsageService{async list(){const c=await billingContext();return new UsageRepository(c.client,c.organizationId,c.workspaceId).list()}}

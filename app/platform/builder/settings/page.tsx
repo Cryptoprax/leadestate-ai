@@ -1,0 +1,2 @@
+import{BuilderPage,SettingsGrid}from"@/features/platform/builder/components/BuilderComponents";import{settings}from"@/features/platform/builder/config";export default function Page(){return <BuilderPage eyebrow="Settings Builder" title="Dynamic settings" description="Schema-driven settings sections ready for validation, permission, localization, and future persistence adapters."><SettingsGrid sections={settings}/></BuilderPage>
+}

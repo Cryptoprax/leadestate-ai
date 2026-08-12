@@ -1,0 +1,86 @@
+import type { User } from "../types/user";
+
+export const users: User[] = [
+  {
+    id: "usr-amelia",
+    name: "Amelia Chen",
+    email: "amelia@northstar.example",
+    initials: "AC",
+    avatarTone: "from-cyan-300 to-blue-500",
+    role: "Organization Owner",
+    organization: "Northstar Holdings",
+    workspace: "LeadEstate Global",
+    status: "Active",
+    lastActive: "2 minutes ago",
+  },
+  {
+    id: "usr-james",
+    name: "James Wilson",
+    email: "james@meridian.example",
+    initials: "JW",
+    avatarTone: "from-violet-300 to-fuchsia-500",
+    role: "Regional Head",
+    organization: "Meridian Group",
+    workspace: "UK Operations",
+    status: "Active",
+    lastActive: "18 minutes ago",
+  },
+  {
+    id: "usr-priya",
+    name: "Priya Raman",
+    email: "priya@aurora.example",
+    initials: "PR",
+    avatarTone: "from-amber-300 to-orange-500",
+    role: "Platform Admin",
+    organization: "Aurora Ventures",
+    workspace: "APAC Launch",
+    status: "Invited",
+    lastActive: "Invitation pending",
+  },
+  {
+    id: "usr-daniel",
+    name: "Daniel Kim",
+    email: "daniel@northstar.example",
+    initials: "DK",
+    avatarTone: "from-emerald-300 to-teal-500",
+    role: "Team Lead",
+    organization: "Northstar Holdings",
+    workspace: "Sales Operations",
+    status: "Active",
+    lastActive: "Yesterday",
+  },
+  {
+    id: "usr-sofia",
+    name: "Sofia Martins",
+    email: "sofia@atlasresearch.example",
+    initials: "SM",
+    avatarTone: "from-rose-300 to-pink-500",
+    role: "Viewer",
+    organization: "Atlas Research",
+    workspace: "Research Lab",
+    status: "Suspended",
+    lastActive: "12 days ago",
+  },
+];
+
+export const userFilters = [
+  {
+    id: "user-status",
+    label: "Status",
+    options: [
+      { label: "Active", value: "active" },
+      { label: "Invited", value: "invited" },
+      { label: "Suspended", value: "suspended" },
+    ],
+  },
+  {
+    id: "user-role",
+    label: "Role",
+    options: [
+      { label: "Platform Admin", value: "platform-admin" },
+      { label: "Organization Owner", value: "organization-owner" },
+      { label: "Team Lead", value: "team-lead" },
+      { label: "Viewer", value: "viewer" },
+    ],
+  },
+];
