@@ -1,1 +1,1 @@
-import type{ReactNode}from"react";import{LeadEstateShell}from"@/features/leadestate/components/LeadEstateShell";export default function Layout({children}:{children:ReactNode}){return <LeadEstateShell>{children}</LeadEstateShell>}
+import type{ReactNode}from"react";import{LeadEstateShell}from"@/features/leadestate/components/LeadEstateShell";import{SearchOverlay}from"@/features/platform/universal-objects/components/SearchOverlay";export default function Layout({children}:{children:ReactNode}){return <LeadEstateShell>{children}<SearchOverlay/></LeadEstateShell>}

@@ -1,0 +1,4 @@
+import type{KnowledgeRecord,Prediction,Recommendation}from"../domain/types";import type{MemoryRecord}from"../memory/contracts";
+export type WorkforceRole="ai-ceo"|"ai-sales-director"|"ai-sales-executive"|"ai-receptionist"|"ai-marketing-manager"|"ai-customer-success"|"ai-operations-manager"|"ai-legal-assistant"|"ai-finance-assistant"|"ai-reporting-assistant"|"ai-property-advisor"|"ai-recruiter";
+export interface WorkforceContext{knowledge:readonly KnowledgeRecord[];memory:readonly MemoryRecord[];recommendations:readonly Recommendation[];predictions:readonly Prediction[];permissions:readonly string[];correlationId:string}
+export interface WorkforceExtension{readonly role:WorkforceRole;capabilities:readonly string[];prepare(context:WorkforceContext):Promise<Readonly<Record<string,unknown>>>;execute?:never}

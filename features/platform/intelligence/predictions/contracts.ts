@@ -1,0 +1,3 @@
+import type{UniversalObjectRef}from"@/features/platform/universal-objects/domain/models";import type{Prediction,PredictionType}from"../domain/types";
+export interface PredictionEngine{predict(type:PredictionType,target?:UniversalObjectRef,context?:Readonly<Record<string,unknown>>):Promise<Prediction>}
+export class PlaceholderPredictionEngine implements PredictionEngine{async predict(type:PredictionType,target?:UniversalObjectRef):Promise<Prediction>{return{id:crypto.randomUUID(),type,target,value:0,unit:"score",confidence:0,horizon:"not evaluated",factors:[],status:"placeholder",generatedAt:new Date().toISOString(),modelVersion:"none"}}}

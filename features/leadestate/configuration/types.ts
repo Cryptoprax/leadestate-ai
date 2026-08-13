@@ -1,0 +1,15 @@
+export type ConfigEntity = "properties"|"leads"|"deals"|"contacts"|"companies";
+export type FieldType = "text"|"number"|"currency"|"date"|"boolean"|"dropdown"|"multi-select"|"tags"|"url"|"email"|"phone"|"rich-text";
+export type WorkflowNodeType = "trigger"|"condition"|"action"|"delay"|"notification"|"ai";
+export type StageDefinition = {id:string;name:string;color:string;icon:string;probability:number;archived:boolean};
+export type PipelineDefinition = {id:string;name:string;entity:ConfigEntity;isDefault:boolean;archived:boolean;stages:StageDefinition[]};
+export type CustomFieldDefinition = {id:string;label:string;key:string;type:FieldType;target:ConfigEntity;required:boolean;options:string[]};
+export type FormFieldDefinition = {id:string;label:string;fieldKey:string;required:boolean;placeholder:string;helpText:string;defaultValue:string;condition?:{field:string;operator:"equals"|"not_equals";value:string}};
+export type FormSectionDefinition = {id:string;title:string;fields:FormFieldDefinition[]};
+export type FormDefinition = {id:string;name:string;target:ConfigEntity;sections:FormSectionDefinition[]};
+export type WorkflowNodeDefinition = {id:string;type:WorkflowNodeType;label:string;x:number;y:number};
+export type WorkflowDefinition = {id:string;name:string;nodes:WorkflowNodeDefinition[];edges:{id:string;source:string;target:string}[]};
+export type PermissionKey = "create"|"read"|"update"|"delete"|"export"|"import"|"approvals"|"ai"|"reporting";
+export type RolePermission = {role:string;modules:Record<string,Record<PermissionKey,boolean>>};
+export type CompanyPreferences = {brandName:string;brandColor:string;logoDataUrl:string;businessStart:string;businessEnd:string;workingDays:string[];country:string;currency:string;timezone:string;language:string;dateFormat:string;numberFormat:string;measurementUnit:string};
+export type ConfigurationState = {version:1;pipelines:PipelineDefinition[];fields:CustomFieldDefinition[];forms:FormDefinition[];workflows:WorkflowDefinition[];permissions:RolePermission[];preferences:CompanyPreferences};

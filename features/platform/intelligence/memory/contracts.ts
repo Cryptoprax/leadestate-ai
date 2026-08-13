@@ -1,0 +1,9 @@
+import type{UniversalObjectRef}from"@/features/platform/universal-objects/domain/models";
+export type MemoryScope="conversation"|"user"|"company"|"property"|"lead"|"deal"|"task"|"knowledge"|"session";
+export type MemoryDuration="short-term"|"long-term";
+export interface MemoryRecord{id:string;scope:MemoryScope;owner:UniversalObjectRef;content:string;metadata:Readonly<Record<string,unknown>>;duration:MemoryDuration;version:number;createdAt:string;updatedAt:string;expiresAt?:string;semanticStatus:"placeholder"|"indexed"}
+export interface MemoryQuery{scope?:readonly MemoryScope[];owner?:UniversalObjectRef;text?:string;limit?:number;includeExpired?:boolean}
+export interface MemoryStore{remember(record:MemoryRecord):Promise<void>;recall(query:MemoryQuery):Promise<readonly MemoryRecord[]>;forget(id:string):Promise<void>;versions(id:string):Promise<readonly MemoryRecord[]>}
+export interface VectorStore{upsert(id:string,vector:readonly number[],metadata:Readonly<Record<string,unknown>>):Promise<void>;query(vector:readonly number[],limit:number):Promise<readonly{id:string;score:number}[]>;remove(id:string):Promise<void>}
+export interface MemoryRetriever{retrieve(query:MemoryQuery):Promise<readonly MemoryRecord[]>}
+export class InMemoryMemoryStore implements MemoryStore{private records:MemoryRecord[]=[];async remember(record:MemoryRecord){this.records.push(record)}async recall(query:MemoryQuery){const now=Date.now();return this.records.filter(record=>(!query.scope?.length||query.scope.includes(record.scope))&&(!query.owner||record.owner.id===query.owner.id)&&(!query.text||record.content.toLowerCase().includes(query.text.toLowerCase()))&&(query.includeExpired||!record.expiresAt||new Date(record.expiresAt).getTime()>now)).slice(0,query.limit??50)}async forget(id:string){this.records=this.records.filter(record=>record.id!==id)}async versions(id:string){return this.records.filter(record=>record.id===id).sort((a,b)=>b.version-a.version)}}
