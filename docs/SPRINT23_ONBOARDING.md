@@ -16,7 +16,7 @@ Sprint 23 upgrades the existing four-step onboarding presentation without changi
 
 ## Architecture and data flow
 
-The onboarding page remains protected by the existing authentication check and redirects users with an organization to `/leadestate`. Client components manage progressive disclosure, browser-derived defaults, inline validation, and previews. All organization, workspace, locale, and invitation controls retain the existing form names. Native form submission calls the existing server action, which reparses all data with Zod before the existing service invokes the atomic Supabase RPC.
+The onboarding page remains protected by the existing authentication check and redirects users with an organization to `/vayon`. Client components manage progressive disclosure, browser-derived defaults, inline validation, and previews. All organization, workspace, locale, and invitation controls retain the existing form names. Native form submission calls the existing server action, which reparses all data with Zod before the existing service invokes the atomic Supabase RPC.
 
 No organization, billing, AI workforce, integration, invitation, or workspace provisioning logic moved into the browser. Pending submission state is read from React form status to disable duplicate submissions.
 

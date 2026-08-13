@@ -1,7 +1,7 @@
 const testimonials = [
   {
     quote:
-      "LeadEstate AI responds while our agents are still in viewings. We are qualifying more serious buyers without increasing headcount.",
+      "Vayon OS responds while our agents are still in viewings. We are qualifying more serious buyers without increasing headcount.",
     name: "Maya Chen",
     role: "Sales Director, Northline Properties",
     initials: "MC",
@@ -27,7 +27,7 @@ export function Testimonials() {
     <section id="testimonials" className="px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vds-primary">
             Built for modern teams
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -39,23 +39,23 @@ export function Testimonials() {
           {testimonials.map((testimonial) => (
             <figure
               key={testimonial.name}
-              className="flex h-full flex-col rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.065] to-transparent p-7"
+              className="flex h-full flex-col rounded-3xl border border-vds-border bg-gradient-to-br from-vds-surface to-transparent p-7"
             >
-              <div className="flex gap-1 text-cyan-300" aria-label="5 out of 5 stars">
+              <div className="flex gap-1 text-vds-primary" aria-label="5 out of 5 stars">
                 {"★★★★★"}
               </div>
-              <blockquote className="mt-6 flex-1 text-lg leading-8 text-slate-200">
+              <blockquote className="mt-6 flex-1 text-lg leading-8 text-vds-secondary">
                 “{testimonial.quote}”
               </blockquote>
-              <figcaption className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-                <span className="flex size-11 items-center justify-center rounded-full bg-cyan-300/10 text-sm font-semibold text-cyan-200">
+              <figcaption className="mt-8 flex items-center gap-4 border-t border-vds-border pt-6">
+                <span className="flex size-11 items-center justify-center rounded-full bg-vds-primary-soft text-sm font-semibold text-vds-primary">
                   {testimonial.initials}
                 </span>
                 <span>
-                  <span className="block text-sm font-semibold text-white">
+                  <span className="block text-sm font-semibold text-vds-foreground">
                     {testimonial.name}
                   </span>
-                  <span className="mt-1 block text-xs text-slate-500">
+                  <span className="mt-1 block text-xs text-vds-muted">
                     {testimonial.role}
                   </span>
                 </span>

@@ -1,0 +1,11 @@
+import { auroraCompanies } from "../crm-network/companies";
+import { auroraRealtyGroup } from "../config/aurora-realty-group";
+import { auroraEmployees } from "../people/employees";
+import type { AuroraProperty, PropertyPortfolioFilters, PropertyPortfolioHomeProjection } from "./contracts";
+import { auroraProperties } from "./properties";
+export class AuroraPropertyPortfolio {readonly properties=auroraProperties;constructor(){const ids=new Set(this.properties.map(item=>item.id)),companies=new Set(auroraCompanies.map(item=>item.id)),people=new Set(auroraEmployees.map(item=>item.id)),units=new Set(auroraRealtyGroup.businessUnits.map(item=>item.id)),offices=new Set(auroraRealtyGroup.offices.map(item=>item.id));if(ids.size!==this.properties.length)throw new Error("Duplicate Aurora property identity.");for(const item of this.properties){if(!companies.has(item.developerCompanyId)||!companies.has(item.builderCompanyId)||!companies.has(item.ownerCompanyId))throw new Error(`Invalid company relationship for ${item.id}.`);if(!people.has(item.assignedSalesManagerId)||!people.has(item.assignedSalesAgentId))throw new Error(`Invalid sales assignment for ${item.id}.`);if(!units.has(item.businessUnitId)||!offices.has(item.officeId))throw new Error(`Invalid organization relationship for ${item.id}.`)}}
+  property(id:string){return this.properties.find(item=>item.id===id)}
+  filter(filters:PropertyPortfolioFilters):readonly AuroraProperty[]{return this.properties.filter(item=>(!filters.city||item.city===filters.city)&&(!filters.businessUnit||item.businessUnitId===filters.businessUnit)&&(!filters.status||item.status===filters.status)&&(!filters.propertyType||item.propertyType===filters.propertyType)&&(!filters.priceBand||item.priceRange.band===filters.priceBand)&&(!filters.bedrooms||item.bedrooms===filters.bedrooms)&&(!filters.developerCompanyId||item.developerCompanyId===filters.developerCompanyId)&&(!filters.tags?.length||filters.tags.every(tag=>item.tags.includes(tag))))}
+  homeProjection():PropertyPortfolioHomeProjection{return Object.freeze({featuredProperties:Object.freeze([]),recentlyAddedProperties:Object.freeze([]),luxuryPortfolio:Object.freeze([]),commercialPortfolio:Object.freeze([]),state:"awaiting-connected-business-data",analytics:"none"})}
+}
+export const auroraPropertyPortfolio=new AuroraPropertyPortfolio();

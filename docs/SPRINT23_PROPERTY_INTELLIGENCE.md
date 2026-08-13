@@ -2,7 +2,7 @@
 
 ## Architecture
 
-The Properties route remains the canonical inventory route and keeps the existing server actions, `PropertyService`, repository, authorization checks, and Supabase RPC write path. The milestone adds an independent intelligence layer under `features/leadestate/property-intelligence`:
+The Properties route remains the canonical inventory route and keeps the existing server actions, `PropertyService`, repository, authorization checks, and Supabase RPC write path. The milestone adds an independent intelligence layer under `features/vayon/property-intelligence`:
 
 - `PropertyIntelligenceService` performs tenant-scoped, read-only dashboard aggregation.
 - `PropertyImportService` coordinates previews without writing to Supabase.

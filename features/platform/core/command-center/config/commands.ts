@@ -14,6 +14,6 @@ export const commands: Command[] = [
   { id: "command-suggested-audit", title: "Review Audit Activity", description: "Inspect recent platform security events.", group: "Suggested Commands", iconName: "audit" },
   { id: "command-quick-search", title: "Universal Search", description: "Search every AtlasOS resource.", group: "Quick Actions", shortcut: "⌘ K", iconName: "search" },
   { id: "command-org-northstar", title: "Northstar Holdings", description: "Active organization · six workspaces.", group: "Recent Organizations", iconName: "organization" },
-  { id: "command-app-leadestate", title: "LeadEstate AI", description: "Operational application · version 1.0.0.", group: "Recent Applications", iconName: "application" },
+  { id: "command-app-vayon", title: "Vayon OS", description: "Operational application · version 1.0.0.", group: "Recent Applications", iconName: "application" },
   { id: "command-user-amelia", title: "Amelia Chen", description: "Organization Owner · active now.", group: "Recent Users", iconName: "user" },
 ];

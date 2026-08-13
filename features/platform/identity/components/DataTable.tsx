@@ -25,37 +25,37 @@ export function DataTable<T>({
   emptyState,
 }: DataTableProps<T>) {
   return (
-    <section className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+    <section className="overflow-hidden rounded-2xl border border-vds-border/[0.08] bg-vds-surface/[0.02]">
       {toolbar}
       {rows.length === 0 ? (
         emptyState
       ) : (
-        <div className="overflow-x-auto [scrollbar-color:rgba(148,163,184,0.16)_transparent] [scrollbar-width:thin]">
+        <div className="overflow-x-auto [scrollbar-color:var(--vds-color-border)_transparent] [scrollbar-width:thin]">
           <table className="w-full min-w-max border-collapse text-left">
             <caption className="sr-only">{caption}</caption>
             <thead>
-              <tr className="border-b border-white/[0.07] bg-white/[0.018]">
+              <tr className="border-b border-vds-border/[0.07] bg-vds-surface/[0.018]">
                 {columns.map((column) => (
                   <th
                     key={column.id}
                     scope="col"
-                    className={`px-4 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-slate-700 ${column.className ?? ""}`}
+                    className={`px-4 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-vds-subtle ${column.className ?? ""}`}
                   >
                     {column.header}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.055]">
+            <tbody className="divide-y divide-vds-divider/[0.055]">
               {rows.map((row) => (
                 <tr
                   key={getRowKey(row)}
-                  className="group transition hover:bg-white/[0.025]"
+                  className="group transition hover:bg-vds-surface/[0.025]"
                 >
                   {columns.map((column) => (
                     <td
                       key={column.id}
-                      className={`whitespace-nowrap px-4 py-3.5 text-xs text-slate-400 ${column.className ?? ""}`}
+                      className={`whitespace-nowrap px-4 py-3.5 text-xs text-vds-muted ${column.className ?? ""}`}
                     >
                       {column.render(row)}
                     </td>

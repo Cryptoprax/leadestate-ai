@@ -8,7 +8,7 @@ import { Testimonials } from "@/components/landing/Testimonials";
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-hidden bg-[#050b12] text-white">
+    <div className="min-h-screen overflow-hidden bg-[var(--vds-color-background)] text-vds-foreground">
       <Header />
       <main>
         <Hero />

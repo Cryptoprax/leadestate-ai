@@ -32,7 +32,7 @@ const columns: DataTableColumn<User>[] = [
   {
     id: "name",
     header: "Name",
-    render: (user) => <span className="font-medium text-slate-200">{user.name}</span>,
+    render: (user) => <span className="font-medium text-vds-secondary">{user.name}</span>,
   },
   { id: "email", header: "Email", render: (user) => user.email },
   { id: "role", header: "Role", render: (user) => user.role },

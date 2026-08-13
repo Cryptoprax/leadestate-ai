@@ -1,0 +1,4 @@
+import type { CanonicalBusinessEvent } from "@/features/platform/business-timeline/domain/contracts";
+import type { ContextReference, ContextSlice } from "../domain/contracts";
+import { unavailableSlice } from "./utilities";
+export function assembleTimeline(events?: readonly CanonicalBusinessEvent[]): ContextSlice { if (!events?.length) return unavailableSlice("timeline", "Timeline", "business-timeline"); const items: readonly ContextReference[] = [...events].sort((a, b) => a.occurredAt.localeCompare(b.occurredAt) || a.sequence - b.sequence).map(event => Object.freeze({ id: event.eventId, label: event.summary, kind: event.eventName, source: "business-timeline", occurredAt: event.occurredAt, eventId: event.eventId })); return Object.freeze({ id: "timeline", title: "Timeline", source: "business-timeline", state: "available", items, message: "" }) }

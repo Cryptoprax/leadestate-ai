@@ -2,7 +2,7 @@
 
 ## Core model
 
-LeadEstate OS is designed for one logical database serving many organizations.
+Vayon OS is designed for one logical database serving many organizations.
 An organization is the primary tenant boundary. Users may eventually belong to
 one or more organizations, but every tenant-scoped request must execute with one
 explicit organization context.

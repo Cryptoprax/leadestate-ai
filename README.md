@@ -1,3 +1,4 @@
+<<<<<<< ours
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -34,3 +35,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+=======
+# Vayon OS
+
+Vayon OS is an intelligence operating system for modern real estate companies. It combines CRM operations, property intelligence, communications, configuration, universal business objects, and governed intelligence architecture in one workspace.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+The authenticated product is served under `/vayon`. Database migrations remain under `supabase/migrations` and must be applied only through the approved deployment process.
+
+## Validation
+
+```bash
+npx tsc --noEmit
+npm run lint
+npm test
+npm run build
+```
+
+See `/docs` for release architecture, production database guidance, and ADRs.
+>>>>>>> theirs

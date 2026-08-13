@@ -26,7 +26,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Foundation",
     status: "Ready",
     iconName: "identity",
-    tone: "bg-cyan-400",
+    tone: "bg-vds-primary",
   },
   {
     id: "authentication",
@@ -35,7 +35,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Architecture",
     status: "Future",
     iconName: "authentication",
-    tone: "bg-blue-400",
+    tone: "bg-vds-info-soft",
   },
   {
     id: "organizations",
@@ -44,7 +44,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Multi-tenant",
     status: "Ready",
     iconName: "organizations",
-    tone: "bg-violet-400",
+    tone: "bg-vds-accent",
   },
   {
     id: "users",
@@ -53,7 +53,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Directory",
     status: "Ready",
     iconName: "users",
-    tone: "bg-emerald-400",
+    tone: "bg-vds-success",
   },
   {
     id: "roles",
@@ -62,7 +62,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "RBAC",
     status: "Ready",
     iconName: "roles",
-    tone: "bg-amber-400",
+    tone: "bg-vds-warning-soft",
   },
   {
     id: "permissions",
@@ -71,7 +71,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Default deny",
     status: "Ready",
     iconName: "permissions",
-    tone: "bg-fuchsia-400",
+    tone: "bg-vds-accent-soft",
   },
   {
     id: "audit-logs",
@@ -80,7 +80,7 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Auditable",
     status: "Planned",
     iconName: "audit",
-    tone: "bg-rose-400",
+    tone: "bg-vds-danger",
   },
   {
     id: "future-status",
@@ -89,6 +89,6 @@ export const identityDashboardItems: IdentityDashboardItem[] = [
     value: "Extensible",
     status: "Roadmap",
     iconName: "future",
-    tone: "bg-slate-400",
+    tone: "bg-vds-subtle",
   },
 ];

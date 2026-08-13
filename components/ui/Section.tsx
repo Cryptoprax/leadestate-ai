@@ -16,7 +16,7 @@ const spacingStyles: Record<SectionSpacing, string> = {
 
 const toneStyles: Record<SectionTone, string> = {
   transparent: "",
-  subtle: "border-y border-white/[0.07] bg-white/[0.025]",
+  subtle: "border-y border-vds-border/[0.07] bg-vds-surface/[0.025]",
 };
 
 export const Section = forwardRef<HTMLElement, SectionProps>(function Section(

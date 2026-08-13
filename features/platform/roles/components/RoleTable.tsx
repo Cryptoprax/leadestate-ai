@@ -19,7 +19,7 @@ const columns: DataTableColumn<Role>[] = [
   {
     id: "role",
     header: "Role",
-    render: (role) => <span className="font-medium text-slate-200">{role.name}</span>,
+    render: (role) => <span className="font-medium text-vds-secondary">{role.name}</span>,
   },
   {
     id: "description",

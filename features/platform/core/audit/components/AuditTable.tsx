@@ -20,7 +20,7 @@ const columns: DataTableColumn<AuditEvent>[] = [
     id: "user",
     header: "User",
     render: (event) => (
-      <span className="font-medium text-slate-200">{event.user}</span>
+      <span className="font-medium text-vds-secondary">{event.user}</span>
     ),
   },
   {

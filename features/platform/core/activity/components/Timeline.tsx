@@ -5,8 +5,8 @@ import { TimelineItem } from "./TimelineItem";
 
 export function Timeline() {
   return (
-    <section className="overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02]">
-      <div className="flex flex-col gap-3 border-b border-white/[0.07] p-4 sm:flex-row sm:items-center">
+    <section className="overflow-hidden rounded-3xl border border-vds-border/[0.08] bg-vds-surface/[0.02]">
+      <div className="flex flex-col gap-3 border-b border-vds-border/[0.07] p-4 sm:flex-row sm:items-center">
         <SearchInput
           label="Search activity"
           placeholder="Search activity..."

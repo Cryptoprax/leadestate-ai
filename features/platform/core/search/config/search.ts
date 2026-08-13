@@ -19,7 +19,7 @@ export const searchCategories: SearchResultCategory[] = [
 export const searchResults: SearchResult[] = [
   {
     id: "search-application",
-    title: "LeadEstate AI",
+    title: "Vayon OS",
     description: "AI-native real estate operating application.",
     category: "Applications",
     metadata: "Application",
@@ -44,7 +44,7 @@ export const searchResults: SearchResult[] = [
   {
     id: "search-property",
     title: "Marina Residence 402",
-    description: "Available property in LeadEstate Global.",
+    description: "Available property in Vayon Global.",
     category: "Properties",
     metadata: "Property",
     iconName: "property",

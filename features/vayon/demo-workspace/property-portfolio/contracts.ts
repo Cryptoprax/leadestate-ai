@@ -1,0 +1,15 @@
+import type { ContextObjectIdentity } from "@/features/platform/context-engine/domain/contracts";
+import type { AuroraCompanyId } from "../crm-network/contracts";
+import type { AuroraBusinessUnitId, AuroraEmployeeId } from "../people/contracts";
+
+export type AuroraPropertyId=`aurora-property-${string}`;
+export type AuroraPropertyType="residential-apartment"|"luxury-villa"|"commercial-office"|"retail-space"|"warehouse"|"industrial"|"plot"|"farm-land"|"investment-asset"|"rental-property";
+export type AuroraPropertyStatus="available"|"reserved"|"off-market"|"rental-available";
+export type AuroraConstructionStatus="ready-to-move"|"under-construction"|"pre-launch";
+export type AuroraPropertyCategory="ready-to-move"|"under-construction"|"pre-launch"|"luxury"|"affordable"|"commercial"|"investment"|"rental"|"premium"|"featured";
+export type AuroraPriceBand="under-75-lakh"|"75-lakh-to-1-5-crore"|"1-5-to-3-crore"|"3-to-7-crore"|"above-7-crore"|"lease-on-request";
+export interface AuroraPriceRange {readonly currency:"INR";readonly minimum?:number;readonly maximum?:number;readonly label:string;readonly band:AuroraPriceBand}
+export interface AuroraPropertyIdentity {readonly namespace:"aurora-demo-property";readonly objectId:AuroraPropertyId;readonly objectType:"property";readonly context:ContextObjectIdentity;readonly timelineEvents:readonly never[]}
+export interface AuroraProperty {readonly id:AuroraPropertyId;readonly name:string;readonly businessUnitId:AuroraBusinessUnitId;readonly propertyType:AuroraPropertyType;readonly status:AuroraPropertyStatus;readonly city:string;readonly locality:string;readonly priceRange:AuroraPriceRange;readonly bedrooms?:number;readonly bathrooms?:number;readonly areaSquareFeet:number;readonly parking:number;readonly amenities:readonly string[];readonly constructionStatus:AuroraConstructionStatus;readonly categories:readonly AuroraPropertyCategory[];readonly developerCompanyId:AuroraCompanyId;readonly builderCompanyId:AuroraCompanyId;readonly ownerCompanyId:AuroraCompanyId;readonly officeId:string;readonly assignedSalesTeam:string;readonly assignedSalesManagerId:AuroraEmployeeId;readonly assignedSalesAgentId:AuroraEmployeeId;readonly description:string;readonly tags:readonly string[];readonly thumbnailPlaceholder:string;readonly galleryPlaceholders:readonly string[];readonly futureDealReferences:readonly never[];readonly futureLeadReferences:readonly never[];readonly identity:AuroraPropertyIdentity}
+export interface PropertyPortfolioFilters {readonly city?:string;readonly businessUnit?:AuroraBusinessUnitId;readonly status?:AuroraPropertyStatus;readonly propertyType?:AuroraPropertyType;readonly priceBand?:AuroraPriceBand;readonly bedrooms?:number;readonly developerCompanyId?:AuroraCompanyId;readonly tags?:readonly string[]}
+export interface PropertyPortfolioHomeProjection {readonly featuredProperties:readonly never[];readonly recentlyAddedProperties:readonly never[];readonly luxuryPortfolio:readonly never[];readonly commercialPortfolio:readonly never[];readonly state:"awaiting-connected-business-data";readonly analytics:"none"}

@@ -1,6 +1,6 @@
-# LeadEstate AI Domain Model
+# Vayon OS Domain Model
 
-LeadEstate AI is a multi-tenant, AI-native real-estate operating model built above AtlasOS. This blueprint defines business language and contracts, not storage, APIs, authentication, or executable rules.
+Vayon OS is a multi-tenant, AI-native real-estate operating model built above AtlasOS. This blueprint defines business language and contracts, not storage, APIs, authentication, or executable rules.
 
 ## Principles
 

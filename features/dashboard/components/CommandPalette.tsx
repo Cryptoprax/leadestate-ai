@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/features/platform/design-system";
 
 import {
   Blocks,
@@ -98,7 +99,7 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center bg-black/65 px-4 pt-[10vh] backdrop-blur-md sm:pt-[14vh]"
+      className="fixed inset-0 z-[100] flex items-start justify-center bg-vds-overlay px-4 pt-[10vh] backdrop-blur-md sm:pt-[14vh]"
       role="presentation"
       onMouseDown={(event) => {
         if (event.currentTarget === event.target) onClose();
@@ -108,10 +109,10 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
-        className="w-full max-w-2xl overflow-hidden rounded-3xl border border-white/10 bg-[#0b111a]/95 shadow-[0_32px_100px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
+        className="w-full max-w-2xl overflow-hidden rounded-3xl border border-vds-border bg-[var(--vds-color-surface)]/95 shadow-[0_32px_100px_var(--vds-overlay)] backdrop-blur-2xl"
       >
-        <div className="flex items-center gap-3 border-b border-white/[0.08] px-5">
-          <Search className="size-5 shrink-0 text-slate-500" aria-hidden="true" />
+        <div className="flex items-center gap-3 border-b border-vds-border/[0.08] px-5">
+          <Search className="size-5 shrink-0 text-vds-muted" aria-hidden="true" />
           <input
             autoFocus
             value={query}
@@ -119,24 +120,24 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
             onKeyDown={(event) => {
               if (event.key === "Escape") onClose();
             }}
-            className="h-16 min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-slate-600"
+            className="h-16 min-w-0 flex-1 bg-transparent text-base text-vds-foreground outline-none placeholder:text-vds-subtle"
             placeholder="Search AtlasOS..."
             aria-label="Search AtlasOS"
           />
-          <button
+          <Button variant="control"
             type="button"
             onClick={onClose}
-            className="flex size-8 items-center justify-center rounded-lg text-slate-500 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 sm:hidden"
+            className="flex size-8 items-center justify-center rounded-lg text-vds-muted transition hover:bg-vds-surface/[0.06] hover:text-vds-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vds-focus sm:hidden"
             aria-label="Close command palette"
           >
             <X className="size-4" aria-hidden="true" />
-          </button>
-          <kbd className="hidden rounded-md border border-white/10 bg-white/[0.05] px-2 py-1 font-sans text-[10px] text-slate-500 sm:block">
+          </Button>
+          <kbd className="hidden rounded-md border border-vds-border bg-vds-surface/[0.05] px-2 py-1 font-sans text-[10px] text-vds-muted sm:block">
             ESC
           </kbd>
         </div>
 
-        <div className="max-h-[min(62vh,34rem)] overflow-y-auto p-2 [scrollbar-color:rgba(148,163,184,0.18)_transparent] [scrollbar-width:thin]">
+        <div className="max-h-[min(62vh,34rem)] overflow-y-auto p-2 [scrollbar-color:var(--vds-color-border)_transparent] [scrollbar-width:thin]">
           {categoryOrder.map((category) => {
             const items = filteredItems.filter(
               (item) => item.category === category,
@@ -145,35 +146,35 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
 
             return (
               <div key={category} className="py-2">
-                <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-600">
+                <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-vds-subtle">
                   {category}
                 </p>
                 {items.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <button
+                    <Button variant="control"
                       key={item.id}
                       type="button"
                       onClick={onClose}
-                      className="group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition hover:bg-white/[0.055] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+                      className="group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition hover:bg-vds-surface/[0.055] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vds-focus"
                     >
-                      <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.035] text-slate-500 group-hover:text-cyan-300">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-vds-border/[0.07] bg-vds-surface/[0.035] text-vds-muted group-hover:text-vds-primary">
                         <Icon className="size-4" strokeWidth={1.7} aria-hidden="true" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-medium text-slate-200">
+                        <span className="block truncate text-sm font-medium text-vds-secondary">
                           {item.title}
                         </span>
-                        <span className="mt-0.5 block truncate text-xs text-slate-600">
+                        <span className="mt-0.5 block truncate text-xs text-vds-subtle">
                           {item.subtitle}
                         </span>
                       </span>
                       {item.shortcut ? (
-                        <kbd className="rounded-md border border-white/[0.08] bg-white/[0.035] px-2 py-1 font-sans text-[10px] text-slate-600">
+                        <kbd className="rounded-md border border-vds-border/[0.08] bg-vds-surface/[0.035] px-2 py-1 font-sans text-[10px] text-vds-subtle">
                           {item.shortcut}
                         </kbd>
                       ) : null}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -182,17 +183,17 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
 
           {filteredItems.length === 0 ? (
             <div className="px-6 py-14 text-center">
-              <p className="text-sm font-medium text-slate-300">
+              <p className="text-sm font-medium text-vds-secondary">
                 No AtlasOS results
               </p>
-              <p className="mt-1 text-xs text-slate-600">
+              <p className="mt-1 text-xs text-vds-subtle">
                 Try a workspace, module, page, or command.
               </p>
             </div>
           ) : null}
         </div>
 
-        <div className="flex items-center justify-between border-t border-white/[0.07] px-5 py-3 text-[10px] text-slate-600">
+        <div className="flex items-center justify-between border-t border-vds-border/[0.07] px-5 py-3 text-[10px] text-vds-subtle">
           <span>Navigate with ↑ ↓ · Select with Enter</span>
           <span>AtlasOS Command</span>
         </div>

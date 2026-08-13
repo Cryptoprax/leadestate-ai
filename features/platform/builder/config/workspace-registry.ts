@@ -1,4 +1,4 @@
-import type { WorkspaceDefinition, WorkspaceTab } from "@/features/leadestate/workspace-engine/types";
+import type { WorkspaceDefinition, WorkspaceTab } from "@/features/vayon/workspace-engine/types";
 import { standardWorkspaceActions } from "./workspace-actions";
 import { standardWorkspaceTabs } from "./workspace-tabs";
 import { workspaceWidgetCatalog } from "./workspace-widgets";

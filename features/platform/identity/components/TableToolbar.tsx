@@ -1,3 +1,4 @@
+import { Button } from "@/features/platform/design-system";
 import { Download, Layers3, Plus } from "lucide-react";
 
 import { FilterBar, type ToolbarFilter } from "./FilterBar";
@@ -21,7 +22,7 @@ export function TableToolbar({
   bulkActionLabel = "Bulk actions",
 }: TableToolbarProps) {
   return (
-    <div className="flex flex-col gap-3 border-b border-white/[0.07] p-3 sm:p-4 xl:flex-row xl:items-center xl:justify-between">
+    <div className="flex flex-col gap-3 border-b border-vds-border/[0.07] p-3 sm:p-4 xl:flex-row xl:items-center xl:justify-between">
       <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
         <SearchInput
           label={searchLabel}
@@ -31,27 +32,27 @@ export function TableToolbar({
         <FilterBar filters={filters} />
       </div>
       <div className="flex items-center gap-2">
-        <button
+        <Button variant="control"
           type="button"
-          className="inline-flex h-9 items-center gap-2 rounded-xl border border-white/[0.07] px-3 text-xs font-medium text-slate-500 transition hover:bg-white/[0.05] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+          className="inline-flex h-9 items-center gap-2 rounded-xl border border-vds-border/[0.07] px-3 text-xs font-medium text-vds-muted transition hover:bg-vds-surface/[0.05] hover:text-vds-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vds-focus"
         >
           <Layers3 className="size-3.5" aria-hidden="true" />
           <span className="hidden sm:inline">{bulkActionLabel}</span>
-        </button>
-        <button
+        </Button>
+        <Button variant="control"
           type="button"
-          className="inline-flex h-9 items-center gap-2 rounded-xl border border-white/[0.07] px-3 text-xs font-medium text-slate-500 transition hover:bg-white/[0.05] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+          className="inline-flex h-9 items-center gap-2 rounded-xl border border-vds-border/[0.07] px-3 text-xs font-medium text-vds-muted transition hover:bg-vds-surface/[0.05] hover:text-vds-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vds-focus"
         >
           <Download className="size-3.5" aria-hidden="true" />
           {exportLabel}
-        </button>
-        <button
+        </Button>
+        <Button variant="primary"
           type="button"
-          className="inline-flex h-9 items-center gap-2 rounded-xl bg-cyan-300 px-3 text-xs font-semibold text-slate-950 transition hover:bg-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080d14]"
+          className="inline-flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2"
         >
           <Plus className="size-3.5" aria-hidden="true" />
           {primaryAction}
-        </button>
+        </Button>
       </div>
     </div>
   );

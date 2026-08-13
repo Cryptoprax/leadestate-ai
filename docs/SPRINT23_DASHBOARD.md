@@ -1,6 +1,6 @@
 # Sprint 23 Milestone 2 — Executive Dashboard
 
-The Executive Dashboard upgrades `/leadestate` into an enterprise CRM command center while retaining the existing route, authentication boundary, tenant RLS, organization/workspace services, billing implementation, onboarding flow, and database schema.
+The Executive Dashboard upgrades `/vayon` into an enterprise CRM command center while retaining the existing route, authentication boundary, tenant RLS, organization/workspace services, billing implementation, onboarding flow, and database schema.
 
 ## Architecture
 

@@ -1,0 +1,4 @@
+import { AlignLeft } from "lucide-react";
+import type { ExecutiveNarrativeBlock } from "../domain/contracts";
+import { ExecutiveCard } from "./ExecutiveCard";
+export function NarrativePanel({ blocks }: { readonly blocks: readonly ExecutiveNarrativeBlock[] }) { return <ExecutiveCard title="Executive Narrative" eyebrow="Structured narrative" icon={<AlignLeft className="size-4" aria-hidden="true"/>} className="xl:col-span-2"><div className="space-y-3">{blocks.map(block => <article key={block.id} className="rounded-2xl border border-vds-border/[.07] bg-vds-input p-5"><p className="text-sm leading-6 text-vds-muted">{block.body}</p><div className="mt-4 flex flex-wrap gap-2 text-[10px] uppercase tracking-[.13em] text-vds-subtle"><span>Rules-based structure</span><span aria-hidden="true">·</span><span>{block.sourceLabel ?? "No source connected"}</span></div></article>)}</div></ExecutiveCard> }

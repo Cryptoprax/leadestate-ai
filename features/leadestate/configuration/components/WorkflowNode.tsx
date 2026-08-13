@@ -1,4 +1,0 @@
-"use client";
-import { Bot,Clock3,GitBranch,Play,Send,Zap } from "lucide-react";import type { WorkflowNodeDefinition } from "../types";
-const icons={trigger:Play,condition:GitBranch,action:Zap,delay:Clock3,notification:Send,ai:Bot};
-export function WorkflowNode({node,selected,onSelect}:{node:WorkflowNodeDefinition;selected:boolean;onSelect:()=>void}){const Icon=icons[node.type];return <button type="button" onClick={onSelect} style={{left:node.x,top:node.y}} className={`absolute z-10 flex w-40 items-center gap-3 rounded-2xl border p-3 text-left shadow-xl ${selected?"border-cyan-300 bg-cyan-300/10":"border-white/10 bg-[#0c1722]"}`}><span className="grid size-8 place-items-center rounded-xl bg-white/[.06] text-cyan-200"><Icon className="size-4"/></span><span><span className="block text-[9px] uppercase text-slate-600">{node.type}</span><span className="block truncate text-xs">{node.label}</span></span></button>}

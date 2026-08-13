@@ -2,11 +2,11 @@
 
 ## Configuration philosophy
 
-LeadEstate OS configuration describes a company’s operating model without embedding it in CRM source code. Pipeline, field, form, workflow, permission-intent, and preference models are independent of Properties, Leads, Deals, Contacts, and Companies. Phase 1 is intentionally non-executing and schema-independent: it does not alter current CRM pipelines, authorization, RLS, authentication, onboarding, or billing.
+Vayon OS configuration describes a company’s operating model without embedding it in CRM source code. Pipeline, field, form, workflow, permission-intent, and preference models are independent of Properties, Leads, Deals, Contacts, and Companies. Phase 1 is intentionally non-executing and schema-independent: it does not alter current CRM pipelines, authorization, RLS, authentication, onboarding, or billing.
 
 ## Architecture
 
-The module lives under `features/leadestate/configuration`:
+The module lives under `features/vayon/configuration`:
 
 - `types.ts` defines versioned UI/domain definitions without persistence assumptions.
 - `config/defaults.ts` contains neutral starter definitions.
@@ -14,7 +14,7 @@ The module lives under `features/leadestate/configuration`:
 - Utility functions handle immutable ordering, duplication, and portable JSON export.
 - `ConfigurationEngine` owns draft state and composes independent builder widgets.
 
-The route `/leadestate/settings/configuration` is additive and uses the existing protected LeadEstate layout and navigation permission model.
+The route `/vayon/settings/configuration` is additive and uses the existing protected Vayon layout and navigation permission model.
 
 ## Builders
 

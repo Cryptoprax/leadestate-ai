@@ -1,0 +1,4 @@
+import type { RuntimeStorage } from "../contracts/ports";
+import type { AIRuntimeConversation, AIRuntimeResponse, AIRuntimeSession } from "../domain/contracts";
+export class InMemoryRuntimeStorage implements RuntimeStorage { private sessions = new Map<string, AIRuntimeSession>(); private conversations = new Map<string, AIRuntimeConversation>(); private responses = new Map<string, AIRuntimeResponse>(); async saveSession(value: AIRuntimeSession) { this.sessions.set(value.id, value) } async getSession(id: string) { return this.sessions.get(id) } async saveConversation(value: AIRuntimeConversation) { this.conversations.set(value.id, value) } async getConversation(id: string) { return this.conversations.get(id) } async saveResponse(value: AIRuntimeResponse) { this.responses.set(value.requestId, value) } async getResponse(id: string) { return this.responses.get(id) } }
+

@@ -8,7 +8,7 @@ identity, permissions, builders, AI, messaging, automation, billing,
 observability, and extensibility—so product teams can focus on domain advantage
 instead of repeatedly rebuilding infrastructure.
 
-LeadEstate AI is the first AtlasOS product. It applies AI employees, CRM,
+Vayon OS is the first AtlasOS product. It applies AI employees, CRM,
 property operations, messaging, and automation to real estate. Its success must
 strengthen reusable platform capabilities rather than turn AtlasOS into a real
 estate-specific codebase.

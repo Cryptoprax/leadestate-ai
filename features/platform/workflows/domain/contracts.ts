@@ -1,0 +1,17 @@
+export type WorkflowStatus = "draft" | "published" | "archived";
+export type WorkflowNodeKind = "trigger" | "condition" | "delay" | "approval" | "branch" | "loop" | "notification" | "email" | "calendar" | "task" | "communication" | "crm" | "webhook" | "document" | "variable" | "math" | "formatter" | "ai" | "plugin";
+export type TriggerKind = "lead.created" | "deal.won" | "meeting.created" | "task.completed" | "campaign.started" | "document.uploaded" | "property.published" | "email.received" | "calendar.event" | "manual" | "schedule" | "webhook";
+export type ActionKind = "task.create" | "meeting.create" | "deal.create" | "lead.create" | "timeline.propose" | "email.propose" | "whatsapp.propose" | "user.notify" | "document.create" | "webhook.propose" | "ai.request" | "plugin";
+export type VariableScope = "lead" | "deal" | "company" | "contact" | "meeting" | "task" | "campaign" | "property" | "user" | "workspace" | "current-date" | "math" | "string" | "boolean" | "list";
+
+export interface WorkflowPosition { readonly x: number; readonly y: number }
+export interface WorkflowNode { readonly id: string; readonly kind: WorkflowNodeKind; readonly label: string; readonly position: WorkflowPosition; readonly configuration: Readonly<Record<string, unknown>>; readonly variableReferences: readonly string[]; readonly groupId?: string }
+export interface WorkflowConnection { readonly id: string; readonly sourceNodeId: string; readonly targetNodeId: string; readonly sourcePort?: string; readonly targetPort?: string; readonly label?: string }
+export interface WorkflowVariable { readonly id: string; readonly name: string; readonly scope: VariableScope; readonly valueType: "string" | "number" | "boolean" | "date" | "object" | "list"; readonly required: boolean }
+export interface WorkflowDefinition { readonly id: string; readonly name: string; readonly description: string; readonly version: number; readonly status: WorkflowStatus; readonly organizationId?: string; readonly workspaceId?: string; readonly nodes: readonly WorkflowNode[]; readonly connections: readonly WorkflowConnection[]; readonly variables: readonly WorkflowVariable[]; readonly createdAt?: string; readonly updatedAt?: string }
+export interface WorkflowTemplate { readonly id: string; readonly name: string; readonly description: string; readonly category: string; readonly definition: WorkflowDefinition }
+export interface NodeRegistration { readonly kind: WorkflowNodeKind; readonly label: string; readonly category: "control" | "business" | "integration" | "data" | "intelligence" | "extension"; readonly executable: false }
+export interface WorkflowValidationIssue { readonly code: "disconnected_node" | "circular_loop" | "invalid_reference" | "missing_variable" | "duplicate_id" | "missing_trigger"; readonly severity: "error" | "warning"; readonly message: string; readonly subjectId?: string }
+export interface WorkflowValidationResult { readonly valid: boolean; readonly issues: readonly WorkflowValidationIssue[] }
+export interface PlannedStep { readonly order: number; readonly nodeId: string; readonly kind: WorkflowNodeKind; readonly dependencies: readonly string[]; readonly executable: false }
+export interface ExecutionPlan { readonly workflowId: string; readonly workflowVersion: number; readonly valid: boolean; readonly steps: readonly PlannedStep[]; readonly issues: readonly WorkflowValidationIssue[]; readonly mode: "planning-only"; readonly executable: false }

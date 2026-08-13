@@ -41,7 +41,7 @@ Four additional policies protect `storage.objects` for authenticated read, inser
 
 | Bucket | Public | Size limit | Allowed MIME types |
 | --- | --- | ---: | --- |
-| `leadestate-assets` | No | 20 MiB | JPEG, PNG, WebP, AVIF, PDF |
+| `vayon-assets` | No | 20 MiB | JPEG, PNG, WebP, AVIF, PDF |
 
 Object paths are expected to begin with `<organization_id>/<workspace_id>/`. Storage policies validate membership against those two path segments.
 
@@ -98,7 +98,7 @@ AI capabilities, workforce records, billing subscriptions, and integration conne
 
 ## Manual deployment checklist
 
-1. Confirm the target Supabase project is brand new and contains no prior LeadEstate AI tables or migration history.
+1. Confirm the target Supabase project is brand new and contains no prior Vayon OS tables or migration history.
 2. Review the baseline diff and the warning about the repaired Sprint 21 newline corruption.
 3. In an isolated disposable Supabase project, run a full reset with this baseline and inspect function, policy, trigger, and seed creation. Do not use the production project for this rehearsal.
 4. Run Supabase database linting against the disposable project and review security-definer function search paths and function execute grants.

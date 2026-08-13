@@ -24,8 +24,8 @@ const columns: DataTableColumn<Organization>[] = [
     header: "Organization Name",
     render: (organization) => (
       <div>
-        <p className="font-medium text-slate-200">{organization.name}</p>
-        <p className="mt-0.5 text-[10px] text-slate-700">{organization.id}</p>
+        <p className="font-medium text-vds-secondary">{organization.name}</p>
+        <p className="mt-0.5 text-[10px] text-vds-subtle">{organization.id}</p>
       </div>
     ),
   },

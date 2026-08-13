@@ -2,10 +2,10 @@ import type { ApplicationStatus } from "../types/application";
 
 const statusStyles: Record<ApplicationStatus, string> = {
   operational:
-    "border-emerald-300/15 bg-emerald-300/[0.08] text-emerald-300",
-  beta: "border-violet-300/15 bg-violet-300/[0.08] text-violet-300",
-  preview: "border-amber-300/15 bg-amber-300/[0.08] text-amber-300",
-  maintenance: "border-rose-300/15 bg-rose-300/[0.08] text-rose-300",
+    "border-vds-success bg-vds-success/[0.08] text-vds-success",
+  beta: "border-vds-accent bg-vds-accent/[0.08] text-vds-accent",
+  preview: "border-vds-warning bg-vds-warning/[0.08] text-vds-warning",
+  maintenance: "border-vds-danger bg-vds-danger/[0.08] text-vds-danger",
 };
 
 const statusLabels: Record<ApplicationStatus, string> = {

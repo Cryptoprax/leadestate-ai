@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vayon">
+  <defs><linearGradient id="v" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#67e8f9"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+  <rect width="64" height="64" rx="16" fill="#07111b"/>
+  <path d="M13 15h11l8 27 8-27h11L38 51H26L13 15Z" fill="url(#v)"/>
+</svg>

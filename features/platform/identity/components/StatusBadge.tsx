@@ -12,11 +12,11 @@ export interface StatusBadgeProps {
 
 const toneStyles: Record<StatusTone, string> = {
   positive:
-    "border-emerald-300/15 bg-emerald-300/[0.08] text-emerald-300",
-  neutral: "border-white/[0.08] bg-white/[0.04] text-slate-400",
-  warning: "border-amber-300/15 bg-amber-300/[0.08] text-amber-300",
-  negative: "border-rose-300/15 bg-rose-300/[0.08] text-rose-300",
-  info: "border-cyan-300/15 bg-cyan-300/[0.08] text-cyan-300",
+    "border-vds-success bg-vds-success/[0.08] text-vds-success",
+  neutral: "border-vds-border/[0.08] bg-vds-surface/[0.04] text-vds-muted",
+  warning: "border-vds-warning bg-vds-warning/[0.08] text-vds-warning",
+  negative: "border-vds-danger bg-vds-danger/[0.08] text-vds-danger",
+  info: "border-vds-accent-border bg-vds-primary/[0.08] text-vds-primary",
 };
 
 export function StatusBadge({

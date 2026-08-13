@@ -42,13 +42,13 @@ export function Features() {
     <section id="features" className="px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vds-primary">
             One intelligent workflow
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
             Every tool your sales team needs to move faster.
           </h2>
-          <p className="mt-5 text-lg leading-8 text-slate-400">
+          <p className="mt-5 text-lg leading-8 text-vds-muted">
             Turn every enquiry into a structured, personalized sales journey
             without adding repetitive work to your team.
           </p>
@@ -58,13 +58,13 @@ export function Features() {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="group rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.025] p-7 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30"
+              className="group rounded-3xl border border-vds-border bg-gradient-to-b from-vds-surface to-vds-surface p-7 transition duration-300 hover:-translate-y-1 hover:border-vds-accent-border"
             >
-              <div className="flex size-11 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-xl text-cyan-300">
+              <div className="flex size-11 items-center justify-center rounded-2xl border border-vds-accent-border bg-vds-primary-soft text-xl text-vds-primary">
                 {feature.icon}
               </div>
               <h3 className="mt-6 text-xl font-semibold">{feature.title}</h3>
-              <p className="mt-3 leading-7 text-slate-400">
+              <p className="mt-3 leading-7 text-vds-muted">
                 {feature.description}
               </p>
             </article>

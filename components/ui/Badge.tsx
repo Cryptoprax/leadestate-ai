@@ -8,17 +8,17 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  neutral: "border-white/10 bg-white/[0.06] text-slate-300",
-  accent: "border-cyan-300/20 bg-cyan-300/10 text-cyan-200",
-  success: "border-emerald-300/20 bg-emerald-300/10 text-emerald-200",
-  warning: "border-amber-300/20 bg-amber-300/10 text-amber-200",
+  neutral: "border-vds-border bg-vds-surface/[0.06] text-vds-secondary",
+  accent: "border-vds-accent-border bg-vds-primary-soft text-vds-primary",
+  success: "border-vds-success bg-vds-success-soft text-vds-success",
+  warning: "border-vds-warning bg-vds-warning-soft text-vds-warning",
 };
 
 const dotStyles: Record<BadgeVariant, string> = {
-  neutral: "bg-slate-400",
-  accent: "bg-cyan-300",
-  success: "bg-emerald-300",
-  warning: "bg-amber-300",
+  neutral: "bg-vds-subtle",
+  accent: "bg-vds-primary",
+  success: "bg-vds-success",
+  warning: "bg-vds-warning",
 };
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(

@@ -47,7 +47,7 @@ Release the installable CRM foundation with contacts, leads, pipelines,
 activities, assignments, configurable fields and views, permissions, events,
 imports, data quality, and analytics.
 
-**Exit outcome:** LeadEstate AI can run core customer operations on a reusable
+**Exit outcome:** Vayon OS can run core customer operations on a reusable
 CRM module.
 
 ## Version 6 — AI

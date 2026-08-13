@@ -2,11 +2,11 @@ import type { Workspace } from "../types/workspace";
 
 export const workspaces: Workspace[] = [
   {
-    id: "workspace-leadestate-global",
-    name: "LeadEstate Global",
+    id: "workspace-vayon-global",
+    name: "Vayon Global",
     organization: "Northstar Holdings",
     userCount: 86,
-    applications: ["LeadEstate AI", "Analytics", "AI Studio"],
+    applications: ["Vayon OS", "Analytics", "AI Studio"],
     status: "Operational",
     environment: "Production",
   },
@@ -15,7 +15,7 @@ export const workspaces: Workspace[] = [
     name: "Sales Operations",
     organization: "Northstar Holdings",
     userCount: 42,
-    applications: ["LeadEstate AI", "Marketing Studio"],
+    applications: ["Vayon OS", "Marketing Studio"],
     status: "Operational",
     environment: "Production",
   },
@@ -24,7 +24,7 @@ export const workspaces: Workspace[] = [
     name: "UK Operations",
     organization: "Meridian Group",
     userCount: 58,
-    applications: ["LeadEstate AI", "Support Desk", "Analytics"],
+    applications: ["Vayon OS", "Support Desk", "Analytics"],
     status: "Operational",
     environment: "Production",
   },

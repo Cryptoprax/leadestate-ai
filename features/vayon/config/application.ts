@@ -1,0 +1,1 @@
+import{applications,brands,themes}from"@/features/platform/builder/config";export const application=applications.find(item=>item.id==="vayon")!;export const brand=brands.find(item=>item.id===application.brandId)!;export const theme=themes.find(item=>item.id===application.themeId)!;

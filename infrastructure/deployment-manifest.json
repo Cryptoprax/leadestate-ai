@@ -1,0 +1,31 @@
+{
+  "release": "2.0.0",
+  "application": "vayon",
+  "runtime": {
+    "provider": "vercel",
+    "framework": "nextjs",
+    "region": "bom1"
+  },
+  "dns": {
+    "provider": "cloudflare",
+    "proxyInitiallyEnabled": false,
+    "records": [
+      { "type": "CNAME", "name": "app", "target": "copy-exact-value-from-vercel-domain-inspect", "proxied": false },
+      { "type": "CNAME", "name": "staging", "target": "copy-exact-value-from-vercel-domain-inspect", "proxied": false }
+    ]
+  },
+  "data": {
+    "provider": "supabase",
+    "migrationsAppliedByWebDeployment": false
+  },
+  "source": {
+    "provider": "github",
+    "requiredWorkflow": ".github/workflows/ci.yml"
+  },
+  "probes": {
+    "health": "/api/health",
+    "liveness": "/api/health/live",
+    "readiness": "/api/health/ready",
+    "version": "/api/version"
+  }
+}

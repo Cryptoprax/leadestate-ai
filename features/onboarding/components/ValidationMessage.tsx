@@ -10,7 +10,7 @@ export function ValidationMessage({
   if (!message) return null;
   return (
     <p
-      className={`mt-2 flex items-center gap-1.5 text-xs ${valid ? "text-emerald-300" : "text-rose-300"}`}
+      className={`mt-2 flex items-center gap-1.5 text-xs ${valid ? "text-vds-success" : "text-vds-danger"}`}
       role={valid ? "status" : "alert"}
     >
       {valid ? <CheckCircle2 className="size-3.5" /> : <AlertCircle className="size-3.5" />}

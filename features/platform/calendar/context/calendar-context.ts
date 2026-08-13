@@ -1,0 +1,1 @@
+export const calendarContextRelationships=Object.freeze(["lead","deal","property","contact","company","campaign","task","meeting"]as const);export interface CalendarContextSlice{readonly eventId:string;readonly related:readonly{type:(typeof calendarContextRelationships)[number];id:string}[];readonly unavailableReason:string|null}

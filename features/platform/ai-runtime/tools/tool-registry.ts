@@ -1,0 +1,6 @@
+import type { ToolRegistry } from "../contracts/ports";
+import type { ToolCallProposal, ToolContract, ToolType } from "../domain/contracts";
+const types: readonly ToolType[] = ["calendar", "crm", "email", "documents", "search", "tasks", "properties", "leads", "deals", "analytics", "plugin"];
+export const architectureTools: readonly ToolContract[] = types.map(type => ({ id: `tool:${type}`, name: `${type} tool`, type, description: `Non-executable ${type} tool contract.`, inputSchema: { type: "object" }, requiredPermissions: [], requiresApproval: true, executable: false }));
+export class InMemoryToolRegistry implements ToolRegistry { private readonly tools = new Map<string, ToolContract>(); constructor(initial: readonly ToolContract[] = architectureTools) { initial.forEach(tool => this.register(tool)) } register(tool: ToolContract) { this.tools.set(tool.id, { ...tool, executable: false }) } list() { return [...this.tools.values()] } propose(toolId: string, args: Readonly<Record<string, unknown>>): ToolCallProposal { const tool = this.tools.get(toolId); return { id: crypto.randomUUID(), toolId, arguments: args, status: "blocked", executable: false, reason: tool ? "Tool execution is unavailable in the architecture release." : "Tool is not registered." } } }
+

@@ -1,0 +1,2 @@
+import type { WorkflowDefinition } from "../domain/contracts";
+export class InMemoryWorkflowStore {private drafts=new Map<string,WorkflowDefinition>();list(){return Object.freeze([...this.drafts.values()])}get(id:string){return this.drafts.get(id)}saveDraft(workflow:WorkflowDefinition){if(workflow.status!=="draft")throw new Error("Local store accepts drafts only.");const snapshot=structuredClone(workflow);this.drafts.set(snapshot.id,Object.freeze(snapshot));return snapshot}}

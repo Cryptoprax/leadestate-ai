@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/features/platform/design-system";
 
 import {
   CircleHelp,
@@ -22,41 +23,41 @@ const menuItems = [
 export function ProfileDropdown({ onClose }: ProfileDropdownProps) {
   return (
     <div
-      className="absolute right-0 top-[calc(100%+0.6rem)] z-50 w-64 overflow-hidden rounded-2xl border border-white/10 bg-[#0b111a]/95 shadow-2xl shadow-black/50 backdrop-blur-2xl"
+      className="absolute right-0 top-[calc(100%+0.6rem)] z-50 w-64 overflow-hidden rounded-2xl border border-vds-border bg-[var(--vds-color-surface)]/95 shadow-2xl shadow-vds-shadow backdrop-blur-2xl"
       role="menu"
       aria-label="User menu"
     >
-      <div className="border-b border-white/[0.07] p-4">
-        <p className="text-sm font-semibold text-white">Platform Operator</p>
-        <p className="mt-0.5 text-xs text-slate-500">operator@atlasos.com</p>
+      <div className="border-b border-vds-border/[0.07] p-4">
+        <p className="text-sm font-semibold text-vds-foreground">Platform Operator</p>
+        <p className="mt-0.5 text-xs text-vds-muted">operator@atlasos.com</p>
       </div>
       <div className="p-1.5">
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (
-            <button
+            <Button variant="control"
               key={item.label}
               type="button"
               onClick={onClose}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-vds-secondary transition hover:bg-vds-surface/[0.06] hover:text-vds-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vds-focus"
               role="menuitem"
             >
-              <Icon className="size-4 text-slate-500" aria-hidden="true" />
+              <Icon className="size-4 text-vds-muted" aria-hidden="true" />
               {item.label}
-            </button>
+            </Button>
           );
         })}
       </div>
-      <div className="border-t border-white/[0.07] p-1.5">
-        <button
+      <div className="border-t border-vds-border/[0.07] p-1.5">
+        <Button variant="control"
           type="button"
           onClick={onClose}
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-400 transition hover:bg-red-400/10 hover:text-red-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300/70"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-vds-muted transition hover:bg-vds-danger-soft hover:text-vds-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vds-danger"
           role="menuitem"
         >
           <LogOut className="size-4" aria-hidden="true" />
           Sign out
-        </button>
+        </Button>
       </div>
     </div>
   );

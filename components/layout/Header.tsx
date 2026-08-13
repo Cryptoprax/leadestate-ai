@@ -11,9 +11,9 @@ export function Header() {
         <a
           href="#"
           className="flex items-center gap-3"
-          aria-label="LeadEstate AI home"
+          aria-label="Vayon OS home"
         >
-          <span className="flex size-9 items-center justify-center rounded-xl bg-cyan-400 text-[#041018] shadow-[0_0_32px_rgba(34,211,238,0.28)]">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-vds-primary text-[var(--vds-color-background)] shadow-[0_0_32px_var(--vds-color-accent-border)]">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -36,7 +36,7 @@ export function Header() {
             </svg>
           </span>
           <span className="text-lg font-semibold tracking-tight">
-            LeadEstate <span className="text-cyan-300">AI</span>
+            Vayon <span className="text-vds-primary">AI</span>
           </span>
         </a>
 
@@ -45,7 +45,7 @@ export function Header() {
             <a
               key={item.label}
               href={item.href}
-              className="text-sm text-slate-300 transition-colors hover:text-white"
+              className="text-sm text-vds-secondary transition-colors hover:text-vds-foreground"
             >
               {item.label}
             </a>
@@ -54,7 +54,7 @@ export function Header() {
 
         <a
           href="#book-demo"
-          className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-5 py-2.5 text-sm font-semibold text-cyan-100 transition hover:border-cyan-300/60 hover:bg-cyan-300/15"
+          className="rounded-full border border-vds-accent-border bg-vds-primary-soft px-5 py-2.5 text-sm font-semibold text-vds-primary transition hover:border-vds-accent-border hover:bg-vds-primary-soft"
         >
           Book a Demo
         </a>

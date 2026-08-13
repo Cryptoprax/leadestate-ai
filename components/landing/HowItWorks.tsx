@@ -29,11 +29,11 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative border-y border-white/10 bg-white/[0.025] px-6 py-24 sm:py-32 lg:px-8"
+      className="relative border-y border-vds-border bg-vds-surface/[0.025] px-6 py-24 sm:py-32 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vds-primary">
             How it works
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -43,20 +43,20 @@ export function HowItWorks() {
 
         <ol className="relative mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <div
-            className="absolute left-[12%] right-[12%] top-7 hidden h-px bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent lg:block"
+            className="absolute left-[12%] right-[12%] top-7 hidden h-px bg-gradient-to-r from-transparent via-vds-primary-soft to-transparent lg:block"
             aria-hidden="true"
           />
           {steps.map((step) => (
             <li key={step.number} className="relative">
-              <div className="mb-6 flex size-14 items-center justify-center rounded-full border border-cyan-300/30 bg-[#08131d] text-sm font-bold text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.12)]">
+              <div className="mb-6 flex size-14 items-center justify-center rounded-full border border-vds-accent-border bg-[var(--vds-color-surface)] text-sm font-bold text-vds-primary shadow-[0_0_24px_var(--vds-color-primary-soft)]">
                 {step.number}
               </div>
-              <div className="rounded-3xl border border-white/10 bg-[#07111a] p-6">
-                <p className="text-xs font-medium uppercase tracking-widest text-slate-500">
+              <div className="rounded-3xl border border-vds-border bg-vds-surface p-6">
+                <p className="text-xs font-medium uppercase tracking-widest text-vds-muted">
                   Step {Number(step.number)}
                 </p>
                 <h3 className="mt-3 text-xl font-semibold">{step.title}</h3>
-                <p className="mt-3 leading-7 text-slate-400">
+                <p className="mt-3 leading-7 text-vds-muted">
                   {step.description}
                 </p>
               </div>

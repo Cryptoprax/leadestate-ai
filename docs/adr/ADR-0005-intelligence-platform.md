@@ -1,7 +1,7 @@
 # ADR-0005: Intelligence Platform
 
 ## Context
-LeadEstate OS must evolve beyond module-local data and direct model calls.
+Vayon OS must evolve beyond module-local data and direct model calls.
 ## Problem
 Intelligence embedded in CRM modules duplicates concepts and prevents governance and reuse.
 ## Decision

@@ -5,7 +5,7 @@
 This blueprint is the authoritative product and architecture specification for
 AtlasOS, a configurable, multi-tenant SaaS Operating System. It aligns company
 strategy, product design, platform architecture, security, governance, and
-delivery sequencing. LeadEstate AI is the first product implemented on AtlasOS;
+delivery sequencing. Vayon OS is the first product implemented on AtlasOS;
 it validates the platform without defining its limits.
 
 ## Audience

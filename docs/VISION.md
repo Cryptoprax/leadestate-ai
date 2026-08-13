@@ -1,13 +1,13 @@
-# LeadEstate OS Vision
+# Vayon OS Vision
 
 ## Purpose
 
-LeadEstate OS is a multi-tenant SaaS operating system for building and running
+Vayon OS is a multi-tenant SaaS operating system for building and running
 industry-focused applications. It provides a durable platform foundation for
 identity, organizations, tenancy, permissions, observability, configuration,
 automation, and extensibility.
 
-LeadEstate AI is the first application powered by LeadEstate OS. It applies the
+Vayon OS is the first application powered by Vayon OS. It applies the
 platform to real estate sales by helping teams qualify leads, match properties,
 coordinate communication, and improve operational visibility. The platform is
 intentionally broader than this first product.
@@ -29,7 +29,7 @@ intentionally broader than this first product.
 
 ## Long-term outcome
 
-LeadEstate OS will enable teams to launch new SaaS products without rebuilding
+Vayon OS will enable teams to launch new SaaS products without rebuilding
 core platform concerns. Each application can deliver a specialized experience
 while sharing reliable infrastructure, governance, design standards, and
 operational tooling.

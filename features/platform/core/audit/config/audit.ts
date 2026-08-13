@@ -1,7 +1,7 @@
 import type { AuditEvent } from "../types/audit";
 
 export const auditEvents: AuditEvent[] = [
-  { id: "audit-1", date: "07 Aug 2026 · 09:42", user: "Amelia Chen", organization: "Northstar Holdings", workspace: "LeadEstate Global", application: "Mission Control", action: "User login", target: "Session", ip: "203.0.113.24", device: "Chrome · macOS", status: "Success" },
+  { id: "audit-1", date: "07 Aug 2026 · 09:42", user: "Amelia Chen", organization: "Northstar Holdings", workspace: "Vayon Global", application: "Mission Control", action: "User login", target: "Session", ip: "203.0.113.24", device: "Chrome · macOS", status: "Success" },
   { id: "audit-2", date: "07 Aug 2026 · 09:18", user: "Platform Operations", organization: "Aurora Ventures", workspace: "APAC Launch", application: "Identity", action: "Organization created", target: "Aurora Ventures", ip: "198.51.100.17", device: "Service identity", status: "Success" },
   { id: "audit-3", date: "07 Aug 2026 · 08:24", user: "Sales AI", organization: "Northstar Holdings", workspace: "Sales Operations", application: "AI Studio", action: "Tool permission denied", target: "Billing export", ip: "Internal", device: "AI employee", status: "Denied" },
   { id: "audit-4", date: "06 Aug 2026 · 17:05", user: "James Wilson", organization: "Meridian Group", workspace: "UK Operations", application: "Automation", action: "Workflow published", target: "Lead follow-up v3", ip: "192.0.2.44", device: "Edge · Windows", status: "Success" },

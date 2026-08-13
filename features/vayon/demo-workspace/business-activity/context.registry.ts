@@ -1,0 +1,3 @@
+import type { ContextObjectIdentity } from "@/features/platform/context-engine/domain/contracts";import { auroraCampaigns,auroraCommunications } from "./records";import { auroraTimelineHistory } from "./timeline.history";
+export class AuroraActivityContextRegistry {readonly identities:readonly ContextObjectIdentity[]=Object.freeze([...auroraCampaigns,...auroraCommunications].map(item=>item.identity.context));readonly timelineIdentities=Object.freeze(auroraTimelineHistory.events.map(event=>Object.freeze({eventId:event.eventId,eventName:event.eventName,subject:event.subject,correlationId:event.correlationId})));identity(id:string){return this.identities.find(item=>item.id===id)}}
+export const auroraActivityContextRegistry=new AuroraActivityContextRegistry();

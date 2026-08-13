@@ -1,1 +1,25 @@
-import type{IntegrationProvider}from"./contracts";import{InactiveIntegrationProvider}from"./contracts";import{GmailIntegrationAdapter,GoogleCalendarIntegrationAdapter,MapsIntegrationAdapter,OpenAIIntegrationAdapter,StorageIntegrationAdapter,StripeIntegrationAdapter,WhatsAppIntegrationAdapter}from"./adapters";class FutureAdapter extends InactiveIntegrationProvider{constructor(readonly code:string){super()}}export class IntegrationProviderRegistry{private factories=new Map<string,()=>IntegrationProvider>();constructor(){this.register("openai",()=>new OpenAIIntegrationAdapter());this.register("gmail",()=>new GmailIntegrationAdapter());this.register("google_calendar",()=>new GoogleCalendarIntegrationAdapter());this.register("whatsapp_business",()=>new WhatsAppIntegrationAdapter());this.register("stripe",()=>new StripeIntegrationAdapter());this.register("google_maps",()=>new MapsIntegrationAdapter());this.register("supabase_storage",()=>new StorageIntegrationAdapter());for(const code of["twilio","microsoft_365","anthropic","gemini"])this.register(code,()=>new FutureAdapter(code))}register(code:string,factory:()=>IntegrationProvider){this.factories.set(code,factory)}resolve(code:string){const provider=this.factories.get(code);if(!provider)throw new Error(`Integration provider '${code}' is not registered.`);return provider()}codes(){return[...this.factories.keys()]}}
+import type { IntegrationProvider } from "./contracts";
+import { InactiveIntegrationProvider } from "./contracts";
+import { GmailIntegrationAdapter, GoogleCalendarIntegrationAdapter, MapsIntegrationAdapter, OpenAIIntegrationAdapter, StorageIntegrationAdapter, StripeIntegrationAdapter, WhatsAppIntegrationAdapter } from "./adapters";
+import { MicrosoftBusinessIntegrationAdapter, MicrosoftIdentityIntegrationAdapter } from "../microsoft/provider/adapter";
+import { microsoftProviderRegistry } from "../microsoft/provider/registry";
+
+class FutureAdapter extends InactiveIntegrationProvider { constructor(readonly code:string){ super() } }
+export class IntegrationProviderRegistry {
+  private factories=new Map<string,()=>IntegrationProvider>();
+  constructor(){
+    this.register("openai",()=>new OpenAIIntegrationAdapter());
+    this.register("gmail",()=>new GmailIntegrationAdapter());
+    this.register("google_calendar",()=>new GoogleCalendarIntegrationAdapter());
+    this.register("whatsapp_business",()=>new WhatsAppIntegrationAdapter());
+    this.register("stripe",()=>new StripeIntegrationAdapter());
+    this.register("google_maps",()=>new MapsIntegrationAdapter());
+    this.register("supabase_storage",()=>new StorageIntegrationAdapter());
+    this.register("microsoft_identity",()=>new MicrosoftIdentityIntegrationAdapter());
+    for(const descriptor of microsoftProviderRegistry.filter(item=>item.capability!=="identity"))this.register(descriptor.code,()=>new MicrosoftBusinessIntegrationAdapter(descriptor));
+    for(const code of["twilio","microsoft_365","anthropic","gemini"])this.register(code,()=>new FutureAdapter(code));
+  }
+  register(code:string,factory:()=>IntegrationProvider){this.factories.set(code,factory)}
+  resolve(code:string){const provider=this.factories.get(code);if(!provider)throw new Error(`Integration provider '${code}' is not registered.`);return provider()}
+  codes(){return[...this.factories.keys()]}
+}

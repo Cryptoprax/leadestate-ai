@@ -41,7 +41,7 @@ export function MissionControlLayout({
   }, []);
 
   return (
-    <div className="flex h-dvh min-h-[36rem] overflow-hidden bg-[#060a10] text-slate-100 selection:bg-cyan-300/20">
+    <div className="flex h-dvh min-h-[36rem] overflow-hidden bg-[var(--vds-color-background)] text-vds-foreground selection:bg-vds-primary-soft">
       <Sidebar
         collapsed={sidebarCollapsed}
         mobileOpen={mobileNavigationOpen}
@@ -52,7 +52,7 @@ export function MissionControlLayout({
 
       <div className="relative flex min-w-0 flex-1 flex-col">
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_50%_-20%,rgba(34,211,238,0.08),transparent_55%)]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_50%_-20%,var(--vds-color-primary-soft),transparent_55%)]"
           aria-hidden="true"
         />
         <Topbar
@@ -60,7 +60,7 @@ export function MissionControlLayout({
           onNotificationsOpen={() => setNotificationCenterOpen(true)}
           onMobileMenuOpen={() => setMobileNavigationOpen(true)}
         />
-        <main className="relative min-h-0 flex-1 overflow-y-auto [scrollbar-color:rgba(148,163,184,0.18)_transparent] [scrollbar-width:thin]">
+        <main className="relative min-h-0 flex-1 overflow-y-auto [scrollbar-color:var(--vds-color-border)_transparent] [scrollbar-width:thin]">
           {children}
         </main>
         <StatusBar />

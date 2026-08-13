@@ -1,0 +1,26 @@
+import type { NavigationItem } from "../types";
+
+export const vayonNavigation: readonly NavigationItem[] = [
+  { id: "vayon-home", label: "Home", href: "/vayon/home", icon: "H", surface: "sidebar", order: 0, visible: true, permission: { anyOf: ["crm.records.manage", "applications.launch"] } },
+  { id: "vayon-properties", label: "Properties", href: "/vayon/properties", icon: "P", surface: "sidebar", order: 1, visible: true, moduleId: "properties", permission: { anyOf: ["properties.read", "properties.publish"] } },
+  { id: "vayon-leads", label: "Leads", href: "/vayon/leads", icon: "L", surface: "sidebar", order: 2, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-deals", label: "Deals", href: "/vayon/deals", icon: "S", surface: "sidebar", order: 3, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-operations", label: "Operations", href: "/vayon/operations", icon: "O", surface: "sidebar", order: 4, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-calendar", label: "Calendar", href: "/vayon/calendar", icon: "C", surface: "sidebar", order: 5, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-tasks", label: "Tasks", href: "/vayon/tasks", icon: "K", surface: "sidebar", order: 6, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-communications", label: "Communications", href: "/vayon/communications", icon: "M", surface: "sidebar", order: 7, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon", label: "AI Workforce", href: "/vayon/ai", icon: "A", surface: "sidebar", order: 8, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-objects", label: "Universal Objects", href: "/vayon/objects", icon: "U", surface: "sidebar", order: 9, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-intelligence", label: "Intelligence", href: "/vayon/intelligence", icon: "I", surface: "sidebar", order: 10, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-brain", label: "Brain", href: "/vayon/brain", icon: "B", surface: "sidebar", order: 11, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-cognitive", label: "Cognitive", href: "/vayon/cognitive", icon: "C", surface: "sidebar", order: 12, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-workforce", label: "Workforce", href: "/vayon/workforce", icon: "W", surface: "sidebar", order: 13, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-runtime", label: "Runtime", href: "/vayon/runtime", icon: "R", surface: "sidebar", order: 14, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-growth", label: "Growth", href: "/vayon/growth", icon: "G", surface: "sidebar", order: 15, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-timeline", label: "Business Timeline", href: "/vayon/timeline", icon: "T", surface: "sidebar", order: 16, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-context", label: "Unified Context", href: "/vayon/context", icon: "X", surface: "sidebar", order: 17, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-configuration", label: "Configuration", href: "/vayon/settings/configuration", icon: "C", surface: "sidebar", order: 18, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },
+  { id: "vayon-appearance", label: "Appearance", href: "/vayon/settings/appearance", icon: "A", surface: "sidebar", order: 19, visible: true, permission: { anyOf: ["crm.read", "applications.launch"] } },
+  { id: "vayon-billing", label: "Billing", href: "/vayon/settings/billing", icon: "B", surface: "sidebar", order: 20, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },
+  { id: "vayon-team", label: "Team", href: "/vayon/team", icon: "T", surface: "sidebar", order: 21, visible: true, permission: { anyOf: ["users.read", "users.manage"] } },
+];

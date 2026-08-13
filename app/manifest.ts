@@ -1,0 +1,2 @@
+import type { MetadataRoute } from "next";
+export default function manifest(): MetadataRoute.Manifest { return { name: "Vayon OS", short_name: "Vayon", description: "The intelligence operating system for modern real estate companies.", start_url: "/vayon", display: "standalone", background_color: "#050b12", theme_color: "#22d3ee", icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }] }; }

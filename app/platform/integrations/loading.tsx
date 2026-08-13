@@ -1,1 +1,1 @@
-export default function Loading(){return <div className="animate-pulse p-8"><div className="h-9 w-64 rounded-xl bg-white/5"/><div className="mt-7 grid grid-cols-5 gap-3">{Array.from({length:10},(_,i)=><div className="h-24 rounded-2xl bg-white/[.03]" key={i}/>)}</div></div>}
+export default function Loading(){return <div className="animate-pulse p-8"><div className="h-9 w-64 rounded-xl bg-vds-elevated"/><div className="mt-7 grid grid-cols-5 gap-3">{Array.from({length:10},(_,i)=><div className="h-24 rounded-2xl bg-vds-surface/[.03]" key={i}/>)}</div></div>}

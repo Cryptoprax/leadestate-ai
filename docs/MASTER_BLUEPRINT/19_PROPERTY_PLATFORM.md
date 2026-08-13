@@ -3,7 +3,7 @@
 ## Purpose
 
 The Property Platform is an installable module for real estate inventory and
-transactions. It is the domain foundation for LeadEstate AI while remaining
+transactions. It is the domain foundation for Vayon OS while remaining
 independent from the AtlasOS operating core.
 
 ## Domain scope

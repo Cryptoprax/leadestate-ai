@@ -1,0 +1,2 @@
+export interface WorkflowTimelineProposal {readonly type:"workflow.created"|"workflow.updated"|"workflow.published"|"workflow.plan.generated";readonly workflowId:string;readonly workflowVersion:number;readonly summary:string;readonly status:"proposed";readonly persisted:false}
+export function proposeWorkflowTimelineEvent(input:Omit<WorkflowTimelineProposal,"status"|"persisted">):WorkflowTimelineProposal{return Object.freeze({...input,status:"proposed",persisted:false})}

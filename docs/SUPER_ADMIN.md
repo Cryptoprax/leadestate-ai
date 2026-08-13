@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Mission Control is the future internal operations surface for LeadEstate OS. It
+Mission Control is the future internal operations surface for Vayon OS. It
 provides authorized platform operators with system-wide visibility and tightly
 controlled intervention capabilities. It is separate from organization
 administration and is not a customer-facing tenant role.

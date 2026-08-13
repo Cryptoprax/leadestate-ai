@@ -1,0 +1,5 @@
+"use client";
+import { Laptop, Moon, Sun } from "lucide-react";
+import { useVdsTheme } from "./ThemeProvider";
+const order = ["dark", "light", "system"] as const;
+export function ThemeToggle({ compact = false }: { readonly compact?: boolean }) { const { mode, resolved, setMode } = useVdsTheme(), current = mode === "custom" ? resolved : mode, next = order[(order.indexOf(current) + 1) % order.length], Icon = current === "system" ? Laptop : resolved === "dark" ? Moon : Sun; return <button type="button" onClick={() => setMode(next)} aria-label={`Appearance: ${current}. Switch to ${next} theme`} title={`Theme: ${current}`} className="vds-focus inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[var(--vds-color-border)] bg-[var(--vds-color-surface)] px-3 text-[var(--vds-color-muted)] shadow-sm hover:border-[var(--vds-color-border-strong)] hover:text-[var(--vds-color-foreground)]"><Icon className="size-4" aria-hidden="true"/>{!compact && <span className="text-xs capitalize">{current}</span>}<span className="sr-only">Switch to {next} theme</span></button> }

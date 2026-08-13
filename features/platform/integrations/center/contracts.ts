@@ -1,0 +1,7 @@
+import type{ProductionFeatureKey,WorkspaceFeatureFlag}from"@/lib/infrastructure/feature-flags";
+export type IntegrationCategory="identity"|"communication"|"calendar"|"productivity"|"social"|"crm"|"payments"|"storage"|"ai"|"future";
+export type IntegrationHealth="healthy"|"needs_attention"|"authorization_required"|"disabled"|"unavailable"|"unknown";
+export interface IntegrationDefinition{readonly code:string;readonly name:string;readonly category:IntegrationCategory;readonly version:string;readonly featureFlag:ProductionFeatureKey|null;readonly requiredScopes:readonly string[];readonly settingsHref:string|null;readonly available:boolean;readonly incrementalAuthorization:boolean}
+export interface IntegrationDiagnostics{readonly lastError:string|null;readonly retryCount:number|null;readonly quotaStatus:string|null;readonly rateLimit:string|null;readonly tokenExpiresAt:string|null}
+export interface IntegrationCenterItem{readonly definition:IntegrationDefinition;readonly connected:boolean;readonly featureEnabled:boolean;readonly workspaceEnabled:boolean;readonly grantedScopes:readonly string[];readonly missingScopes:readonly string[];readonly health:IntegrationHealth;readonly lastValidation:string|null;readonly lastSync:string|null;readonly diagnostics:IntegrationDiagnostics}
+export interface IntegrationCenterModel{readonly workspaceId:string;readonly providers:readonly IntegrationCenterItem[];readonly featureFlags:readonly WorkspaceFeatureFlag[];readonly lifecycleEvents:readonly never[]}

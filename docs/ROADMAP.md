@@ -1,4 +1,4 @@
-# LeadEstate OS Roadmap
+# Vayon OS Roadmap
 
 This roadmap describes strategic sequencing, not committed delivery dates.
 Priorities will be validated against security, customer value, and platform

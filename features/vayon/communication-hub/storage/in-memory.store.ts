@@ -1,0 +1,4 @@
+import type { CommunicationHubStorage } from "../contracts/ports";
+import type { CallRecord, ComposerDraft, ConversationThread, ConversationTimelineItem, MeetingRecord } from "../domain/contracts";
+export class InMemoryCommunicationHubStorage implements CommunicationHubStorage { private draftValues: ComposerDraft[] = []; constructor(private readonly threadValues: readonly ConversationThread[] = [], private readonly timelineValues: readonly ConversationTimelineItem[] = [], private readonly meetingValues: readonly MeetingRecord[] = [], private readonly callValues: readonly CallRecord[] = []) {} threads() { return this.threadValues } timeline() { return this.timelineValues } drafts() { return this.draftValues } saveDraft(value: ComposerDraft) { this.draftValues = [...this.draftValues.filter(item => item.id !== value.id), { ...value, sendAvailable: false }] } meetings() { return this.meetingValues } calls() { return this.callValues } }
+

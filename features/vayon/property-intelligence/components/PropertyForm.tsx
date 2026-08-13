@@ -1,0 +1,1 @@
+import type{PropertyRecord}from"@/features/vayon/property/types";import{PropertyWizard}from"@/features/vayon/property/components/PropertyWizard";export function PropertyForm(props:{action:(form:FormData)=>void|Promise<void>;property?:PropertyRecord;error?:string}){return <PropertyWizard {...props}/>}

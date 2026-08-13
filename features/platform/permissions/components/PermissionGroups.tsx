@@ -21,8 +21,8 @@ const categoryOrder: Permission["category"][] = [
 
 export function PermissionGroups() {
   return (
-    <section className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02]">
-      <div className="flex flex-col gap-3 border-b border-white/[0.07] p-4 sm:flex-row sm:items-center">
+    <section className="overflow-hidden rounded-2xl border border-vds-border/[0.08] bg-vds-surface/[0.02]">
+      <div className="flex flex-col gap-3 border-b border-vds-border/[0.07] p-4 sm:flex-row sm:items-center">
         <SearchInput
           label="Search permissions"
           placeholder="Search permissions..."
@@ -30,7 +30,7 @@ export function PermissionGroups() {
         />
         <FilterBar filters={permissionFilters} />
       </div>
-      <div className="divide-y divide-white/[0.07]">
+      <div className="divide-y divide-vds-divider/[0.07]">
         {categoryOrder.map((category) => {
           const categoryPermissions = permissions.filter(
             (permission) => permission.category === category,
@@ -43,14 +43,14 @@ export function PermissionGroups() {
             >
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="flex size-7 items-center justify-center rounded-lg bg-white/[0.04] text-slate-600">
+                  <span className="flex size-7 items-center justify-center rounded-lg bg-vds-surface/[0.04] text-vds-subtle">
                     <KeyRound className="size-3.5" aria-hidden="true" />
                   </span>
-                  <h2 className="text-sm font-semibold text-slate-300">
+                  <h2 className="text-sm font-semibold text-vds-secondary">
                     {category}
                   </h2>
                 </div>
-                <p className="mt-2 text-[10px] text-slate-700">
+                <p className="mt-2 text-[10px] text-vds-subtle">
                   {categoryPermissions.length} permission
                   {categoryPermissions.length === 1 ? "" : "s"}
                 </p>
@@ -59,18 +59,18 @@ export function PermissionGroups() {
                 {categoryPermissions.map((permission) => (
                   <article
                     key={permission.id}
-                    className="grid gap-3 rounded-xl border border-white/[0.06] bg-white/[0.018] p-4 transition hover:border-white/[0.1] sm:grid-cols-[minmax(0,1fr)_auto]"
+                    className="grid gap-3 rounded-xl border border-vds-border/[0.06] bg-vds-surface/[0.018] p-4 transition hover:border-vds-border/[0.1] sm:grid-cols-[minmax(0,1fr)_auto]"
                   >
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-xs font-semibold text-slate-200">
+                        <h3 className="text-xs font-semibold text-vds-secondary">
                           {permission.name}
                         </h3>
-                        <code className="rounded-md bg-white/[0.04] px-1.5 py-0.5 text-[9px] text-cyan-300/70">
+                        <code className="rounded-md bg-vds-surface/[0.04] px-1.5 py-0.5 text-[9px] text-vds-primary">
                           {permission.key}
                         </code>
                       </div>
-                      <p className="mt-1.5 text-xs leading-5 text-slate-600">
+                      <p className="mt-1.5 text-xs leading-5 text-vds-subtle">
                         {permission.description}
                       </p>
                     </div>

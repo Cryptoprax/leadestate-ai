@@ -14,7 +14,7 @@ The package separates:
 - `ai`: a deliberately inactive future AI provider contract.
 - `components`: reusable profile, graph, timeline, document, attachment, address, tag, search, header, badge, and timeline-card surfaces.
 
-The additive `/leadestate/objects` workbench demonstrates the architecture without fabricating records. Browser storage is namespaced and never writes to the production CRM or Supabase.
+The additive `/vayon/objects` workbench demonstrates the architecture without fabricating records. Browser storage is namespaced and never writes to the production CRM or Supabase.
 
 ## Canonical objects
 
@@ -32,7 +32,7 @@ A persistence milestone should validate relationship types, prevent invalid self
 
 `SearchIndex` abstracts indexing from query orchestration. `LocalSearchIndex` provides deterministic in-browser search for locally created UBO records; `PlaceholderBackendSearchIndex` makes the future backend boundary explicit. `UniversalSearchService` accepts scoped queries across Contacts, Companies, Properties, Leads, Deals, Tasks, Calendar, Documents, Notes, Tags, and future AI Memory.
 
-`SearchOverlay` is available throughout the protected LeadEstate shell with Ctrl/Cmd+K, recent searches, scope visibility, empty states, and keyboard dismissal. It does not pretend to index production CRM rows before an approved backend adapter exists.
+`SearchOverlay` is available throughout the protected Vayon shell with Ctrl/Cmd+K, recent searches, scope visibility, empty states, and keyboard dismissal. It does not pretend to index production CRM rows before an approved backend adapter exists.
 
 ## Future persistence
 

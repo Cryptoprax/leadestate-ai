@@ -2,9 +2,9 @@ import type { PlatformApplication } from "../types/application";
 
 export const applications: PlatformApplication[] = [
   {
-    id: "leadestate-ai",
-    name: "LeadEstate AI",
-    slug: "leadestate-ai",
+    id: "vayon",
+    name: "Vayon OS",
+    slug: "vayon",
     logo: "LE",
     description:
       "AI-native real estate operations for lead qualification, property matching, messaging, and viewings.",
@@ -13,27 +13,27 @@ export const applications: PlatformApplication[] = [
     version: "1.0.0",
     category: "Product",
     permissions: [
-      "applications.leadestate.launch",
-      "applications.leadestate.configure",
+      "applications.vayon.launch",
+      "applications.vayon.configure",
     ],
     navigation: [
       {
-        id: "leadestate-overview",
+        id: "vayon-overview",
         title: "Overview",
-        route: "/platform/applications/leadestate-ai",
+        route: "/platform/applications/vayon",
         iconName: "overview",
       },
       {
-        id: "leadestate-workspace",
+        id: "vayon-workspace",
         title: "Workspace",
-        route: "/platform/applications/leadestate-ai/workspace",
+        route: "/platform/applications/vayon/workspace",
         iconName: "workspace",
       },
     ],
     theme: {
-      accent: "text-cyan-200",
-      gradient: "from-cyan-300 via-cyan-400 to-blue-500",
-      glow: "shadow-cyan-500/20",
+      accent: "text-vds-primary",
+      gradient: "from-vds-primary via-vds-primary to-vds-info",
+      glow: "shadow-vds-shadow",
     },
   },
   {
@@ -66,8 +66,8 @@ export const applications: PlatformApplication[] = [
       },
     ],
     theme: {
-      accent: "text-fuchsia-200",
-      gradient: "from-fuchsia-300 via-pink-400 to-rose-500",
+      accent: "text-vds-accent",
+      gradient: "from-vds-accent via-vds-accent to-vds-danger",
       glow: "shadow-fuchsia-500/20",
     },
   },
@@ -98,9 +98,9 @@ export const applications: PlatformApplication[] = [
       },
     ],
     theme: {
-      accent: "text-violet-200",
-      gradient: "from-violet-300 via-purple-400 to-indigo-500",
-      glow: "shadow-violet-500/20",
+      accent: "text-vds-accent",
+      gradient: "from-vds-accent via-vds-accent to-vds-accent",
+      glow: "shadow-vds-shadow",
     },
   },
   {
@@ -130,9 +130,9 @@ export const applications: PlatformApplication[] = [
       },
     ],
     theme: {
-      accent: "text-emerald-200",
-      gradient: "from-emerald-300 via-teal-400 to-cyan-500",
-      glow: "shadow-emerald-500/20",
+      accent: "text-vds-success",
+      gradient: "from-vds-success via-teal-400 to-vds-primary",
+      glow: "shadow-vds-shadow",
     },
   },
   {
@@ -162,9 +162,9 @@ export const applications: PlatformApplication[] = [
       },
     ],
     theme: {
-      accent: "text-amber-200",
-      gradient: "from-amber-300 via-orange-400 to-red-500",
-      glow: "shadow-amber-500/20",
+      accent: "text-vds-warning",
+      gradient: "from-vds-warning via-vds-warning to-vds-danger",
+      glow: "shadow-vds-shadow",
     },
   },
   {
@@ -197,9 +197,9 @@ export const applications: PlatformApplication[] = [
       },
     ],
     theme: {
-      accent: "text-blue-200",
-      gradient: "from-blue-300 via-sky-400 to-cyan-500",
-      glow: "shadow-blue-500/20",
+      accent: "text-vds-info",
+      gradient: "from-vds-primary via-sky-400 to-vds-primary",
+      glow: "shadow-vds-shadow",
     },
   },
   {
@@ -232,9 +232,9 @@ export const applications: PlatformApplication[] = [
       },
     ],
     theme: {
-      accent: "text-slate-100",
-      gradient: "from-slate-200 via-slate-400 to-slate-600",
-      glow: "shadow-slate-400/20",
+      accent: "text-vds-foreground",
+      gradient: "from-vds-secondary via-vds-muted to-vds-subtle",
+      glow: "shadow-vds-shadow",
     },
   },
   {
@@ -268,7 +268,7 @@ export const applications: PlatformApplication[] = [
     ],
     theme: {
       accent: "text-lime-200",
-      gradient: "from-lime-300 via-green-400 to-emerald-500",
+      gradient: "from-vds-success via-vds-success to-vds-success",
       glow: "shadow-lime-500/20",
     },
   },

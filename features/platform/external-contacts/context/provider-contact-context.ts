@@ -1,0 +1,1 @@
+import type{ContactMatchObject}from"../domain/contracts";export interface ProviderContactContextSlice{readonly provider:"google_contacts";readonly providerContactId:string;readonly links:readonly{type:ContactMatchObject;id:string;status:"proposed"}[];readonly unavailableReason:string|null}

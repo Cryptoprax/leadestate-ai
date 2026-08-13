@@ -8,7 +8,7 @@ export function SettingsSection({
   category: SettingsCategory;
 }) {
   return (
-    <section className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+    <section className="rounded-2xl border border-vds-border/[0.07] bg-vds-surface/[0.02] p-4">
       <SectionHeader
         title={category.name}
         description={category.description}

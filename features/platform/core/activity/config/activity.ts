@@ -39,7 +39,7 @@ export const activityEvents: ActivityEvent[] = [
     title: "Lead Created",
     description: "A new qualified enquiry entered Sales Operations.",
     category: "CRM",
-    actor: "LeadEstate AI",
+    actor: "Vayon OS",
     organization: "Northstar Holdings",
     date: "Today",
     time: "08:31",

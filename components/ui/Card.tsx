@@ -10,9 +10,9 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 const variantStyles: Record<CardVariant, string> = {
   default:
-    "border border-white/10 bg-[#0a131d] shadow-[0_18px_60px_rgba(0,0,0,0.2)]",
+    "border border-vds-border bg-[var(--vds-color-surface)] shadow-[0_18px_60px_var(--vds-shadow-color)]",
   glass:
-    "border border-white/10 bg-white/[0.055] shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl",
+    "border border-vds-border bg-vds-surface/[0.055] shadow-[0_18px_60px_var(--vds-shadow-color)] backdrop-blur-xl",
 };
 
 const paddingStyles: Record<CardPadding, string> = {

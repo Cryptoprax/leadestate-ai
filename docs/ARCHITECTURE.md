@@ -1,8 +1,8 @@
-# LeadEstate OS Architecture
+# Vayon OS Architecture
 
 ## Architectural goals
 
-LeadEstate OS uses a modular, feature-first architecture. Dependencies should
+Vayon OS uses a modular, feature-first architecture. Dependencies should
 flow from product features toward stable platform and shared UI contracts, never
 from the platform into a specific product feature.
 

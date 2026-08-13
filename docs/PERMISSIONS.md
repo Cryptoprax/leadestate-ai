@@ -2,7 +2,7 @@
 
 ## Philosophy
 
-LeadEstate OS uses role-based access control (RBAC) with explicit, fine-grained
+Vayon OS uses role-based access control (RBAC) with explicit, fine-grained
 permissions. Roles are named collections of permissions; application code
 authorizes capabilities rather than checking role names directly.
 
