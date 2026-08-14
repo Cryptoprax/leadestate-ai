@@ -20,9 +20,16 @@ export const metadata: Metadata = {
   description: "The intelligence operating system for modern real estate companies.",
   applicationName: "Vayon OS",
   manifest: "/manifest.webmanifest",
-  icons: { icon: "/icon.svg", shortcut: "/icon.svg", apple: "/icon.svg" },
-  openGraph: { title: "Vayon OS", description: "The intelligence operating system for modern real estate companies.", type: "website", siteName: "Vayon" },
-  twitter: { card: "summary_large_image", title: "Vayon OS", description: "The intelligence operating system for modern real estate companies." },
+  icons: {
+    icon: [
+      { url: "/assets/brand/favicon.ico", sizes: "256x256" },
+      { url: "/assets/brand/favicon.png", type: "image/png", sizes: "256x256" },
+    ],
+    shortcut: "/assets/brand/favicon.ico",
+    apple: "/assets/brand/apple-touch-icon.png",
+  },
+  openGraph: { title: "Vayon OS", description: "The intelligence operating system for modern real estate companies.", type: "website", siteName: "Vayon", images: [{ url: "/assets/brand/opengraph-image.png", width: 1200, height: 630, alt: "VAYON" }] },
+  twitter: { card: "summary_large_image", title: "Vayon OS", description: "The intelligence operating system for modern real estate companies.", images: ["/assets/brand/twitter-image.png"] },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

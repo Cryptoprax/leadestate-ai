@@ -13,31 +13,7 @@ export function Header() {
           className="flex items-center gap-3"
           aria-label="Vayon OS home"
         >
-          <span className="flex size-9 items-center justify-center rounded-xl bg-vds-primary text-[var(--vds-color-background)] shadow-[0_0_32px_var(--vds-color-accent-border)]">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="size-5"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 18V9.5L12 4l8 5.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinejoin="round"
-              />
-              <path
-                d="m9 14 2-2 2 2 3-3"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-          <span className="text-lg font-semibold tracking-tight">
-            Vayon <span className="text-vds-primary">AI</span>
-          </span>
+          <BrandLogo size="md" priority />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -62,3 +38,4 @@ export function Header() {
     </header>
   );
 }
+import { BrandLogo } from "@/components/brand";

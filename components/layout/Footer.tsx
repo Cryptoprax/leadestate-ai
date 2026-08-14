@@ -16,12 +16,7 @@ export function Footer() {
               className="inline-flex items-center gap-3"
               aria-label="Vayon OS home"
             >
-              <span className="flex size-9 items-center justify-center rounded-xl bg-vds-primary font-bold text-[var(--vds-color-background)]">
-                L
-              </span>
-              <span className="text-lg font-semibold">
-                Vayon <span className="text-vds-primary">AI</span>
-              </span>
+              <BrandLogo size="md" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-6 text-vds-muted">
               The always-on AI sales employee built for modern real estate
@@ -69,3 +64,4 @@ export function Footer() {
     </footer>
   );
 }
+import { BrandLogo } from "@/components/brand";

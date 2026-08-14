@@ -12,6 +12,7 @@ import { completeOnboardingAction } from "../actions/onboarding.actions";
 import { LogoUploader } from "./LogoUploader";
 import { ProgressStepper } from "./ProgressStepper";
 import { ValidationMessage } from "./ValidationMessage";
+import { BrandLogo } from "@/components/brand";
 
 type Invite = { id: number; name: string; email: string; role: string };
 type Errors = Partial<Record<"organizationName"|"country"|"currency"|"timezone"|"language"|"workspaceName",string>>;
@@ -49,7 +50,7 @@ export function OnboardingWizard({error}:{error?:string}){
     <div className="grid lg:grid-cols-[18rem_1fr]">
       <aside className="relative overflow-hidden border-b border-vds-border/[0.07] bg-gradient-to-br from-vds-primary/[0.09] via-transparent to-vds-accent/[0.08] p-6 lg:min-h-[42rem] lg:border-b-0 lg:border-r lg:p-8">
         <div className="absolute -left-20 top-40 size-52 rounded-full bg-vds-primary/[0.06] blur-3xl"/>
-        <p className="relative text-sm font-semibold text-vds-primary">Vayon OS</p><h1 className="relative mt-8 text-3xl font-semibold tracking-tight">Your command center starts here.</h1><p className="relative mt-3 text-sm leading-6 text-vds-muted">A secure workspace configured around your market, team, and operating model.</p>
+        <div className="relative"><BrandLogo size="md" priority/></div><h1 className="relative mt-8 text-3xl font-semibold tracking-tight">Your command center starts here.</h1><p className="relative mt-3 text-sm leading-6 text-vds-muted">A secure workspace configured around your market, team, and operating model.</p>
         <div className="relative mt-10 hidden space-y-5 text-sm lg:block">{[{icon:Building2,text:"Organization and workspace provisioning"},{icon:Users,text:"Role-based team access"},{icon:Check,text:"Billing and AI workforce ready"}].map(({icon:Icon,text})=><div key={text} className="flex items-center gap-3 text-vds-secondary"><span className="grid size-9 place-items-center rounded-xl border border-vds-border bg-vds-surface/[0.04] text-vds-primary"><Icon className="size-4"/></span>{text}</div>)}</div>
       </aside>
       <section className="p-5 sm:p-8 lg:p-10">

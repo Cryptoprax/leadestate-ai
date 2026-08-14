@@ -1,8 +1,86 @@
 import type { NavigationItem } from "@/features/platform/builder/types";
-import type { UniversalSearchProvider, UniversalSearchRequest } from "../contracts/ports";
-import type { UniversalBarResult, UniversalSearchScope } from "../domain/contracts";
+import type {
+  UniversalSearchProvider,
+  UniversalSearchRequest,
+} from "../contracts/ports";
+import type {
+  UniversalBarResult,
+  UniversalSearchScope,
+} from "../domain/contracts";
 import { quickCreateActions } from "../config/quick-create";
-const allScopes: readonly UniversalSearchScope[] = ["properties", "leads", "deals", "contacts", "companies", "campaigns", "meetings", "tasks", "documents", "communications", "universal-objects", "business-timeline", "executive-home", "growth", "settings"];
-export class StaticNavigationSearchProvider implements UniversalSearchProvider { readonly id = "static-navigation"; readonly scopes = allScopes; constructor(private readonly navigation: readonly NavigationItem[]) {} search(request: UniversalSearchRequest): readonly UniversalBarResult[] { const term = request.query.toLocaleLowerCase(); const navigation = this.navigation.filter(item => item.visible && item.href).map(item => ({ id: `navigate-${item.id}`, label: item.label, description: `Open ${item.label}.`, href: item.href!, scope: scopeFor(item.href!), kind: "navigation" as const, keywords: [item.label.toLocaleLowerCase(), item.href!] })).filter(item => matches(item, term)); return [...quickCreateActions.filter(item => request.scopes.includes(item.scope) && matches(item, term)), ...navigation.filter(item => request.scopes.includes(item.scope))] } }
-function matches(item: Pick<UniversalBarResult, "label" | "description" | "keywords">, term: string) { return [item.label, item.description, ...item.keywords].some(value => value.toLocaleLowerCase().includes(term)) }
-function scopeFor(href: string): UniversalSearchScope { if (href.includes("properties")) return "properties"; if (href.includes("leads")) return "leads"; if (href.includes("deals")) return "deals"; if (href.includes("communications")) return "communications"; if (href.includes("timeline")) return "business-timeline"; if (href.includes("objects")) return "universal-objects"; if (href.includes("growth")) return "growth"; if (href.includes("home")) return "executive-home"; if (href.includes("settings")) return "settings"; if (href.includes("tasks")) return "tasks"; if (href.includes("calendar") || href.includes("meetings")) return "meetings"; return "settings" }
+const allScopes: readonly UniversalSearchScope[] = [
+  "properties",
+  "leads",
+  "deals",
+  "contacts",
+  "companies",
+  "campaigns",
+  "meetings",
+  "tasks",
+  "documents",
+  "communications",
+  "employees",
+  "workflows",
+  "analytics",
+  "pages",
+  "navigation",
+  "universal-objects",
+  "business-timeline",
+  "executive-home",
+  "growth",
+  "settings",
+];
+export class StaticNavigationSearchProvider implements UniversalSearchProvider {
+  readonly id = "static-navigation";
+  readonly scopes = allScopes;
+  constructor(private readonly navigation: readonly NavigationItem[]) {}
+  search(request: UniversalSearchRequest): readonly UniversalBarResult[] {
+    const term = request.query.toLocaleLowerCase();
+    const navigation = this.navigation
+      .filter((item) => item.visible && item.href)
+      .map((item) => ({
+        id: `navigate-${item.id}`,
+        label: item.label,
+        description: `Open ${item.label}.`,
+        href: item.href!,
+        scope: scopeFor(item.href!),
+        kind: "navigation" as const,
+        keywords: [item.label.toLocaleLowerCase(), item.href!],
+      }))
+      .filter((item) => matches(item, term));
+    return [
+      ...quickCreateActions.filter(
+        (item) => request.scopes.includes(item.scope) && matches(item, term),
+      ),
+      ...navigation.filter((item) => request.scopes.includes(item.scope)),
+    ];
+  }
+}
+function matches(
+  item: Pick<UniversalBarResult, "label" | "description" | "keywords">,
+  term: string,
+) {
+  return [item.label, item.description, ...item.keywords].some((value) =>
+    value.toLocaleLowerCase().includes(term),
+  );
+}
+function scopeFor(href: string): UniversalSearchScope {
+  if (href.includes("properties")) return "properties";
+  if (href.includes("leads")) return "leads";
+  if (href.includes("deals")) return "deals";
+  if (href.includes("communications")) return "communications";
+  if (href.includes("employees") || href.includes("workforce"))
+    return "employees";
+  if (href.includes("workflows") || href.includes("approvals"))
+    return "workflows";
+  if (href.includes("analytics")) return "analytics";
+  if (href.includes("timeline")) return "business-timeline";
+  if (href.includes("objects")) return "universal-objects";
+  if (href.includes("growth")) return "growth";
+  if (href.includes("home") || href.includes("dashboard"))
+    return "executive-home";
+  if (href.includes("settings") || href.includes("admin")) return "settings";
+  if (href.includes("tasks")) return "tasks";
+  if (href.includes("calendar") || href.includes("meetings")) return "meetings";
+  return "navigation";
+}

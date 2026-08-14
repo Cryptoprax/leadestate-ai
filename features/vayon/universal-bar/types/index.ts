@@ -1,2 +1,19 @@
-export type { AdaptiveSuggestion, UniversalBarMode, UniversalBarResult, UniversalHistoryItem, UniversalHistoryKind, UniversalIntent, UniversalIntentType, UniversalPreviewModel, UniversalPreviewType, UniversalSearchScope } from "../domain/contracts";
-export type { UniversalHistoryStore, UniversalIntentRouter, UniversalSearchEngine, UniversalSearchProvider, UniversalSearchRequest } from "../contracts/ports";
+export type {
+  AdaptiveSuggestion,
+  UniversalBarMode,
+  UniversalBarResult,
+  UniversalHistoryItem,
+  UniversalHistoryKind,
+  UniversalIntent,
+  UniversalIntentType,
+  UniversalPreviewModel,
+  UniversalPreviewType,
+  UniversalSearchScope,
+} from "../domain/contracts";
+export type {
+  UniversalHistoryStore,
+  UniversalIntentRouter,
+  UniversalSearchEngine,
+  UniversalSearchProvider,
+  UniversalSearchRequest,
+} from "../contracts/ports";

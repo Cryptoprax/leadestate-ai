@@ -18,6 +18,7 @@ import type {
   DemoExperienceModel,
   DemoRecord,
 } from "../domain/contracts";
+import { BrandLogo } from "@/components/brand";
 
 const tabs = [
   "dashboard",
@@ -73,11 +74,8 @@ export function DemoExperience({
     >
       <header className="sticky top-0 z-50 border-b border-vds-border bg-vds-background/95 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[106rem] items-center gap-3 px-4 sm:px-6">
-          <span className="grid size-9 place-items-center rounded-xl bg-vds-primary text-sm font-bold text-vds-background">
-            V
-          </span>
+          <BrandLogo size="sm" priority />
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">Vayon OS</p>
             <p className="truncate text-[10px] text-vds-subtle">
               Aurora Realty Group
             </p>

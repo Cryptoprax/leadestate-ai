@@ -1,5 +1,6 @@
 import {
   Activity,
+  BarChart3,
   Bot,
   Brain,
   BriefcaseBusiness,
@@ -21,6 +22,7 @@ import {
   Network,
   Phone,
   RadioTower,
+  ShieldCheck,
   Settings,
   Sparkles,
   SquareKanban,
@@ -39,6 +41,7 @@ export const shellNavigation: readonly ShellNavigationGroup[] = [
     items: [
       { label: "Dashboard", href: "/vayon/dashboard", icon: Gauge },
       { label: "Executive Home", href: "/vayon/home", icon: Home },
+      { label: "Analytics", href: "/vayon/analytics", icon: BarChart3 },
     ],
   },
   {
@@ -71,6 +74,8 @@ export const shellNavigation: readonly ShellNavigationGroup[] = [
       { label: "Calendar", href: "/vayon/calendar", icon: CalendarDays },
       { label: "Tasks", href: "/vayon/tasks", icon: SquareKanban },
       { label: "Timeline", href: "/vayon/timeline", icon: Activity },
+      { label: "Workflows", href: "/vayon/workflows", icon: Workflow },
+      { label: "Approvals", href: "/vayon/approvals", icon: ShieldCheck },
     ],
   },
   {
@@ -110,6 +115,7 @@ export const shellNavigation: readonly ShellNavigationGroup[] = [
     icon: Sparkles,
     items: [
       { label: "Workforce", href: "/vayon/workforce", icon: Bot },
+      { label: "AI Employees", href: "/vayon/ai/employees", icon: Users },
       {
         label: "Assistant",
         icon: Sparkles,
@@ -124,6 +130,7 @@ export const shellNavigation: readonly ShellNavigationGroup[] = [
     icon: Settings,
     items: [
       { label: "Team", href: "/vayon/team", icon: UsersRound },
+      { label: "Administration", href: "/vayon/admin", icon: ShieldCheck },
       { label: "Settings", href: "/vayon/settings/appearance", icon: Settings },
       {
         label: "Integrations",
@@ -155,6 +162,7 @@ export const shellNavigation: readonly ShellNavigationGroup[] = [
       { label: "Timeline Dashboard", href: "/vayon/timeline", icon: Activity },
       { label: "Architecture", href: "/vayon/objects", icon: FileCode2 },
       { label: "Documents", href: "/vayon/storage", icon: FileText },
+      { label: "System", href: "/vayon/system", icon: Gauge },
     ],
   },
 ];

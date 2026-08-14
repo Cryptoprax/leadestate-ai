@@ -1,2 +1,25 @@
-import type { UniversalSearchEngine, UniversalSearchProvider, UniversalSearchRequest } from "../contracts/ports";
-export class ProviderNeutralUniversalSearch implements UniversalSearchEngine { constructor(private readonly providers: readonly UniversalSearchProvider[]) {} search(request: UniversalSearchRequest) { const term = request.query.trim().toLocaleLowerCase(); if (!term) return []; const seen = new Set<string>(); return this.providers.flatMap(provider => provider.scopes.some(scope => request.scopes.includes(scope)) ? provider.search(request) : []).filter(result => { if (seen.has(result.id)) return false; seen.add(result.id); return true }).slice(0, request.limit ?? 20) } }
+import type {
+  UniversalSearchEngine,
+  UniversalSearchProvider,
+  UniversalSearchRequest,
+} from "../contracts/ports";
+export class ProviderNeutralUniversalSearch implements UniversalSearchEngine {
+  constructor(private readonly providers: readonly UniversalSearchProvider[]) {}
+  search(request: UniversalSearchRequest) {
+    const term = request.query.trim().toLocaleLowerCase();
+    if (!term) return [];
+    const seen = new Set<string>();
+    return this.providers
+      .flatMap((provider) =>
+        provider.scopes.some((scope) => request.scopes.includes(scope))
+          ? provider.search(request)
+          : [],
+      )
+      .filter((result) => {
+        if (seen.has(result.id)) return false;
+        seen.add(result.id);
+        return true;
+      })
+      .slice(0, request.limit ?? 20);
+  }
+}

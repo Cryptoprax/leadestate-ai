@@ -4,7 +4,7 @@ import test from "node:test";
 const read = (path) =>
   readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("demo is the only additive public route exception", () => {
+test("demo remains an additive public route", () => {
   const source = read("lib/supabase/proxy.ts");
   assert.match(source, /"\/demo"/);
   assert.match(source, /PUBLIC_ROUTES/);
@@ -24,7 +24,10 @@ test("demo repository is isolated read only and fixture backed", () => {
   assert.match(source, /AuroraDemoRepository/);
   assert.match(source, /readOnly:\s*true/);
   assert.match(source, /seeded-json-fixtures/);
-  assert.doesNotMatch(source, /supabase|client\.from\(|insert\(|update\(|delete\(/);
+  assert.doesNotMatch(
+    source,
+    /supabase|client\.from\(|insert\(|update\(|delete\(/,
+  );
 });
 test("demo inventory exceeds required experience volumes", () => {
   const source = read(
