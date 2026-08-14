@@ -1,0 +1,1 @@
+import{GoogleCalendarWorkspace}from"@/features/platform/google-calendar/components";export default async function Page({searchParams}:{searchParams:Promise<{q?:string;view?:"day"|"week"|"month"|"agenda";page?:string}>}){const q=await searchParams;return <GoogleCalendarWorkspace query={q.q} view={q.view} pageToken={q.page}/>}

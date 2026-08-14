@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";import{GoogleCalendarShell}from"@/features/platform/google-calendar/components";export default function Layout({children}:{children:ReactNode}){return <GoogleCalendarShell>{children}</GoogleCalendarShell>}
