@@ -1,14 +1,14 @@
-import { CommandCenter } from "@/features/vayon/operational-workforce/components/WorkforceViews";
+import { ActivityList } from "@/features/vayon/operational-workforce/components/WorkforceViews";
 import { WorkforceShell } from "@/features/vayon/operational-workforce/components/WorkforceShell";
 import { WorkforceService } from "@/features/vayon/operational-workforce/services/workforce.service";
 export default async function Page() {
   const snapshot = await (await WorkforceService.production()).snapshot();
   return (
     <WorkforceShell
-      title="AI Command Center"
-      description="Mission control for Vayon operational AI employees. All execution is deterministic, advisory, and isolated from external AI providers."
+      title="Workforce History"
+      description="A read-only timeline of deterministic workforce outcomes derived from existing workspace tasks."
     >
-      <CommandCenter snapshot={snapshot} />
+      <ActivityList items={snapshot.activity} />
     </WorkforceShell>
   );
 }

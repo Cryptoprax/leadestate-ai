@@ -1,14 +1,14 @@
-import { CommandCenter } from "@/features/vayon/operational-workforce/components/WorkforceViews";
+import { EmployeeGrid } from "@/features/vayon/operational-workforce/components/WorkforceViews";
 import { WorkforceShell } from "@/features/vayon/operational-workforce/components/WorkforceShell";
 import { WorkforceService } from "@/features/vayon/operational-workforce/services/workforce.service";
 export default async function Page() {
   const snapshot = await (await WorkforceService.production()).snapshot();
   return (
     <WorkforceShell
-      title="AI Command Center"
-      description="Mission control for Vayon operational AI employees. All execution is deterministic, advisory, and isolated from external AI providers."
+      title="AI Workforce"
+      description="Eight role-specific operational advisors with explicit health, capabilities, permissions, queues, and availability."
     >
-      <CommandCenter snapshot={snapshot} />
+      <EmployeeGrid items={snapshot.employees} />
     </WorkforceShell>
   );
 }

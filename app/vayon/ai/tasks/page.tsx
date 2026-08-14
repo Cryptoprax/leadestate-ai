@@ -1,1 +1,25 @@
-import{AIHeader,AITaskCard}from"@/features/vayon/ai-workforce/components/AIWorkforceUI";import{ApprovalQueue}from"@/features/vayon/ai-workforce/components/ApprovalQueue";import{AIService}from"@/features/vayon/ai-workforce/services/ai.service";import{ApprovalService}from"@/features/vayon/ai-workforce/services/approval.service";export default async function Page(){const[tasks,approvals]=await Promise.all([new AIService().tasks(),new ApprovalService().list()]);return <main className="mx-auto max-w-6xl px-5 py-8"><AIHeader title="AI Tasks & Approvals" description="Review proposed work before any future AI action. Approval records decisions only; execution remains disabled."/><section className="mt-7 grid gap-6 lg:grid-cols-2"><div><h2 className="mb-3 font-semibold">Generated tasks</h2><div className="space-y-3">{tasks.map(x=><AITaskCard item={x} key={x.id}/>)}</div></div><div><h2 className="mb-3 font-semibold">Approval center</h2><ApprovalQueue items={approvals}/></div></section></main>}
+import { TaskList } from "@/features/vayon/operational-workforce/components/WorkforceViews";
+import { WorkforceShell } from "@/features/vayon/operational-workforce/components/WorkforceShell";
+import { WorkforceService } from "@/features/vayon/operational-workforce/services/workforce.service";
+export default async function Page() {
+  const snapshot = await (await WorkforceService.production()).snapshot();
+  return (
+    <WorkforceShell
+      title="Workforce Task Queue"
+      description="Pending, running, completed, failed, and cancelled work across the tenant-scoped operational workforce."
+    >
+      <div className="grid gap-6 xl:grid-cols-5">
+        {["pending", "running", "completed", "failed", "cancelled"].map(
+          (status) => (
+            <section key={status}>
+              <h2 className="mb-3 font-semibold capitalize">{status}</h2>
+              <TaskList
+                items={snapshot.tasks.filter((x) => x.status === status)}
+              />
+            </section>
+          ),
+        )}
+      </div>
+    </WorkforceShell>
+  );
+}
