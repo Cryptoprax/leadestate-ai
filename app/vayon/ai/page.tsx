@@ -6,7 +6,7 @@ export default async function Page() {
   return (
     <WorkforceShell
       title="AI Command Center"
-      description="Mission control for Vayon operational AI employees. All execution is deterministic, advisory, and isolated from external AI providers."
+      description="Mission control for live, governed Vayon AI employees with workspace-attributed conversations and provider health."
     >
       <CommandCenter snapshot={snapshot} />
     </WorkforceShell>

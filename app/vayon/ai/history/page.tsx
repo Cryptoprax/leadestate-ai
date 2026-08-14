@@ -6,7 +6,7 @@ export default async function Page() {
   return (
     <WorkforceShell
       title="Workforce History"
-      description="A read-only timeline of deterministic workforce outcomes derived from existing workspace tasks."
+      description="A read-only timeline of governed workforce outcomes derived from existing workspace tasks and conversations."
     >
       <ActivityList items={snapshot.activity} />
     </WorkforceShell>

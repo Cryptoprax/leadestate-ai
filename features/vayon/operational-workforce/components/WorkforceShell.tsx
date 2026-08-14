@@ -19,7 +19,7 @@ export function WorkforceShell({
     <main className="mx-auto max-w-[96rem] px-4 py-7 sm:px-6 lg:px-8">
       <header>
         <p className="text-xs font-semibold uppercase tracking-[.2em] text-vds-primary">
-          Operational AI · deterministic mode
+          Live AI Workforce
         </p>
         <h1 className="mt-2 text-3xl font-semibold">{title}</h1>
         <p className="mt-2 max-w-3xl text-sm text-vds-muted">{description}</p>

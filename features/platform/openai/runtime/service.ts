@@ -22,11 +22,13 @@ export class WorkforceRuntimeService {
     await this.repository.append({ conversationId, role: "user", content: input.message.trim() });
     const system = `You are ${input.employee}, a governed VAYON AI employee. Use only supplied workspace evidence. Never invent CRM relationships. Never execute actions. Recommendations always require human approval. If evidence is absent, say so explicitly.`;
     const prompt = `${input.message.trim()}\n\nAuthorized workspace references (identifiers only; do not infer their contents): ${refs.length ? JSON.stringify(refs) : "None supplied"}.`;
+    const started = performance.now();
     let output = "";
     for await (const delta of this.provider.stream({ employee: input.employee, workspaceId: this.workspaceId, model: process.env.OPENAI_MODEL ?? "gpt-5", system, prompt })) { output += delta; yield { type: "delta" as const, value: delta, conversationId }; }
     const usage = await this.provider.countTokens(`${system}\n${prompt}\n${output}`);
     const cost = this.provider.estimateCost(process.env.OPENAI_MODEL ?? "gpt-5", usage.promptTokens, Math.ceil(output.length / 4));
-    await this.repository.append({ conversationId, role: "assistant", content: output, model: cost.model, usage: { ...usage, completionTokens: Math.ceil(output.length / 4), totalTokens: usage.promptTokens + Math.ceil(output.length / 4) }, cost });
-    yield { type: "complete" as const, conversationId, usage, cost, recommendationOnly: true as const };
+    const latencyMs = Math.round(performance.now() - started);
+    await this.repository.append({ conversationId, role: "assistant", content: output, model: cost.model, usage: { ...usage, completionTokens: Math.ceil(output.length / 4), totalTokens: usage.promptTokens + Math.ceil(output.length / 4) }, cost, latencyMs });
+    yield { type: "complete" as const, conversationId, usage, cost, model: cost.model, latencyMs, recommendationOnly: true as const };
   }
 }

@@ -9,7 +9,7 @@ export function WorkforceChatPanel({ employee, initial, health }: { employee: AI
   const [messages, setMessages] = useState<readonly WorkforceMessage[]>(initial.messages);
   const [query, setQuery] = useState("");
   const [value, setValue] = useState("");
-  const [status, setStatus] = useState<"online" | "processing" | "idle" | "error">(health.connected ? "online" : "error");
+  const [status, setStatus] = useState<"online" | "processing" | "idle" | "offline" | "error">(health.connected ? "online" : "offline");
   const visible = useMemo(() => initial.conversations.filter((item) => item.title.toLowerCase().includes(query.toLowerCase())), [initial.conversations, query]);
 
   async function submit(event: FormEvent) {
@@ -17,7 +17,7 @@ export function WorkforceChatPanel({ employee, initial, health }: { employee: AI
     const message = value.trim();
     if (!message || status === "processing") return;
     setValue(""); setStatus("processing");
-    const temporary: WorkforceMessage = { id: crypto.randomUUID(), conversationId: conversationId ?? "pending", role: "user", content: message, model: null, usage: null, cost: null, createdAt: new Date().toISOString(), recommendationOnly: true };
+    const temporary: WorkforceMessage = { id: crypto.randomUUID(), conversationId: conversationId ?? "pending", role: "user", content: message, model: null, usage: null, cost: null, latencyMs: null, createdAt: new Date().toISOString(), recommendationOnly: true };
     setMessages((current) => [...current, temporary]);
     try {
       const response = await fetch("/api/ai/workforce/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ employee, conversationId, message }) });
@@ -26,11 +26,11 @@ export function WorkforceChatPanel({ employee, initial, health }: { employee: AI
       while (true) {
         const { done, value: chunk } = await reader.read(); if (done) break; buffer += decoder.decode(chunk, { stream: true });
         const lines = buffer.split("\n"); buffer = lines.pop() ?? "";
-        for (const line of lines) { if (!line) continue; const item = JSON.parse(line) as { type: string; value?: string; conversationId?: string; message?: string; usage?: WorkforceMessage["usage"]; cost?: WorkforceMessage["cost"] };
+        for (const line of lines) { if (!line) continue; const item = JSON.parse(line) as { type: string; value?: string; conversationId?: string; message?: string; usage?: WorkforceMessage["usage"]; cost?: WorkforceMessage["cost"]; model?: string; latencyMs?: number };
           if (item.type === "error") throw new Error(item.message);
           if (item.conversationId) setConversationId(item.conversationId);
-          if (item.type === "delta") { assistant += item.value ?? ""; const next: WorkforceMessage = { id: assistantId, conversationId: item.conversationId ?? "pending", role: "assistant", content: assistant, model: health.model, usage: null, cost: null, createdAt: new Date().toISOString(), recommendationOnly: true }; setMessages((current) => [...current.filter((entry) => entry.id !== assistantId), next]); }
-          if (item.type === "complete") setMessages((current) => current.map((entry) => entry.id === assistantId ? { ...entry, usage: item.usage ?? null, cost: item.cost ?? null } : entry));
+          if (item.type === "delta") { assistant += item.value ?? ""; const next: WorkforceMessage = { id: assistantId, conversationId: item.conversationId ?? "pending", role: "assistant", content: assistant, model: health.model, usage: null, cost: null, latencyMs: null, createdAt: new Date().toISOString(), recommendationOnly: true }; setMessages((current) => [...current.filter((entry) => entry.id !== assistantId), next]); }
+          if (item.type === "complete") setMessages((current) => current.map((entry) => entry.id === assistantId ? { ...entry, usage: item.usage ?? null, cost: item.cost ?? null, model: item.model ?? entry.model, latencyMs: item.latencyMs ?? null } : entry));
         }
       }
       setStatus("idle");
@@ -44,8 +44,8 @@ export function WorkforceChatPanel({ employee, initial, health }: { employee: AI
       <div className="mt-3 space-y-2">{visible.map((item) => <Button variant="control" fullWidth onClick={() => setConversationId(item.id)} key={item.id} className="rounded-xl border border-vds-border p-3 text-left text-sm"><span className="line-clamp-2">{item.title}</span></Button>)}</div>
     </aside>
     <div className="rounded-2xl border border-vds-border bg-vds-surface p-5">
-      <header className="flex items-center justify-between gap-3"><div><h2 className="font-semibold">Live chat</h2><p className="text-xs text-vds-muted">Workspace-attributed · GPT-5 · recommendation only</p></div><span className="rounded-full border border-vds-border px-3 py-1 text-xs capitalize">{status}</span></header>
-      <div aria-live="polite" className="mt-4 min-h-64 space-y-3 rounded-xl bg-vds-elevated p-4">{messages.filter((item) => !conversationId || item.conversationId === conversationId || item.conversationId === "pending").map((item) => <article key={item.id} className={`max-w-[85%] rounded-xl border border-vds-border p-3 text-sm ${item.role === "user" ? "ml-auto bg-vds-primary-soft" : "bg-vds-surface"}`}><p className="whitespace-pre-wrap">{item.content}</p>{item.role === "assistant" && <p className="mt-2 text-[11px] text-vds-muted">{item.usage ? `${item.usage.totalTokens} tokens` : "Streaming"} · {item.cost ? `$${item.cost.totalUsd.toFixed(6)}` : "Cost pending"} · Approval required</p>}</article>)}</div>
+      <header className="flex items-center justify-between gap-3"><div><h2 className="font-semibold">Live chat</h2><p className="text-xs text-vds-muted">Workspace-attributed · {health.model} · {health.connected ? `Provider healthy · ${health.latencyMs ?? "—"} ms` : health.reason} · recommendation only</p></div><span className="rounded-full border border-vds-border px-3 py-1 text-xs font-semibold uppercase">{status}</span></header>
+      <div aria-live="polite" className="mt-4 min-h-64 space-y-3 rounded-xl bg-vds-elevated p-4">{messages.filter((item) => !conversationId || item.conversationId === conversationId || item.conversationId === "pending").map((item) => <article key={item.id} className={`max-w-[85%] rounded-xl border border-vds-border p-3 text-sm ${item.role === "user" ? "ml-auto bg-vds-primary-soft" : "bg-vds-surface"}`}><p className="whitespace-pre-wrap">{item.content}</p>{item.role === "assistant" && <p className="mt-2 text-[11px] text-vds-muted">{item.model ?? health.model} · {item.usage ? `${item.usage.totalTokens} tokens` : "Streaming"} · {item.cost ? `$${item.cost.totalUsd.toFixed(6)}` : "Cost pending"} · {item.latencyMs === null ? "Latency pending" : `${item.latencyMs} ms`} · Approval required</p>}</article>)}</div>
       <form onSubmit={submit} className="mt-4 flex gap-2"><label className="sr-only" htmlFor="workforce-message">Message</label><textarea id="workforce-message" value={value} onChange={(event) => setValue(event.target.value)} rows={2} maxLength={20_000} placeholder="Ask for analysis or a recommendation…" className="min-w-0 flex-1 rounded-xl border border-vds-border bg-vds-elevated px-3 py-2 text-sm"/><Button type="submit" disabled={!health.connected || status === "processing"}>Send</Button></form>
       {!health.connected && <p className="mt-2 text-xs text-vds-danger">Provider unavailable: {health.reason}. Deterministic fallback remains active for non-chat workforce operations.</p>}
     </div>
