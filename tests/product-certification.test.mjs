@@ -7,8 +7,8 @@ const read = path => readFileSync(new URL(`../${path}`, import.meta.url), "utf8"
 
 test("every authenticated route receives an explicit evidence-safe certification status", async () => {
   const result = await certifyProduct();
-  assert.equal(result.evidence.routeCount, 61);
-  assert.equal(result.routes.length, 61);
+  assert.equal(result.evidence.routeCount, 62);
+  assert.equal(result.routes.length, 62);
   assert.equal(result.routes.every(item => ["PASS", "WARNING", "FAIL"].includes(item.status)), true);
   assert.equal(result.routes.every(item => item.status === "WARNING"), true);
 });
