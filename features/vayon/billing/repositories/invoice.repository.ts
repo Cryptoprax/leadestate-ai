@@ -1,1 +1,12 @@
-import"server-only";import type{SupabaseClient}from"@supabase/supabase-js";import type{InvoiceRecord}from"../types";export class InvoiceRepository{constructor(private c:SupabaseClient,private o:string,private w:string){}async list(){const{data,error}=await this.c.from("invoices").select("id,invoice_number,status,currency,subtotal,tax,total,issued_at,due_at,paid_at,download_url").eq("organization_id",this.o).eq("workspace_id",this.w).is("deleted_at",null).order("created_at",{ascending:false});if(error)throw error;return(data??[]).map(r=>({id:r.id,number:r.invoice_number,status:r.status,currency:r.currency,subtotal:Number(r.subtotal),tax:Number(r.tax),total:Number(r.total),issuedAt:r.issued_at??undefined,dueAt:r.due_at??undefined,paidAt:r.paid_at??undefined,downloadUrl:r.download_url??undefined}))as InvoiceRecord[]}async generateDraft(){const{data,error}=await this.c.rpc("generate_draft_invoice",{p_workspace_id:this.w});if(error)throw error;return String(data)}}
+import "server-only";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { InvoiceRecord } from "../types";
+export class InvoiceRepository {
+  constructor(private client: SupabaseClient, private organizationId: string, private workspaceId: string) {}
+  async list(): Promise<InvoiceRecord[]> {
+    const { data, error } = await this.client.from("invoices").select("id,invoice_number,status,currency,subtotal,tax,total,issued_at,due_at,paid_at,download_url,provider_invoice_id").eq("organization_id", this.organizationId).eq("workspace_id", this.workspaceId).is("deleted_at", null).order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data ?? []).map((row) => ({ id: row.id, number: row.invoice_number, status: row.status, currency: row.currency, subtotal: Number(row.subtotal), tax: Number(row.tax), total: Number(row.total), issuedAt: row.issued_at ?? undefined, dueAt: row.due_at ?? undefined, paidAt: row.paid_at ?? undefined, downloadUrl: row.download_url ?? undefined, providerInvoiceId: row.provider_invoice_id ?? undefined }));
+  }
+  async generateDraft() { const { data, error } = await this.client.rpc("generate_draft_invoice", { p_workspace_id: this.workspaceId }); if (error) throw error; return String(data); }
+}

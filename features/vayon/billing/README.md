@@ -1,5 +1,7 @@
-# Billing & Subscription Platform
+# Stripe billing platform
 
-Sprint 16 provides organization/workspace subscriptions, plan entitlements, usage, limits, billing contacts, and invoice ledger presentation. A provider-neutral interface is present, but its only implementation is inactive.
+The billing platform uses the existing Repository → Service → Provider → ViewModel boundary. Stripe owns payment collection, Checkout, Customer Portal, tax calculation, trials, invoices, payment methods, proration, cancellation, reactivation, and metered usage. Supabase stores tenant-scoped projections and entitlement limits; webhook event IDs and usage idempotency keys prevent replay.
 
-Plan selection updates the internal entitlement ledger for launch testing; it does not charge a customer. Draft invoice generation creates a clearly marked placeholder with payment collection disabled. Stripe checkout, webhooks, payment methods, tax calculation, finalized invoices, and downloads require a future provider milestone.
+Reads are available to Organization Owner, Billing Admin, Finance, and Read-only billing roles. Mutations re-authorize Organization Owner or Billing Admin inside the server action/service boundary. Missing `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, or plan price configuration fails explicitly. Secrets are never persisted in billing tables or rendered in the UI.
+
+Stripe product prices are configured with `STRIPE_PRICE_STARTER` and `STRIPE_PRICE_PROFESSIONAL`. Enterprise uses a sales-assisted custom contract. Usage meters use `vayon_<metric>` event names and must be configured in Stripe before reporting production usage.
