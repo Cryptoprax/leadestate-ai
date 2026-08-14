@@ -12,7 +12,7 @@ The score is evidence-weighted: automated correctness and source-level presentat
 
 ## Certified page inventory
 
-Every page has an explicit status. All 49 pages are **WARNING**: compiled and source-audited, but awaiting authenticated browser verification.
+Every authenticated page has an explicit status. All 131 pages are **WARNING**: compiled and source-audited, but awaiting authenticated browser verification.
 
 | Route | Status |
 | --- | --- |

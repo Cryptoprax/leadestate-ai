@@ -1,0 +1,2 @@
+import{IdentityWorkspaceService,SettingsShell,TenantSettingsPanel}from"@/features/identity-workspace";
+export default async function Page(){const{tenant}=await new IdentityWorkspaceService().snapshot();return <SettingsShell title="Organization" description="Review commercial organization details captured during onboarding."><TenantSettingsPanel tenant={tenant} scope="organization"/></SettingsShell>}

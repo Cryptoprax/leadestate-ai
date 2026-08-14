@@ -25,7 +25,7 @@ export const authenticatedRouteInventory = Object.freeze([
   { group: "AI and Intelligence", count: 19 },
   { group: "CRM and Transactions", count: 24 },
   { group: "Communications and Calendar", count: 31 },
-  { group: "Platform and Operations", count: 42 },
+  { group: "Platform and Operations", count: 48 },
 ] as const);
 export interface SystemDiagnostics {
   readonly build: ReturnType<typeof getBuildMetadata>;
@@ -37,7 +37,7 @@ export interface SystemDiagnostics {
   readonly testStatus: "not-exposed-at-runtime";
   readonly sensitiveRuntimeDataIncluded: false;
   readonly routes: typeof authenticatedRouteInventory;
-  readonly routeCount: 125;
+  readonly routeCount: 131;
   readonly performance: {
     readonly rendering: "server-components-preferred";
     readonly hydration: "isolated-client-boundaries";
@@ -54,7 +54,7 @@ export function getSystemDiagnostics(): SystemDiagnostics {
     testStatus: "not-exposed-at-runtime",
     sensitiveRuntimeDataIncluded: false,
     routes: authenticatedRouteInventory,
-    routeCount: 125,
+    routeCount: 131,
     performance: Object.freeze({
       rendering: "server-components-preferred" as const,
       hydration: "isolated-client-boundaries" as const,

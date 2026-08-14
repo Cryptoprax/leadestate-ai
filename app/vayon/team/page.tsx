@@ -1,8 +1,9 @@
 import { MailPlus, Search, ShieldCheck, UserPlus, Users } from "lucide-react";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { ButtonLink } from "@/features/platform/design-system";
+import { Button, ButtonLink } from "@/features/platform/design-system";
 import { operationsContext } from "@/features/vayon/operations/services/context";
+import { inviteTeamMemberAction } from "@/features/identity-workspace/actions/settings.actions";
 
 type Role = { code: string; name: string } | null;
 type MemberRow = {
@@ -61,12 +62,13 @@ function formatDate(value?: string | null) {
 export default async function TeamPage({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string }>;
+  searchParams: Promise<{ search?: string;error?:string;success?:string }>;
 }) {
-  const [{ search = "" }, context] = await Promise.all([
+  const [queryParams, context] = await Promise.all([
     searchParams,
     operationsContext(),
   ]);
+  const {search=""}=queryParams;
   const { client, organizationId, workspaceId } = context;
   const {
     data: { user },
@@ -162,6 +164,8 @@ export default async function TeamPage({
           <div><p className="text-2xl font-semibold">{rolesResult.data?.length ?? 0}</p><p className="text-sm text-vds-muted">Available roles</p></div>
         </Card>
       </section>
+      {queryParams.error&&<p role="alert" className="mt-5 rounded-xl border border-vds-danger bg-vds-danger-soft p-3 text-sm text-vds-danger">{queryParams.error}</p>}
+      {queryParams.success&&<p role="status" className="mt-5 rounded-xl border border-vds-success bg-vds-success-soft p-3 text-sm text-vds-success">{queryParams.success}</p>}
 
       <Card padding="none" className="mt-6 overflow-hidden">
         <div className="flex flex-col gap-4 border-b border-vds-border/[0.07] p-5 sm:flex-row sm:items-center sm:justify-between">
@@ -201,6 +205,7 @@ export default async function TeamPage({
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.4fr_1fr]">
         <Card id="pending-invitations" padding="none" className="overflow-hidden">
           <div className="border-b border-vds-border/[0.07] p-5"><h2 className="font-semibold">Pending Invitations</h2><p className="mt-1 text-sm text-vds-muted">Invitations awaiting acceptance.</p></div>
+          {canManage&&<form action={inviteTeamMemberAction} className="grid gap-3 border-b border-vds-border p-5 sm:grid-cols-2"><label className="text-sm">Name<input name="name" required minLength={2} className="mt-2 h-11 w-full rounded-xl border border-vds-border bg-vds-input px-3"/></label><label className="text-sm">Email<input name="email" type="email" required className="mt-2 h-11 w-full rounded-xl border border-vds-border bg-vds-input px-3"/></label><label className="text-sm">Role<select name="role" defaultValue="agent" className="mt-2 h-11 w-full rounded-xl border border-vds-border bg-vds-input px-3"><option value="organization_admin">Admin</option><option value="branch_manager">Manager</option><option value="sales_manager">Sales manager</option><option value="agent">Agent</option><option value="viewer">Viewer</option></select></label><div className="flex items-end"><Button type="submit" className="w-full">Create pending invitation</Button></div><p className="text-xs text-vds-subtle sm:col-span-2">No email will be sent. The invitation is stored for a future approved delivery provider.</p></form>}
           {invitations.length ? <div className="divide-y divide-vds-divider/[0.06]">{invitations.map((invite)=><div key={invite.id} className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-2xl bg-vds-warning-soft text-xs font-semibold text-vds-warning">{initials(invite.name)}</span><div><p className="font-medium">{invite.name}</p><p className="mt-0.5 text-sm text-vds-muted">{invite.email} · {invite.roles?.name ?? "Unassigned"}</p></div></div><div className="flex items-center gap-3">{statusBadge("pending")}<time className="text-xs text-vds-subtle">Expires {formatDate(invite.expires_at)}</time></div></div>)}</div>:<div className="p-10 text-center text-sm text-vds-muted">No pending invitations.</div>}
         </Card>
 
