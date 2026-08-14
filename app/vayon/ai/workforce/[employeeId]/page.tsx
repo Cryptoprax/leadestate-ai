@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import { EmployeeProfile } from "@/features/vayon/operational-workforce/components/WorkforceViews";
 import { WorkforceShell } from "@/features/vayon/operational-workforce/components/WorkforceShell";
 import { WorkforceService } from "@/features/vayon/operational-workforce/services/workforce.service";
+import { WorkforceRuntimeService } from "@/features/platform/openai/runtime/service";
+import { WorkforceChatPanel } from "@/features/platform/openai/runtime/ChatPanel";
+import type { AIEmployeeCode } from "@/features/platform/openai/domain/models";
 export default async function Page({
   params,
 }: {
@@ -12,6 +15,12 @@ export default async function Page({
     await WorkforceService.production()
   ).employee(employeeId);
   if (!result.employee) notFound();
+  const runtime = await WorkforceRuntimeService.production();
+  const employee = result.employee.code as AIEmployeeCode;
+  const [history, health] = await Promise.all([
+    runtime.history(employee).catch(() => ({ conversations: [], messages: [] })),
+    runtime.health(),
+  ]);
   return (
     <WorkforceShell
       title={result.employee.name}
@@ -22,6 +31,7 @@ export default async function Page({
         tasks={result.tasks}
         activity={result.activity}
       />
+      <WorkforceChatPanel employee={employee} initial={history} health={health} />
     </WorkforceShell>
   );
 }

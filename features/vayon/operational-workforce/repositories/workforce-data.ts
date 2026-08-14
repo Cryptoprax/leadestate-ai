@@ -61,11 +61,11 @@ export const definitions = [
     "FA",
   ],
   [
-    "legal-ai",
-    "Legal AI",
-    "Document Advisor",
-    "Flags document review needs without providing legal decisions.",
-    "LA",
+    "executive-ai",
+    "Executive AI",
+    "Executive Advisor",
+    "Synthesizes approved workspace evidence into governed executive recommendations.",
+    "EA",
   ],
 ] as const;
 export const unavailableMetrics = (): readonly WorkforceMetric[] =>

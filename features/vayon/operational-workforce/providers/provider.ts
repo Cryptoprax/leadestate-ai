@@ -16,7 +16,7 @@ export interface AITaskResult {
 }
 export interface AISummary {
   readonly text: string;
-  readonly source: "deterministic-rules";
+  readonly source: "deterministic-rules" | "openai";
   readonly confidence: number;
 }
 export interface AIRecommendation {

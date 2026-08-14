@@ -1,0 +1,1 @@
+import type{OpenAITelemetry,ProviderAssignment}from"../domain/models";export interface OpenAIRepositoryContract{telemetry():Promise<OpenAITelemetry>;assignments():Promise<readonly ProviderAssignment[]>;recordFailure(input:{employee:string;model:string;latencyMs:number;code:string}):Promise<void>}

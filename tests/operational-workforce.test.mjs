@@ -14,7 +14,7 @@ test("operational workforce defines all eight first-class employees", () => {
     "Marketing AI",
     "Operations AI",
     "Finance AI",
-    "Legal AI",
+    "Executive AI",
   ])
     assert.match(source, new RegExp(name));
 });
