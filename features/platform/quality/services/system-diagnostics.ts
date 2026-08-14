@@ -37,7 +37,7 @@ export interface SystemDiagnostics {
   readonly testStatus: "not-exposed-at-runtime";
   readonly sensitiveRuntimeDataIncluded: false;
   readonly routes: typeof authenticatedRouteInventory;
-  readonly routeCount: 131;
+  readonly routeCount: 137;
   readonly performance: {
     readonly rendering: "server-components-preferred";
     readonly hydration: "isolated-client-boundaries";
@@ -54,7 +54,7 @@ export function getSystemDiagnostics(): SystemDiagnostics {
     testStatus: "not-exposed-at-runtime",
     sensitiveRuntimeDataIncluded: false,
     routes: authenticatedRouteInventory,
-    routeCount: 131,
+    routeCount: 137,
     performance: Object.freeze({
       rendering: "server-components-preferred" as const,
       hydration: "isolated-client-boundaries" as const,

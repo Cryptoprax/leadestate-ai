@@ -1,0 +1,1 @@
+import { GmailMailboxPage } from "@/features/platform/gmail/components";export default function Page({searchParams}:{readonly searchParams:Promise<{q?:string;page?:string}>}){return <GmailMailboxPage folder="archive" searchParams={searchParams}/>}

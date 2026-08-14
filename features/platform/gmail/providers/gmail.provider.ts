@@ -1,0 +1,8 @@
+import "server-only";
+import { redirect } from "next/navigation";
+import { GoogleOAuthService } from "@/features/platform/integrations/google/services/google-oauth.service";
+import type { ComposeMail } from "@/features/platform/messaging";
+import type { GmailProviderContract } from "../contracts/gmail-provider";
+import type { GmailSearch, MailboxFolder } from "../domain/models";
+import { GmailPlatformService } from "../services/gmail-platform.service";
+export class ProductionGmailProvider implements GmailProviderContract {readonly id="gmail" as const;readonly name="Gmail" as const;readonly version="1.0.0";constructor(private service=new GmailPlatformService()){}async connect():Promise<never>{redirect("/vayon/settings/google")}disconnect(){return new GoogleOAuthService().disconnect()}health(){return this.service.health()}async validate(){return(await this.health()).state==="healthy"}listMessages(folder:MailboxFolder,search?:GmailSearch,pageToken?:string){return this.service.list(folder,search,pageToken)}getMessage(id:string){return this.service.message(id)}searchMessages(search:GmailSearch,pageToken?:string){return this.service.list("inbox",search,pageToken)}listThreads(search?:GmailSearch,pageToken?:string){return this.service.threads(search,pageToken)}getThread(id:string){return this.service.thread(id)}sendMessage(input:ComposeMail){return this.service.send(input)}createDraft(input:ComposeMail){return this.service.createDraft(input)}updateDraft(id:string,input:ComposeMail){return this.service.updateDraft(id,input)}deleteDraft(id:string){return this.service.deleteDraft(id)}listLabels(){return this.service.labels()}refreshToken(){return this.service.refresh()}}
