@@ -362,7 +362,7 @@ export const marketingPages: Readonly<
     "pricing",
     "Pricing",
     "A plan for every stage of operational maturity.",
-    "Compare Vayon editions using an evidence-safe preview. Commercial pricing remains subject to launch packaging.",
+    "Compare production Vayon editions. Pricing available at launch is now represented by the approved Stripe plan catalog.",
     [],
     [
       "Monthly and annual presentation",

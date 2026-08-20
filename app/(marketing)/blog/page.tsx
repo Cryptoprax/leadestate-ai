@@ -1,9 +1,1 @@
-import {
-  MarketingPage,
-  marketingMetadata,
-  marketingPages,
-} from "@/features/marketing";
-export const metadata = marketingMetadata("blog");
-export default function Page() {
-  return <MarketingPage content={marketingPages.blog} />;
-}
+import type{Metadata}from"next";import{BlogIndex}from"@/features/marketing/components/Blog";import{MarketingService}from"@/features/marketing/services/marketing.service";export const metadata:Metadata={title:"Vayon Journal",description:"Product, operations, CRM, AI governance, and real estate intelligence.",alternates:{canonical:"/blog"}};export default async function Page({searchParams}:{searchParams:Promise<{q?:string}>}){const q=(await searchParams).q??"",service=new MarketingService();return <BlogIndex articles={service.articles(q)} query={q}/>}

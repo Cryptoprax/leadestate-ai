@@ -106,7 +106,7 @@ function MarketingFooter() {
     {
       title: "Platform",
       links: [
-        ["Product", "/product"],
+        ["Features", "/features"],
         ["AI Workforce", "/ai-workforce"],
         ["CRM", "/crm"],
         ["Integrations", "/integrations"],
@@ -128,6 +128,9 @@ function MarketingFooter() {
         ["Blog", "/blog"],
         ["Documentation", "/docs"],
         ["Security", "/security"],
+        ["Trust Center", "/trust-center"],
+        ["Privacy", "/privacy"],
+        ["Terms", "/terms"],
       ],
     },
   ] as const;

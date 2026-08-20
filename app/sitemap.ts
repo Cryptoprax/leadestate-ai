@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 const routes = [
   "",
   "/product",
+  "/features",
+  "/solutions",
+  "/industries",
   "/ai-workforce",
   "/crm",
   "/properties",
@@ -20,6 +23,9 @@ const routes = [
   "/about",
   "/careers",
   "/contact",
+  "/privacy",
+  "/terms",
+  "/trust-center",
   "/demo",
 ] as const;
 export default function sitemap(): MetadataRoute.Sitemap {

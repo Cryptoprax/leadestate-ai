@@ -1,9 +1,1 @@
-import {
-  MarketingPage,
-  marketingMetadata,
-  marketingPages,
-} from "@/features/marketing";
-export const metadata = marketingMetadata("contact");
-export default function Page() {
-  return <MarketingPage content={marketingPages.contact} />;
-}
+import type{Metadata}from"next";import{LeadCapture}from"@/features/marketing/components/LeadCapture";export const metadata:Metadata={title:"Contact Vayon",description:"Book a Vayon demo, start a trial, contact sales, or join the newsletter.",alternates:{canonical:"/contact"}};export default async function Page({searchParams}:{searchParams:Promise<{submitted?:string;error?:string}>}){const q=await searchParams;return <LeadCapture submitted={q.submitted==="true"} error={Boolean(q.error)}/>}
