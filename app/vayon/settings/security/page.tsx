@@ -1,3 +1,16 @@
-import{ButtonLink}from"@/features/platform/design-system";import{IdentityWorkspaceService,SettingsShell}from"@/features/identity-workspace";
-export default async function Page(){const{profile}=await new IdentityWorkspaceService().snapshot();return <SettingsShell title="Security" description="Session and login protection settings for your VAYON identity."><div className="max-w-3xl rounded-3xl border border-vds-border bg-vds-surface p-6"><dl className="grid gap-4 sm:grid-cols-2"><div><dt className="text-xs text-vds-subtle">Session timeout</dt><dd className="mt-1 font-medium">{String(profile.securitySettings.session_timeout_minutes??480)} minutes</dd></div><div><dt className="text-xs text-vds-subtle">Login alerts</dt><dd className="mt-1 font-medium">{profile.securitySettings.login_alerts!==false?"Enabled":"Disabled"}</dd></div><div><dt className="text-xs text-vds-subtle">Last login</dt><dd className="mt-1 font-medium">{profile.lastLoginAt?new Date(profile.lastLoginAt).toLocaleString():"Supabase session metadata only"}</dd></div><div><dt className="text-xs text-vds-subtle">Refresh rotation</dt><dd className="mt-1 font-medium">Managed by Supabase Auth</dd></div></dl><ButtonLink href="/vayon/settings/profile" className="mt-6">Edit security preferences</ButtonLink></div></SettingsShell>}
-
+import { SettingsShell } from "@/features/identity-workspace";
+import {
+  EnterpriseSecurityService,
+  IdentitySecurityDashboard,
+} from "@/features/platform/enterprise-security";
+export default async function Page() {
+  const data = await (await EnterpriseSecurityService.production()).dashboard();
+  return (
+    <SettingsShell
+      title="Security"
+      description="Enterprise identity, authentication, sessions, devices, MFA, organization access, and API credentials."
+    >
+      <IdentitySecurityDashboard data={data} />
+    </SettingsShell>
+  );
+}
