@@ -1,1 +1,16 @@
-import{redirect}from"next/navigation";import{OnboardingWizard}from"@/features/onboarding/components/OnboardingWizard";import{AuthenticationService}from"@/features/authentication/services/authentication.service";import{OrganizationService}from"@/features/onboarding/services/organization.service";export default async function Page({searchParams}:{searchParams:Promise<{error?:string}>}){const user=await new AuthenticationService().user();if(!user)redirect("/login");if(await new OrganizationService().current())redirect("/vayon");const q=await searchParams;return <main className="relative grid min-h-dvh place-items-center overflow-hidden bg-[var(--vds-color-background)] px-4 py-6 text-vds-foreground sm:px-6 sm:py-10"><div className="pointer-events-none absolute left-[8%] top-[-15rem] size-[34rem] rounded-full bg-vds-primary/[0.055] blur-3xl"/><div className="pointer-events-none absolute bottom-[-18rem] right-[5%] size-[36rem] rounded-full bg-vds-accent/[0.05] blur-3xl"/><OnboardingWizard error={q.error}/></main>}
+import { redirect } from "next/navigation";
+import { AuthenticationService } from "@/features/authentication/services/authentication.service";
+import { OrganizationService } from "@/features/onboarding/services/organization.service";
+import { EnterpriseOnboardingService } from "@/features/onboarding/services/enterprise-onboarding.service";
+import { EnterpriseOnboardingWizard } from "@/features/onboarding/components/EnterpriseOnboardingWizard";
+
+export default async function Page() {
+  const user = await new AuthenticationService().user();
+  if (!user) redirect("/login");
+  const [organization, session] = await Promise.all([
+    new OrganizationService().current(),
+    new EnterpriseOnboardingService().session(),
+  ]);
+  if (organization && session?.completed_at) redirect("/vayon");
+  return <main className="grid min-h-dvh place-items-center bg-vds-background px-4 py-8"><EnterpriseOnboardingWizard session={session} provisioned={Boolean(organization)}/></main>;
+}
