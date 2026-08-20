@@ -7,6 +7,7 @@ import { WorkforceChatPanel } from "@/features/platform/openai/runtime/ChatPanel
 import type { AIEmployeeCode } from "@/features/platform/openai/domain/models";
 import { SalesAIDashboard, SalesAIService } from "@/features/platform/sales-ai";
 import { CRMAIDashboard, CRMAIService } from "@/features/platform/crm-ai";
+import { WhatsAppAIDashboard, WhatsAppAIService } from "@/features/platform/whatsapp-ai";
 export default async function Page({
   params,
 }: {
@@ -25,6 +26,7 @@ export default async function Page({
   ]);
   const salesDashboard = employee === "sales-ai" ? await (await SalesAIService.production()).dashboard() : null;
   const crmDashboard = employee === "crm-ai" ? await (await CRMAIService.production()).dashboard() : null;
+  const whatsappDashboard = employee === "whatsapp-ai" ? await (await WhatsAppAIService.production()).dashboard() : null;
   return (
     <WorkforceShell
       title={result.employee.name}
@@ -32,6 +34,7 @@ export default async function Page({
     >
       {salesDashboard && <SalesAIDashboard data={salesDashboard} />}
       {crmDashboard && <CRMAIDashboard data={crmDashboard} />}
+      {whatsappDashboard && <WhatsAppAIDashboard data={whatsappDashboard} />}
       <EmployeeProfile
         item={result.employee}
         tasks={result.tasks}
