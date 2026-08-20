@@ -4,6 +4,7 @@ import type { AIEmployeeCode } from "../domain/models";
 import { OpenAIProvider } from "../providers/openai.provider";
 import type { RuntimeChatInput } from "./models";
 import { WorkforceConversationRepository } from "./repository";
+import { SalesAIService } from "@/features/platform/sales-ai/services/sales-ai.service";
 
 const employees: readonly AIEmployeeCode[] = ["sales-ai", "crm-ai", "marketing-ai", "whatsapp-ai", "voice-ai", "operations-ai", "finance-ai", "executive-ai"];
 const allowedSources = new Set(["crm", "gmail", "calendar", "whatsapp", "deal", "task"]);
@@ -20,8 +21,9 @@ export class WorkforceRuntimeService {
     const refs = (input.contextRefs ?? []).filter((ref) => allowedSources.has(ref.type) && /^[a-zA-Z0-9_-]{1,100}$/.test(ref.id));
     const conversationId = input.conversationId ?? await this.repository.create(input.employee, input.message.trim());
     await this.repository.append({ conversationId, role: "user", content: input.message.trim() });
-    const system = `You are ${input.employee}, a governed VAYON AI employee. Use only supplied workspace evidence. Never invent CRM relationships. Never execute actions. Recommendations always require human approval. If evidence is absent, say so explicitly.`;
-    const prompt = `${input.message.trim()}\n\nAuthorized workspace references (identifiers only; do not infer their contents): ${refs.length ? JSON.stringify(refs) : "None supplied"}.`;
+    const salesEvidence = input.employee === "sales-ai" ? await (await SalesAIService.production()).runtimeContext() : null;
+    const system = `You are ${input.employee}, a governed VAYON AI employee. Use only supplied workspace evidence. Never invent CRM relationships. Never execute or send messages. Email and WhatsApp content is draft-only. Recommendations always require human approval. If evidence is absent, say so explicitly.${input.employee === "sales-ai" ? " You are an enterprise sales advisor responsible for lead qualification, pipeline risk, daily briefings, communication drafts, meeting preparation, CRM cleanup, and forecasting. Explain confidence and evidence." : ""}`;
+    const prompt = `${input.message.trim()}\n\nAuthorized workspace references (identifiers only; do not infer their contents): ${refs.length ? JSON.stringify(refs) : "None supplied"}.${salesEvidence ? `\n\nTenant-scoped Sales AI evidence:\n${salesEvidence}` : ""}`;
     const started = performance.now();
     let output = "";
     for await (const delta of this.provider.stream({ employee: input.employee, workspaceId: this.workspaceId, model: process.env.OPENAI_MODEL ?? "gpt-5", system, prompt })) { output += delta; yield { type: "delta" as const, value: delta, conversationId }; }

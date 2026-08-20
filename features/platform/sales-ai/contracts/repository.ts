@@ -1,0 +1,4 @@
+import type { DealInsight, SalesAIDashboard, SalesLeadInsight, SalesRecommendation, SalesTimelineEvent } from "../types";
+
+export interface SalesEvidence { readonly leads: readonly SalesLeadInsight[]; readonly deals: readonly DealInsight[]; readonly meetings: readonly { id: string; title: string; startsAt: string; status: string }[]; readonly recentCommunications: readonly { channel: "email" | "whatsapp"; direction: string; occurredAt: string; summary: string }[]; readonly overdueTasks: number; readonly duplicateLeadCount: number; readonly missingFieldCount: number; readonly unassignedLeadCount: number; readonly slowResponseCount: number; readonly pendingApprovals: number; readonly recommendations: readonly SalesRecommendation[]; readonly timeline: readonly SalesTimelineEvent[]; readonly observability: SalesAIDashboard["observability"]; }
+export interface SalesAIRepositoryContract { evidence(): Promise<SalesEvidence>; }

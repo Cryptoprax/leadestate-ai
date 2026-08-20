@@ -1,0 +1,12 @@
+import type { CostEstimate, TokenUsage } from "@/features/platform/openai/domain/models";
+
+export type LeadTemperature = "hot" | "warm" | "cold";
+export interface SalesLeadInsight { readonly id: string; readonly name: string; readonly temperature: LeadTemperature; readonly confidence: number; readonly explanation: string; readonly status: string; readonly value: number; readonly lastActivity: string | null; }
+export interface DealInsight { readonly id: string; readonly title: string; readonly stage: string; readonly daysInStage: number; readonly risk: "low" | "medium" | "high"; readonly probability: number; readonly value: number; readonly missingActivities: readonly string[]; readonly nextAction: string; }
+export interface SalesRecommendation { readonly id: string; readonly title: string; readonly summary: string; readonly type: string; readonly confidence: number | null; readonly status: string; readonly createdAt: string; }
+export interface SalesTimelineEvent { readonly id: string; readonly title: string; readonly detail: string | null; readonly occurredAt: string; }
+export interface SalesObservability { readonly promptTokens: number; readonly completionTokens: number; readonly latencyMs: number | null; readonly estimatedCost: number; readonly model: string | null; readonly recommendationCount: number; }
+export interface SalesBriefing { readonly priorities: readonly string[]; readonly upcomingMeetings: number; readonly overdueFollowUps: number; readonly dealsAtRisk: number; readonly highValueOpportunities: number; readonly expectedRevenue: number; }
+export interface SalesForecast { readonly expectedMonthlyRevenue: number; readonly likelyClosedDeals: number; readonly atRiskRevenue: number; readonly pipelineHealth: "healthy" | "watch" | "critical"; readonly confidence: number; readonly explanation: string; }
+export interface SalesAIDashboard { readonly briefing: SalesBriefing; readonly leads: readonly SalesLeadInsight[]; readonly deals: readonly DealInsight[]; readonly forecast: SalesForecast; readonly pendingApprovals: number; readonly recommendations: readonly SalesRecommendation[]; readonly timeline: readonly SalesTimelineEvent[]; readonly crmCleanup: readonly string[]; readonly observability: SalesObservability; readonly generatedAt: string; }
+export interface SalesGenerationResult { readonly output: string; readonly usage: TokenUsage; readonly cost: CostEstimate; readonly latencyMs: number; readonly model: string; readonly recommendationOnly: true; readonly approvalRequired: true; }
