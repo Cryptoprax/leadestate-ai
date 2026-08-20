@@ -46,6 +46,7 @@ export const missionControlNavigation: NavigationItem[] = [
   { id: "customer-success", title: "Customer Success", iconName: "activity", route: "/platform/customer-success", permission: "platform.customer_success.view", enabled: true, children: [] },
   { id: "support", title: "Support", iconName: "users", route: "/platform/support", permission: "platform.support.access", enabled: true, children: [] },
   { id: "platform-health", title: "Platform Health", iconName: "platform", route: "/platform/platform-health", permission: "platform.health.view", enabled: true, children: [] },
+  { id: "launch-readiness", title: "Launch Readiness", iconName: "audit", route: "/platform/launch-readiness", permission: "platform.audit.view", enabled: true, children: [] },
   { id: "feature-flags", title: "Feature Flags", iconName: "permissions", route: "/platform/feature-flags", permission: "platform.flags.manage", enabled: true, children: [] },
   { id: "releases", title: "Releases", iconName: "applications", route: "/platform/releases", permission: "platform.releases.manage", enabled: true, children: [] },
   { id: "system-analytics", title: "System Analytics", iconName: "search", route: "/platform/system-analytics", permission: "platform.analytics.view", enabled: true, children: [] },
