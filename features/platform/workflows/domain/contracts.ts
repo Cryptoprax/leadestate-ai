@@ -1,7 +1,8 @@
 export type WorkflowStatus = "draft" | "published" | "archived";
-export type WorkflowNodeKind = "trigger" | "condition" | "delay" | "approval" | "branch" | "loop" | "notification" | "email" | "calendar" | "task" | "communication" | "crm" | "webhook" | "document" | "variable" | "math" | "formatter" | "ai" | "plugin";
-export type TriggerKind = "lead.created" | "deal.won" | "meeting.created" | "task.completed" | "campaign.started" | "document.uploaded" | "property.published" | "email.received" | "calendar.event" | "manual" | "schedule" | "webhook";
-export type ActionKind = "task.create" | "meeting.create" | "deal.create" | "lead.create" | "timeline.propose" | "email.propose" | "whatsapp.propose" | "user.notify" | "document.create" | "webhook.propose" | "ai.request" | "plugin";
+export type WorkflowNodeKind = "trigger" | "condition" | "delay" | "approval" | "branch" | "loop" | "notification" | "email" | "calendar" | "task" | "communication" | "crm" | "webhook" | "document" | "variable" | "math" | "formatter" | "ai" | "plugin" | "end";
+export type TriggerKind = "lead.created"|"lead.updated"|"deal.created"|"deal.stage_changed"|"deal.won"|"contact.created"|"property.created"|"email.received"|"gmail.received"|"whatsapp.received"|"meeting.scheduled"|"billing.trial_started"|"billing.trial_ending"|"billing.payment_succeeded"|"billing.payment_failed"|"billing.subscription_cancelled"|"organization.user_invited"|"organization.user_joined"|"organization.role_changed"|"ai.recommendation_generated"|"ai.collaboration_completed"|"ai.executive_alert"|"time.scheduled"|"time.recurring"|"time.reminder"|"time.delay"|"manual"|"webhook";
+export type ActionKind = "crm.task.recommend"|"task.create"|"reminder.create"|"gmail.draft"|"whatsapp.draft"|"meeting.recommend"|"ai.recommend"|"ai.request"|"user.notify"|"email.queue"|"approval.request"|"timeline.update"|"timeline.propose"|"executive.report";
+export type ConditionKind="field"|"date_time"|"organization"|"user"|"role"|"tags"|"pipeline_stage"|"ai_confidence"|"business_health"|"subscription_plan"|"custom_variable";
 export type VariableScope = "lead" | "deal" | "company" | "contact" | "meeting" | "task" | "campaign" | "property" | "user" | "workspace" | "current-date" | "math" | "string" | "boolean" | "list";
 
 export interface WorkflowPosition { readonly x: number; readonly y: number }

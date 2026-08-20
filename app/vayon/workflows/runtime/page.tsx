@@ -1,1 +1,1 @@
-import{WorkflowRuntimeDashboard}from"@/features/platform/workflow-runtime/dashboard/WorkflowRuntimeDashboard";export default function Page(){return <WorkflowRuntimeDashboard sessions={[]}/>}
+import{WorkflowMonitoringDashboard}from"@/features/platform/workflows/components/WorkflowAutomationDashboard";import{WorkflowAutomationService}from"@/features/platform/workflows/services/automation.service";export default async function Page(){return <WorkflowMonitoringDashboard snapshot={await new WorkflowAutomationService().snapshot()}/>}
