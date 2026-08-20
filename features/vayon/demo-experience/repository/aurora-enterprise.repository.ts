@@ -45,6 +45,7 @@ const agents = [
 ];
 const tour = [
   "Dashboard",
+  "AI Workforce",
   "CRM",
   "Properties",
   "Sales AI",
@@ -53,6 +54,7 @@ const tour = [
   "Marketing AI",
   "Executive AI",
   "Workflow Builder",
+  "Knowledge Platform",
   "Notifications",
   "Billing",
   "Organization",

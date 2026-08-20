@@ -1,0 +1,1 @@
+import type{Metadata}from"next";import{RoiCalculator}from"@/features/marketing/components/RoiCalculator";export const metadata:Metadata={title:"AI Workforce ROI Calculator",description:"Model potential time, savings, revenue, and AI Workforce impact using transparent assumptions.",alternates:{canonical:"/roi-calculator"}};export default function Page(){return <RoiCalculator/>}

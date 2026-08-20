@@ -1,9 +1,1 @@
-import {
-  MarketingPage,
-  marketingMetadata,
-  marketingPages,
-} from "@/features/marketing";
-export const metadata = marketingMetadata("customers");
-export default function Page() {
-  return <MarketingPage content={marketingPages.customers} />;
-}
+import type{Metadata}from"next";import{CatalogGrid}from"@/features/marketing/components/AssetPages";import{MarketingAssetsService}from"@/features/marketing/services/marketing-assets.service";export const metadata:Metadata={title:"Customer Stories",description:"Governed templates for VAYON case studies, testimonials, success stories, and reference customers.",alternates:{canonical:"/customers"}};export default function Page(){const items=new MarketingAssetsService().catalog().stories.map(x=>({href:`/customers/${x.slug}`,title:x.title,description:x.summary}));return <CatalogGrid eyebrow="Customer evidence" title="Customer stories—with evidence before claims." description="Reusable templates are ready. Customer names, relationships, quotations, and results remain unpublished until approved." items={items}/>}
