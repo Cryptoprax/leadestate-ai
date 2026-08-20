@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 const links = [
   ["Command Center", "/vayon/ai"],
   ["Workforce", "/vayon/ai/workforce"],
+  ["Collaboration", "/vayon/ai/collaboration"],
   ["Tasks", "/vayon/ai/tasks"],
   ["History", "/vayon/ai/history"],
 ] as const;

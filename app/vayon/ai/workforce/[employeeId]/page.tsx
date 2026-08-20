@@ -10,6 +10,7 @@ import { CRMAIDashboard, CRMAIService } from "@/features/platform/crm-ai";
 import { WhatsAppAIDashboard, WhatsAppAIService } from "@/features/platform/whatsapp-ai";
 import { MarketingAIDashboard, MarketingAIService } from "@/features/platform/marketing-ai";
 import { ExecutiveAIDashboard, ExecutiveAIService } from "@/features/platform/executive-ai";
+import { AICollaborationService, ExecutiveCollaborationDashboard } from "@/features/platform/ai-collaboration";
 export default async function Page({
   params,
 }: {
@@ -31,6 +32,7 @@ export default async function Page({
   const whatsappDashboard = employee === "whatsapp-ai" ? await (await WhatsAppAIService.production()).dashboard() : null;
   const marketingDashboard = employee === "marketing-ai" ? await (await MarketingAIService.production()).dashboard() : null;
   const executiveDashboard = employee === "executive-ai" ? await (await ExecutiveAIService.production()).dashboard() : null;
+  const collaborationDashboard = employee === "executive-ai" ? await (await AICollaborationService.production()).dashboard() : null;
   return (
     <WorkforceShell
       title={result.employee.name}
@@ -41,6 +43,7 @@ export default async function Page({
       {whatsappDashboard && <WhatsAppAIDashboard data={whatsappDashboard} />}
       {marketingDashboard && <MarketingAIDashboard data={marketingDashboard} />}
       {executiveDashboard && <ExecutiveAIDashboard data={executiveDashboard} />}
+      {collaborationDashboard && <ExecutiveCollaborationDashboard data={collaborationDashboard} />}
       <EmployeeProfile
         item={result.employee}
         tasks={result.tasks}
