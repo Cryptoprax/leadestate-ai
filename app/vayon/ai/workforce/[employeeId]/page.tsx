@@ -6,6 +6,7 @@ import { WorkforceRuntimeService } from "@/features/platform/openai/runtime/serv
 import { WorkforceChatPanel } from "@/features/platform/openai/runtime/ChatPanel";
 import type { AIEmployeeCode } from "@/features/platform/openai/domain/models";
 import { SalesAIDashboard, SalesAIService } from "@/features/platform/sales-ai";
+import { CRMAIDashboard, CRMAIService } from "@/features/platform/crm-ai";
 export default async function Page({
   params,
 }: {
@@ -23,12 +24,14 @@ export default async function Page({
     runtime.health(),
   ]);
   const salesDashboard = employee === "sales-ai" ? await (await SalesAIService.production()).dashboard() : null;
+  const crmDashboard = employee === "crm-ai" ? await (await CRMAIService.production()).dashboard() : null;
   return (
     <WorkforceShell
       title={result.employee.name}
       description="Operational employee profile with deterministic memory, governed capabilities, queue visibility, and explainable activity."
     >
       {salesDashboard && <SalesAIDashboard data={salesDashboard} />}
+      {crmDashboard && <CRMAIDashboard data={crmDashboard} />}
       <EmployeeProfile
         item={result.employee}
         tasks={result.tasks}
