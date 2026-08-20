@@ -9,6 +9,7 @@ const exceptions = new Set([
   "features/platform/builder/config/branding.ts",
   "features/platform/core/themes/config/themes.ts",
   "features/platform/design-system/tokens/vds.css",
+  "features/platform/email/templates/registry.ts",
   "features/vayon/demo-workspace/config/aurora-realty-group.ts",
   "features/vayon/configuration/config/defaults.ts",
 ]);

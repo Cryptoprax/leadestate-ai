@@ -1,0 +1,1 @@
+import{EmailCenter}from"@/features/platform/email/components/EmailCenter";import{EmailService}from"@/features/platform/email/services/email.service";export default async function Page(){return <EmailCenter view="history" snapshot={await new EmailService().snapshot()}/>}
