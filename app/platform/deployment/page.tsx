@@ -1,0 +1,1 @@
+import{DeploymentDashboard}from"@/features/platform/deployment/components/DeploymentDashboard";import{DeploymentService}from"@/features/platform/deployment/services/deployment.service";export const dynamic="force-dynamic";export default async function Page(){return <DeploymentDashboard data={await new DeploymentService().snapshot()}/>}
