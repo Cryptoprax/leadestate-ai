@@ -1,7 +1,7 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { AIEmployeeCode, CostEstimate, TokenUsage } from "../domain/models";
-import type { ConversationSnapshot, WorkforceConversation, WorkforceMessage } from "./models";
+import type { ConversationSnapshot, RuntimeUsageSummary, WorkforceConversation, WorkforceMessage } from "./models";
 
 type Context = { client: SupabaseClient; organizationId: string; workspaceId: string };
 type Row = Record<string, unknown>;
@@ -28,6 +28,13 @@ export class WorkforceConversationRepository {
       return { id: String(row.id), conversationId: String(row.conversation_id), role: row.role === "assistant" ? "assistant" : "user", content: String(row.content), model, usage: model ? { promptTokens: input, completionTokens: output, totalTokens: input + output, estimated: false } : null, cost: model ? { model, inputUsd: 0, outputUsd: 0, totalUsd: cost, estimated: true, pricingVersion: "stored-total" } : null, latencyMs: row.latency_ms === null || row.latency_ms === undefined ? null : Number(row.latency_ms), createdAt: String(row.created_at), recommendationOnly: true };
     });
     return { conversations, messages };
+  }
+
+  async usageSummary(): Promise<RuntimeUsageSummary> {
+    const { data, error } = await this.context.client.from("ai_workforce_messages").select("model,cost_estimate,latency_ms,created_at").eq("organization_id", this.context.organizationId).eq("workspace_id", this.context.workspaceId).eq("role", "assistant").order("created_at", { ascending: false }).limit(500);
+    if (error) throw error;
+    const rows = (data ?? []) as Row[], latest = rows[0];
+    return { estimatedCost: rows.reduce((total, row) => total + Number(row.cost_estimate ?? 0), 0), lastResponse: latest?.created_at ? String(latest.created_at) : null, latencyMs: latest?.latency_ms === null || latest?.latency_ms === undefined ? null : Number(latest.latency_ms), model: latest?.model ? String(latest.model) : null };
   }
 
   async create(employee: AIEmployeeCode, title: string) {

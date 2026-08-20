@@ -7,7 +7,7 @@ import type {
   WorkforceTaskStatus,
   WorkforceTaskType,
 } from "../domain/models";
-import { definitions, offlineEmployee } from "./workforce-data";
+import { configuredEmployee, definitions } from "./workforce-data";
 type Row = Record<string, unknown>;
 const taskTypes: readonly WorkforceTaskType[] = [
   "Lead Qualification",
@@ -43,19 +43,14 @@ export class SupabaseWorkforceRepository implements WorkforceRepository {
           .replaceAll("_", "-")
           .includes(def[0].replace("-ai", "")),
       );
-      if (!row) return offlineEmployee(def);
-      const base = offlineEmployee(def);
+      if (!row) return configuredEmployee(def);
+      const base = configuredEmployee(def);
       return {
         ...base,
         id: String(row.id),
         name: String(row.name ?? def[1]),
         avatar: String(row.avatar ?? def[4]),
-        status:
-          row.status === "ready"
-            ? ("idle" as const)
-            : row.status === "suspended"
-              ? ("paused" as const)
-              : ("offline" as const),
+        status: row.status === "ready" ? ("idle" as const) : ("offline" as const),
         permissions: Array.isArray(row.permissions)
           ? row.permissions.map(String)
           : base.permissions,

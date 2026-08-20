@@ -1,6 +1,6 @@
 import type { WorkforceRepository } from "../contracts/repository";
 import type { WorkforceActivity, WorkforceTask } from "../domain/models";
-import { definitions, offlineEmployee } from "./workforce-data";
+import { configuredEmployee, definitions } from "./workforce-data";
 const tasks: readonly WorkforceTask[] = definitions
   .slice(0, 5)
   .map((def, index) => ({
@@ -27,7 +27,7 @@ export class AuroraWorkforceRepository implements WorkforceRepository {
   readonly provider = "aurora" as const;
   async employees() {
     return definitions.map((def, index) => ({
-      ...offlineEmployee(def),
+      ...configuredEmployee(def),
       status:
         index < 3
           ? ("online" as const)

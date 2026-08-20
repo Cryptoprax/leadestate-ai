@@ -1,4 +1,4 @@
-export type WorkforceStatus = "online" | "busy" | "idle" | "paused" | "offline";
+export type WorkforceStatus = "online" | "processing" | "idle" | "error" | "offline";
 export type WorkforceTaskStatus =
   "pending" | "running" | "completed" | "failed" | "cancelled";
 export type WorkforceTaskType =
@@ -61,11 +61,16 @@ export interface WorkforceSnapshot {
   readonly employees: readonly WorkforceEmployee[];
   readonly tasks: readonly WorkforceTask[];
   readonly activity: readonly WorkforceActivity[];
+  readonly runtimeHealth: import("@/features/platform/openai/domain/models").OpenAIHealth;
   readonly observability: {
     readonly health: string;
+    readonly provider: string;
+    readonly model: string;
+    readonly version: string;
     readonly latency: string;
     readonly queueLength: number;
+    readonly estimatedCost: string;
+    readonly lastResponse: string;
     readonly failureCount: number;
-    readonly processingRate: string;
   };
 }

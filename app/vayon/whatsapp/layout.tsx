@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";import{WhatsAppShell}from"@/features/platform/whatsapp/components";export default function Layout({children}:{children:ReactNode}){return <WhatsAppShell>{children}</WhatsAppShell>}

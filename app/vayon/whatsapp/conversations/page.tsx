@@ -1,0 +1,1 @@
+import{WhatsAppConversation,WhatsAppInbox}from"@/features/platform/whatsapp/components";export default async function Page({searchParams}:{searchParams:Promise<{id?:string;q?:string}>}){const query=await searchParams;return query.id?<WhatsAppConversation id={query.id}/>:<WhatsAppInbox query={{search:query.q}} heading="WhatsApp conversations"/>}

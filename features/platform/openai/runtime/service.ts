@@ -2,7 +2,7 @@ import "server-only";
 import { operationsContext } from "@/features/vayon/operations/services/context";
 import type { AIEmployeeCode } from "../domain/models";
 import { OpenAIProvider } from "../providers/openai.provider";
-import type { RuntimeChatInput } from "./models";
+import type { RuntimeChatInput, WorkforceRuntimeObservability } from "./models";
 import { WorkforceConversationRepository } from "./repository";
 import { SalesAIService } from "@/features/platform/sales-ai/services/sales-ai.service";
 import { CRMAIService } from "@/features/platform/crm-ai/services/crm-ai.service";
@@ -18,6 +18,10 @@ export class WorkforceRuntimeService {
   static async production() { const context = await operationsContext(); return new WorkforceRuntimeService(new WorkforceConversationRepository(context), new OpenAIProvider(), context.workspaceId); }
   history(employee: AIEmployeeCode, query = "") { return this.repository.snapshot(employee, query); }
   health() { return this.provider.health(); }
+  async observability(): Promise<WorkforceRuntimeObservability> {
+    const [health, usage] = await Promise.all([this.health(), this.repository.usageSummary().catch(() => ({ estimatedCost: 0, lastResponse: null, latencyMs: null, model: null }))]);
+    return { ...usage, provider: health.state === "unavailable" ? "deterministic" : "openai", model: health.model || usage.model, latencyMs: health.latencyMs ?? usage.latencyMs, health };
+  }
 
   async *chat(input: RuntimeChatInput) {
     if (!employees.includes(input.employee)) throw new Error("Unsupported AI employee.");

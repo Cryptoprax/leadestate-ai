@@ -22,9 +22,9 @@ test("employee and task contracts expose required lifecycle fields", () => {
   const source = read("features/vayon/operational-workforce/domain/models.ts");
   for (const value of [
     "online",
-    "busy",
+    "processing",
     "idle",
-    "paused",
+    "error",
     "offline",
     "pending",
     "running",

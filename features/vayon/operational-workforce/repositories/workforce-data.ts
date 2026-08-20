@@ -77,7 +77,7 @@ export const unavailableMetrics = (): readonly WorkforceMetric[] =>
     "Leads Assisted",
     "Revenue Influenced",
   ].map((label) => ({ label, value: "Awaiting data", available: false }));
-export function offlineEmployee(
+export function configuredEmployee(
   def: (typeof definitions)[number],
 ): WorkforceEmployee {
   return {
@@ -87,18 +87,18 @@ export function offlineEmployee(
     role: def[2],
     description: def[3],
     avatar: def[4],
-    status: "offline",
+    status: "idle",
     capabilities,
     permissions: ["Read-only advisory access"],
     kpis: unavailableMetrics(),
     performance: unavailableMetrics(),
     currentQueue: 0,
     memory: {
-      customerContext: "Awaiting connected business data.",
+      customerContext: "No customer context recorded.",
       recentDecisions: "No decisions recorded.",
       learnedPreferences: "No learned preferences recorded.",
       recentOutcomes: "No outcomes recorded.",
-      currentObjectives: "Awaiting assigned objectives.",
+      currentObjectives: "No objectives recorded.",
     },
     recentActivity: [],
     health: "unavailable",
