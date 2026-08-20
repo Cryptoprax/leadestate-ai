@@ -1,0 +1,6 @@
+export type OrganizationRole="organization_owner"|"organization_admin"|"manager"|"sales"|"marketing"|"operations"|"finance"|"support"|"read_only";
+export interface OrganizationProfile{id:string;name:string;businessEmail:string|null;phone:string|null;website:string|null;timezone:string;locale:string;currency:string;address:Record<string,string>;branding:{primary:string|null;accent:string|null};logoPath:string|null;version:number}
+export interface OrganizationMember{id:string;userId:string;name:string;email:string;role:OrganizationRole;roleName:string;status:"active"|"suspended"|"removed";joinedAt:string;lastLoginAt:string|null}
+export interface OrganizationInvitation{id:string;name:string;email:string;role:OrganizationRole;roleName:string;status:string;expiresAt:string;sentAt:string;resentAt:string|null}
+export interface OrganizationAuditEvent{id:string;eventType:string;actorId:string;subjectId:string|null;metadata:Record<string,unknown>;occurredAt:string}
+export interface OrganizationSnapshot{profile:OrganizationProfile;members:OrganizationMember[];invitations:OrganizationInvitation[];roles:{code:OrganizationRole;name:string;permissions:string[]}[];activity:OrganizationAuditEvent[];canManage:boolean;isOwner:boolean}

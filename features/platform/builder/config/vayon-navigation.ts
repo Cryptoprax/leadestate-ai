@@ -22,5 +22,7 @@ export const vayonNavigation: readonly NavigationItem[] = [
   { id: "vayon-configuration", label: "Configuration", href: "/vayon/settings/configuration", icon: "C", surface: "sidebar", order: 18, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },
   { id: "vayon-appearance", label: "Appearance", href: "/vayon/settings/appearance", icon: "A", surface: "sidebar", order: 19, visible: true, permission: { anyOf: ["crm.read", "applications.launch"] } },
   { id: "vayon-billing", label: "Billing", href: "/vayon/settings/billing", icon: "B", surface: "sidebar", order: 20, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },
+  { id: "vayon-organization", label: "Organization", href: "/vayon/settings/organization", icon: "O", surface: "sidebar", order: 21, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },
+  { id: "vayon-members", label: "Members", href: "/vayon/settings/members", icon: "M", surface: "sidebar", order: 22, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },
   { id: "vayon-team", label: "Team", href: "/vayon/team", icon: "T", surface: "sidebar", order: 21, visible: true, permission: { anyOf: ["users.read", "users.manage"] } },
 ];
