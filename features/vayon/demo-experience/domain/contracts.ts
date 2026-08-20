@@ -33,7 +33,21 @@ export interface DemoExperienceModel {
     readonly whatsapp: number;
     readonly activity: number;
   };
+  readonly enterprise: DemoEnterpriseProjection;
 }
 export interface DemoRepository {
   load(): DemoInventory;
+}
+
+export interface DemoEnterpriseItem { readonly id:string;readonly title:string;readonly detail:string;readonly status:string;readonly relatedIds:readonly string[] }
+export interface DemoEnterpriseProjection {
+  readonly datasetVersion:"aurora-enterprise-v1";
+  readonly demoData:true;
+  readonly team:readonly DemoEnterpriseItem[];
+  readonly workflows:readonly DemoEnterpriseItem[];
+  readonly aiRecommendations:readonly DemoEnterpriseItem[];
+  readonly notifications:readonly DemoEnterpriseItem[];
+  readonly billing:readonly DemoEnterpriseItem[];
+  readonly analytics:readonly DemoEnterpriseItem[];
+  readonly tour:readonly DemoEnterpriseItem[];
 }

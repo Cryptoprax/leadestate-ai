@@ -8,17 +8,20 @@ import {
   ChevronLeft,
   ChevronRight,
   LockKeyhole,
+  Play,
+  RotateCcw,
   Search,
   X,
 } from "lucide-react";
 import Image from "next/image";
-import { useMemo, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useState, type MouseEvent } from "react";
 import type {
   DemoCollection,
   DemoExperienceModel,
   DemoRecord,
 } from "../domain/contracts";
 import { BrandLogo } from "@/components/brand";
+import { DemoObservabilityService } from "../services/demo-observability.service";
 
 const tabs = [
   "dashboard",
@@ -27,8 +30,22 @@ const tabs = [
   "deals",
   "communications",
   "activity",
+  "team",
+  "workflows",
+  "ai",
+  "notifications",
+  "billing",
+  "analytics",
 ] as const;
 type Tab = (typeof tabs)[number];
+const enterpriseTabs = [
+  "team",
+  "workflows",
+  "ai",
+  "notifications",
+  "billing",
+  "analytics",
+] as const;
 const pageSize = 24;
 
 export function DemoExperience({
@@ -39,8 +56,17 @@ export function DemoExperience({
   const [tab, setTab] = useState<Tab>("dashboard"),
     [query, setQuery] = useState(""),
     [page, setPage] = useState(0),
-    [notice, setNotice] = useState(false);
+    [notice, setNotice] = useState(false),
+    [tourStep, setTourStep] = useState<number | null>(null),
+    [resetCount, setResetCount] = useState(0);
+  useEffect(() => {
+    const telemetry = new DemoObservabilityService();
+    if (tab === "dashboard") telemetry.launch(tab);
+    else telemetry.view(tab);
+  }, [tab, resetCount]);
   const filtered = useMemo(() => {
+    if (enterpriseTabs.includes(tab as (typeof enterpriseTabs)[number]))
+      return [];
     const records =
       tab === "dashboard" ? [] : model.inventory[tab as DemoCollection];
     const term = query.trim().toLocaleLowerCase();
@@ -127,6 +153,22 @@ export function DemoExperience({
           data={model.dashboard}
           onBlockedAction={() => setNotice(true)}
         />
+      ) : enterpriseTabs.includes(tab as (typeof enterpriseTabs)[number]) ? (
+        <EnterpriseBrowser
+          title={tab}
+          records={
+            tab === "ai"
+              ? model.enterprise.aiRecommendations
+              : model.enterprise[
+                  tab as
+                    | "team"
+                    | "workflows"
+                    | "notifications"
+                    | "billing"
+                    | "analytics"
+                ]
+          }
+        />
       ) : (
         <DemoBrowser
           tab={tab}
@@ -141,6 +183,53 @@ export function DemoExperience({
           pages={pages}
           onPage={setPage}
         />
+      )}
+      <div className="fixed bottom-5 left-5 z-50 flex gap-2">
+        <Button variant="secondary" onClick={() => setTourStep(0)}>
+          <Play className="size-4" />
+          Start tour
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            new DemoObservabilityService().reset();
+            setResetCount((value) => value + 1);
+            setTab("dashboard");
+            setQuery("");
+            setPage(0);
+            setNotice(true);
+          }}
+        >
+          <RotateCcw className="size-4" />
+          Reset demo
+        </Button>
+      </div>
+      {tourStep !== null && (
+        <div className="fixed inset-x-4 bottom-20 z-[70] mx-auto max-w-lg rounded-2xl border border-vds-accent-border bg-vds-surface p-5 shadow-vds-lg">
+          <p className="text-xs text-vds-primary">
+            Guided tour · {tourStep + 1}/{model.enterprise.tour.length}
+          </p>
+          <h2 className="mt-2 font-semibold">
+            {model.enterprise.tour[tourStep]?.title}
+          </h2>
+          <p className="mt-1 text-sm text-vds-muted">
+            {model.enterprise.tour[tourStep]?.detail}
+          </p>
+          <div className="mt-4 flex justify-end gap-2">
+            <Button variant="ghost" onClick={() => setTourStep(null)}>
+              Close
+            </Button>
+            <Button
+              onClick={() => setTourStep((value) => {
+                if (value !== null && value < model.enterprise.tour.length - 1) return value + 1;
+                new DemoObservabilityService().completeTour();
+                return null;
+              })}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
       )}
       {notice && (
         <div
@@ -168,6 +257,45 @@ export function DemoExperience({
         </div>
       )}
     </div>
+  );
+}
+
+function EnterpriseBrowser({
+  title,
+  records,
+}: {
+  title: string;
+  records: DemoExperienceModel["enterprise"]["team"];
+}) {
+  return (
+    <main className="mx-auto max-w-[100rem] px-4 py-8 sm:px-6">
+      <p className="text-xs font-semibold uppercase tracking-[.18em] text-vds-primary">
+        Enterprise demo data
+      </p>
+      <h1 className="mt-2 text-3xl font-semibold capitalize">{title}</h1>
+      <p className="mt-2 text-sm text-vds-muted">
+        Deterministic, cross-linked, recommendation-only sample data.
+      </p>
+      <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {records.map((record) => (
+          <article
+            className="rounded-2xl border border-vds-border bg-vds-surface p-4"
+            key={record.id}
+          >
+            <div className="flex justify-between gap-3">
+              <h2 className="font-medium">{record.title}</h2>
+              <span className="rounded-full bg-vds-primary-soft px-2 py-1 text-[10px] text-vds-primary">
+                {record.status.replaceAll("_", " ")}
+              </span>
+            </div>
+            <p className="mt-2 text-sm text-vds-muted">{record.detail}</p>
+            <p className="mt-3 text-[10px] text-vds-subtle">
+              {record.relatedIds.length} linked records · Demo data
+            </p>
+          </article>
+        ))}
+      </div>
+    </main>
   );
 }
 

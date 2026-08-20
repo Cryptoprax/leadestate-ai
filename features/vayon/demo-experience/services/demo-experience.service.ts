@@ -14,6 +14,7 @@ import type {
 } from "@/features/vayon/dashboard/types";
 import type { DemoExperienceModel, DemoRepository } from "../domain/contracts";
 import { AuroraDemoRepository } from "../repository/aurora-demo.repository";
+import { AuroraEnterpriseDemoRepository } from "../repository/aurora-enterprise.repository";
 
 const stages = [
   "new",
@@ -32,6 +33,7 @@ const money = (value: number) =>
 export class DemoExperienceService {
   constructor(
     private readonly repository: DemoRepository = new AuroraDemoRepository(),
+    private readonly enterpriseRepository = new AuroraEnterpriseDemoRepository(),
   ) {}
   load(): DemoExperienceModel {
     const inventory = this.repository.load(),
@@ -206,6 +208,7 @@ export class DemoExperienceService {
     return Object.freeze({
       dashboard,
       inventory,
+      enterprise: this.enterpriseRepository.load(),
       counts: {
         users: auroraEmployees.length,
         properties: inventory.properties.length,
