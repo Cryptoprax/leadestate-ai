@@ -1,4 +1,1 @@
-import { NotificationRoute } from "@/features/platform/notifications/dashboard/NotificationRoute";
-export default function Page() {
-  return <NotificationRoute view="history" />;
-}
+import{redirect}from"next/navigation";export default function Page(){redirect("/vayon/notifications?view=archived")}
