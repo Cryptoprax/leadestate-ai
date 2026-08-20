@@ -9,6 +9,7 @@ const card =
   "rounded-2xl border border-vds-border bg-vds-surface p-5 shadow-vds-sm";
 const nav = [
   ["Overview", "/vayon/analytics"],
+  ["Conversion", "/vayon/analytics/conversion"],
   ["Executive", "/vayon/analytics/executive"],
   ["Sales", "/vayon/analytics/sales"],
   ["CRM", "/vayon/analytics/crm"],

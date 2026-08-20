@@ -1,0 +1,5 @@
+import type{ConsentState,Experiment,ExperimentProvider,ExperimentVariant,HeatmapProvider}from"../contracts";
+export class DisabledHeatmapProvider implements HeatmapProvider{readonly id="disabled";readonly enabled=false;async initialize(consent:ConsentState){void consent}async stop(){}}
+export const supportedHeatmapProviders=["microsoft-clarity","hotjar","posthog-session-replay"]as const;
+export class DeterministicExperimentProvider implements ExperimentProvider{assign(experiment:Experiment,anonymousId:string):ExperimentVariant{const total=experiment.variants.reduce((sum,item)=>sum+item.weight,0),hash=[...`${experiment.id}:${anonymousId}`].reduce((sum,char)=>(sum*31+char.charCodeAt(0))>>>0,0),slot=hash%Math.max(total,1);let cursor=0;return experiment.variants.find(item=>(cursor+=item.weight)>slot)??experiment.variants[0]!}async expose(experimentId:string,variantId:string){void experimentId;void variantId}}
+export const experiments:readonly Experiment[]=["landing-page","cta","pricing","industry-page"].map(surface=>({id:`${surface}-baseline`,surface:surface as Experiment["surface"],active:false,variants:[{id:"control",weight:50},{id:"variant",weight:50}]}));

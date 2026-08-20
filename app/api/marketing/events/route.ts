@@ -2,7 +2,7 @@ import { z } from "zod";
 import { SupabaseMarketingProvider } from "@/features/marketing/providers/supabase-marketing.provider";
 
 const schema = z.object({
-  type: z.enum(["page_view", "cta_click", "demo_request", "trial_signup", "contact_sales", "newsletter", "demo_launch", "roi_calculation", "industry_view", "comparison_view", "marketing_conversion"]),
+  type: z.enum(["page_view", "cta_click", "demo_request", "trial_signup", "contact_sales", "newsletter", "demo_launch", "roi_calculation", "industry_view", "comparison_view", "marketing_conversion", "web_vital", "tracking_failure"]),
   path: z.string().max(300),
   sessionId: z.string().uuid(),
   metadata: z.record(z.string(), z.string().max(200)).optional(),
