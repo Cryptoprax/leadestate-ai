@@ -127,6 +127,7 @@ function MarketingFooter() {
         ["Resources", "/resources"],
         ["Blog", "/blog"],
         ["Documentation", "/docs"],
+        ["Developers", "/developers"],
         ["Security", "/security"],
         ["Trust Center", "/trust-center"],
         ["Privacy", "/privacy"],

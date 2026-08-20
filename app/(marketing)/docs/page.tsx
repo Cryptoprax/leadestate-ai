@@ -1,9 +1,3 @@
-import {
-  MarketingPage,
-  marketingMetadata,
-  marketingPages,
-} from "@/features/marketing";
-export const metadata = marketingMetadata("docs");
-export default function Page() {
-  return <MarketingPage content={marketingPages.docs} />;
-}
+import type{Metadata}from"next";import{DocumentationHome}from"@/features/platform/knowledge/components/DocumentationClient";import{DocumentationService}from"@/features/platform/knowledge/services/documentation.service";
+export const metadata:Metadata={title:"Documentation",description:"VAYON product documentation, developer guides, API reference, and operating playbooks.",alternates:{canonical:"/docs"},openGraph:{title:"VAYON Documentation",description:"Build, operate, and scale with VAYON.",url:"/docs",type:"website"}};
+export default async function Page({searchParams}:{searchParams:Promise<{q?:string;category?:string}>}){const{q="",category}=await searchParams,snapshot=new DocumentationService().home(q,category);return <main className="mx-auto max-w-[90rem] px-5 py-10 sm:px-8"><DocumentationHome articles={snapshot.articles} categories={snapshot.categories} popular={snapshot.popular} initialQuery={q} initialCategory={category}/></main>}

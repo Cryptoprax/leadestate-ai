@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { DocumentationService } from "@/features/platform/knowledge/services/documentation.service";
 const routes = [
   "",
   "/product",
@@ -20,6 +21,7 @@ const routes = [
   "/resources",
   "/blog",
   "/docs",
+  "/developers",
   "/about",
   "/careers",
   "/contact",
@@ -29,7 +31,8 @@ const routes = [
   "/demo",
 ] as const;
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((path) => ({
+  const documentation = new DocumentationService().all().map((article) => `/docs/${article.slug}`);
+  return [...routes, ...documentation].map((path) => ({
     url: `https://vayon.app${path}`,
     changeFrequency: path === "/blog" ? "weekly" : "monthly",
     priority: path === "" ? 1 : path === "/product" ? 0.9 : 0.7,

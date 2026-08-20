@@ -1,1 +1,16 @@
-const sections={"REST API reference":["Resources","Pagination","Filtering"],Authentication:["Bearer tokens","Scopes","Expiration"],Webhooks:["Signatures","Retries","Idempotency"],"SDK examples":["TypeScript","cURL","Server actions"],"Error codes":["Authentication","Validation","Rate limiting"],"Rate limits":["Headers","Backoff","Quotas"],Changelog:["Features","Improvements","Bug fixes","Breaking changes"]};export default function Page(){return <main className="mx-auto max-w-6xl px-4 py-8"><p className="text-xs font-semibold uppercase tracking-[.2em] text-vds-primary">Knowledge Platform</p><h1 className="mt-2 text-3xl font-semibold">Developer Portal</h1><p className="mt-2 text-sm text-vds-muted">Canonical integration documentation for VAYON developers.</p><div className="mt-7 grid gap-4 md:grid-cols-2">{Object.entries(sections).map(([title,items])=><section className="rounded-2xl border border-vds-border bg-vds-surface p-5" key={title}><h2 className="font-semibold">{title}</h2><ul className="mt-3 space-y-2 text-sm text-vds-muted">{items.map(x=><li key={x}>{x}</li>)}</ul></section>)}</div></main>}
+import { DeveloperPortal } from "@/features/platform/knowledge/components/DeveloperPortal";
+import { DocumentationService } from "@/features/platform/knowledge/services/documentation.service";
+
+export const knowledgeDeveloperSections = [
+  "REST API reference",
+  "Authentication",
+  "Webhooks",
+  "SDK examples",
+  "Error codes",
+  "Rate limits",
+  "Changelog",
+] as const;
+
+export default function Page() {
+  return <DeveloperPortal resources={new DocumentationService().api()} />;
+}
