@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { WorkforceRuntimeService } from "@/features/platform/openai/runtime/service";
+import { EnterpriseRateLimitService, requestSubject } from "@/features/platform/security-review/services/rate-limit.service";
 
 const schema = z.object({
   employee: z.enum(["sales-ai", "crm-ai", "marketing-ai", "whatsapp-ai", "voice-ai", "operations-ai", "finance-ai", "executive-ai"]),
@@ -9,6 +10,8 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
+  const limit = await new EnterpriseRateLimitService().enforce("ai-runtime", requestSubject(request));
+  if (!limit.allowed) return Response.json({ error: "Rate limit exceeded." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
   const parsed = schema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return Response.json({ error: "Invalid chat request." }, { status: 400 });
   try {

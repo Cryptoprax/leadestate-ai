@@ -1,0 +1,1 @@
+import{SecurityReviewDashboard}from"@/features/platform/security-review/components/SecurityReviewDashboard";import{SecurityReviewService}from"@/features/platform/security-review/services/security-review.service";export const dynamic="force-dynamic";export default async function Page(){return <SecurityReviewDashboard data={await new SecurityReviewService().snapshot()}/>}
