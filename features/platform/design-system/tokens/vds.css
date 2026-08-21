@@ -36,6 +36,14 @@
   --vds-color-focus: #37d5f2;
   --vds-overlay: rgba(0,0,0,.7);
   --vds-shadow-color: rgba(0,0,0,.28);
+  --vds-glass-surface: rgba(24,26,31,.68);
+  --vds-glass-surface-strong: rgba(24,26,31,.82);
+  --vds-glass-border: rgba(255,255,255,.105);
+  --vds-glass-highlight: rgba(255,255,255,.055);
+  --vds-ambient-primary: rgba(20,184,106,.14);
+  --vds-ambient-accent: rgba(55,213,242,.1);
+  --vds-ambient-ai: rgba(115,87,165,.11);
+  --vds-ambient-warm: rgba(247,183,49,.075);
   color-scheme: dark;
 }
 [data-vds-theme="light"] {
@@ -75,6 +83,14 @@
   --vds-color-focus: #087f8f;
   --vds-overlay: rgba(45,41,35,.46);
   --vds-shadow-color: rgba(54,49,42,.18);
+  --vds-glass-surface: rgba(247,243,236,.74);
+  --vds-glass-surface-strong: rgba(247,243,236,.88);
+  --vds-glass-border: rgba(54,49,42,.16);
+  --vds-glass-highlight: rgba(255,255,255,.48);
+  --vds-ambient-primary: rgba(8,127,143,.1);
+  --vds-ambient-accent: rgba(53,104,154,.08);
+  --vds-ambient-ai: rgba(115,87,165,.08);
+  --vds-ambient-warm: rgba(138,100,24,.065);
   color-scheme: light;
 }
 :root { --background: var(--vds-color-background); --foreground: var(--vds-color-foreground); --surface: var(--vds-color-surface); --muted: var(--vds-color-muted); }

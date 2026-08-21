@@ -9,9 +9,9 @@ const navigation = [
 ] as const;
 
 export function MarketingShell({ children }: { readonly children: ReactNode }) {
-  return <div className="min-h-screen bg-vds-background text-vds-foreground">
+  return <div className="vayon-premium-canvas vayon-marketing min-h-screen text-vds-foreground">
     <a href="#marketing-content" className="vds-focus sr-only z-50 rounded-lg bg-vds-surface px-4 py-3 focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
-    <header className="sticky top-0 z-40 border-b border-vds-border bg-vds-background/85 backdrop-blur-2xl">
+    <header className="sticky top-0 z-40 border-b border-vds-border bg-vds-background/70 backdrop-blur-2xl">
       <div className="mx-auto flex h-18 max-w-[90rem] items-center gap-5 px-5 sm:px-8"><Link href="/" aria-label="Vayon home" className="vds-focus flex shrink-0 items-center rounded-lg"><BrandLogo size="sm" priority/></Link><nav aria-label="Primary" className="hidden flex-1 items-center justify-center gap-0.5 xl:flex">{navigation.map(item => <Link key={item.href} href={item.href} className="vds-focus rounded-lg px-2.5 py-2 text-sm text-vds-muted hover:bg-vds-hover hover:text-vds-foreground">{item.label}</Link>)}</nav><div className="ml-auto hidden items-center gap-2 sm:flex"><Link href="/login" className="vds-focus rounded-xl px-4 py-2 text-sm font-medium text-vds-muted hover:text-vds-foreground">Login</Link><ButtonLink href="/signup" size="sm">Get started <ArrowRight className="size-4" aria-hidden="true"/></ButtonLink></div><details className="relative ml-auto xl:hidden"><summary aria-label="Open navigation" className="vds-focus grid size-11 list-none place-items-center rounded-xl border border-vds-border"><Menu className="size-5" aria-hidden="true"/></summary><nav aria-label="Mobile" className="absolute right-0 top-13 grid max-h-[75vh] w-72 gap-1 overflow-y-auto rounded-2xl border border-vds-border bg-vds-surface p-3 shadow-xl">{navigation.map(item => <Link key={item.href} href={item.href} className="vds-focus rounded-lg px-3 py-2.5 text-sm hover:bg-vds-hover">{item.label}</Link>)}<Link href="/login" className="vds-focus rounded-lg px-3 py-2.5 text-sm">Login</Link><ButtonLink href="/signup" size="sm" fullWidth>Get started</ButtonLink></nav></details></div>
     </header><div id="marketing-content">{children}</div><MarketingFooter/>
   </div>;

@@ -41,7 +41,7 @@ export function MissionControlLayout({
   }, []);
 
   return (
-    <div className="flex h-dvh min-h-[36rem] overflow-hidden bg-[var(--vds-color-background)] text-vds-foreground selection:bg-vds-primary-soft">
+    <div className="vayon-premium-canvas flex h-dvh min-h-[36rem] overflow-hidden text-vds-foreground selection:bg-vds-primary-soft">
       <Sidebar
         collapsed={sidebarCollapsed}
         mobileOpen={mobileNavigationOpen}

@@ -34,7 +34,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   return (
     <div
       ref={ref}
-      className={`rounded-3xl transition duration-200 ${variantStyles[variant]} ${paddingStyles[padding]} ${className}`}
+      className={`vds-card-motion rounded-3xl transition duration-200 ${variantStyles[variant]} ${paddingStyles[padding]} ${className}`}
       {...props}
     />
   );
