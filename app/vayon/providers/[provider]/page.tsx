@@ -4,9 +4,13 @@ import {
   ProviderReadinessService,
 } from "@/features/platform/live-providers";
 
+interface ProviderPageProps {
+  params: Promise<{ provider: string }>;
+}
+
 export default async function ProviderPage({
   params,
-}: PageProps<"/vayon/providers/[provider]">) {
+}: ProviderPageProps) {
   const { provider } = await params;
   const model = await new ProviderReadinessService().model(provider);
   if (!model) notFound();

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
 import "./globals.css";
 import { VdsThemeProvider } from "@/features/platform/design-system/theme/ThemeProvider";
 import { ThemeBootstrap } from "@/features/platform/design-system/theme/ThemeBootstrap";
@@ -13,6 +14,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+type LayoutProps = {
+  children: ReactNode;
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://vayon.app"),
@@ -33,7 +38,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Vayon — The AI Operating System for Modern Businesses", description: "One operating system for AI-powered business.", images: ["/assets/brand/twitter-image.png"] },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html
       lang="en"
