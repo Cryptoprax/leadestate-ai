@@ -5,7 +5,7 @@ import { BrandLogo } from "@/components/brand";
 import { ButtonLink } from "@/features/platform/design-system";
 
 const navigation = [
-  { label: "Platform", href: "/product" }, { label: "Solutions", href: "/solutions" }, { label: "AI Workforce", href: "/ai-workforce" }, { label: "Pricing", href: "/pricing" }, { label: "Enterprise", href: "/enterprise" }, { label: "Resources", href: "/resources" }, { label: "Developers", href: "/developers" }, { label: "Documentation", href: "/docs" },
+  { label: "Product", href: "/product" }, { label: "AI Employees", href: "/ai-workforce" }, { label: "Solutions", href: "/solutions" }, { label: "Industries", href: "/industries" }, { label: "Customers", href: "/customers" }, { label: "Pricing", href: "/pricing" }, { label: "Resources", href: "/resources" }, { label: "Enterprise", href: "/enterprise" }, { label: "Developers", href: "/developers" },
 ] as const;
 
 export function MarketingShell({ children }: { readonly children: ReactNode }) {
@@ -20,7 +20,7 @@ export function MarketingShell({ children }: { readonly children: ReactNode }) {
 function MarketingFooter() {
   const groups = [
     ["Platform", [["Features", "/features"], ["AI Workforce", "/ai-workforce"], ["CRM", "/crm"], ["Workflows", "/workflows"], ["Integrations", "/integrations"]]],
-    ["Resources", [["Documentation", "/docs"], ["Blog", "/blog"], ["ROI Calculator", "/roi-calculator"], ["Demo Workspace", "/demo"], ["Customers", "/customers"]]],
+    ["Resources", [["Documentation", "/docs"], ["Blog", "/blog"], ["ROI Calculator", "/roi-calculator"], ["Demo Workspace", "/demo"], ["Customers", "/customers"], ["Status", "/trust-center"]]],
     ["Developers", [["Developer Portal", "/developers"], ["API Reference", "/docs/api-reference"], ["Architecture", "/docs/architecture-overview"], ["Release Notes", "/docs/release-notes"]]],
     ["Enterprise", [["Security", "/security"], ["Trust Center", "/trust-center"], ["Pricing", "/pricing"], ["Contact Sales", "/contact"]]],
     ["Company", [["About", "/about"], ["Careers", "/careers"], ["Media Kit", "/media-kit"], ["Investors", "/investors"]]],
