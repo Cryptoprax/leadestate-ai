@@ -15,6 +15,7 @@ html { scroll-behavior:smooth; background:var(--background); }
 html[data-vds-theme="light"] .vayon-brand-for-dark { display:none; }
 html[data-vds-theme="light"] .vayon-brand-for-light { display:block; }
 body { min-height:100dvh; background:radial-gradient(circle at 70% -10%,var(--vds-color-primary-soft),transparent 30rem),var(--background); color:var(--foreground); font-family:var(--font-geist-sans),Inter,ui-sans-serif,system-ui,sans-serif; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
+.eyebrow { font-size:.75rem; line-height:1rem; font-weight:650; letter-spacing:.2em; text-transform:uppercase; color:var(--vds-color-primary); }
 ::selection { background:var(--vds-color-selection); color:var(--vds-color-foreground); }
 :where(button,a,input,select,textarea,summary) { transition-property:color,background-color,border-color,opacity,box-shadow,transform; transition-duration:160ms; transition-timing-function:cubic-bezier(.2,.8,.2,1); }
 :where(button,a,input,select,textarea,summary):focus-visible,.focus-ring:focus-visible { outline:2px solid var(--vds-color-focus); outline-offset:3px; }
