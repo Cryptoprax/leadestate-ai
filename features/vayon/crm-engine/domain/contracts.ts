@@ -101,3 +101,13 @@ export interface CrmDashboardModel {
   readonly recentLeads: readonly CrmLeadRow[];
   readonly recentActivity: readonly CrmTimelineItem[];
 }
+export interface CrmSalesDashboard {
+  readonly revenue: number;
+  readonly forecast: number;
+  readonly conversion: number;
+  readonly meetings: number;
+  readonly tasks: number;
+  readonly pipeline: number;
+  readonly leadSources: readonly { readonly label: string; readonly count: number }[];
+  readonly topSalespeople: readonly { readonly label: string; readonly count: number }[];
+}

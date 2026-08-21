@@ -8,10 +8,17 @@ const tabs = [
   "properties",
   "deals",
   "communications",
+  "emails",
+  "calls",
+  "whatsapp",
   "meetings",
   "tasks",
   "documents",
+  "notes",
+  "revenue",
+  "pipeline history",
   "ai insights",
+  "ai assistant",
 ] as const;
 export function CrmLeadProfileView({ profile }: { profile: CrmLeadProfile }) {
   const [tab, setTab] = useState<(typeof tabs)[number]>("overview");
@@ -117,6 +124,7 @@ export function CrmLeadProfileView({ profile }: { profile: CrmLeadProfile }) {
           items={tab === "timeline" ? profile.timeline : profile.communications}
         />
       )}{" "}
+      {(tab === "emails" || tab === "calls" || tab === "whatsapp" || tab === "notes") && <Timeline items={profile.timeline.filter(item => item.kind === (tab === "emails" ? "email" : tab === "calls" ? "call" : tab === "notes" ? "note" : "whatsapp"))}/>}
       {(tab === "properties" ||
         tab === "deals" ||
         tab === "meetings" ||
@@ -162,9 +170,13 @@ export function CrmLeadProfileView({ profile }: { profile: CrmLeadProfile }) {
           />
         </div>
       )}
+      {tab === "revenue" && <Info title="Revenue attribution" values={profile.deals.length ? profile.deals.map(deal => [deal.title, deal.meta ?? "Authoritative value unavailable"] as const) : [["Revenue", "No authoritative deal revenue is linked to this customer."]]}/>}
+      {tab === "pipeline history" && <div className="grid gap-3">{profile.deals.length ? profile.deals.map(deal => <article className="rounded-xl border border-vds-border bg-vds-surface p-4" key={deal.id}><p className="font-medium">{deal.title}</p><p className="mt-1 text-xs capitalize text-vds-muted">Current recorded stage · {deal.status}</p></article>) : <Empty label="pipeline history"/>}</div>}
+      {tab === "ai assistant" && <AiAssistant leadId={lead.id} leadName={lead.name}/>}
     </div>
   );
 }
+function AiAssistant({leadId,leadName}:{leadId:string;leadName:string}) { const actions=[["Summarize customer","Summarize this customer using only authoritative workspace evidence."],["Generate follow-up","Draft a follow-up for human review. Do not send it."],["Write proposal","Draft a proposal outline for human review."],["Generate email","Draft a contextual email. Do not send it."],["Meeting agenda","Prepare a meeting agenda using recorded context."],["Risk analysis","Explain customer and deal risks with evidence."],["Suggested next action","Recommend the next action without executing it."]] as const; return <section className="rounded-2xl border border-vds-accent-border bg-vds-primary-soft p-5"><p className="text-xs font-semibold uppercase tracking-[.18em] text-vds-primary">Sales AI · recommendation only</p><h3 className="mt-2 text-xl font-semibold">Assist with {leadName}</h3><p className="mt-2 text-sm leading-6 text-vds-muted">Open the existing governed Sales AI runtime with this customer&apos;s identifier. No message, proposal, meeting, or CRM change is executed automatically.</p><div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{actions.map(([label,prompt])=><ButtonLink key={label} variant="outline" href={`/vayon/ai/workforce/sales-ai?customer=${encodeURIComponent(leadId)}&prompt=${encodeURIComponent(prompt)}`} className="justify-start text-left">{label}</ButtonLink>)}</div></section>}
 function Info({
   title,
   values,

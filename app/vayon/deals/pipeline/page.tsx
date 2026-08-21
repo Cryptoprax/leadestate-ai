@@ -1,4 +1,8 @@
-import { DealRoomRoute } from "@/features/vayon/deal-room/dashboard/DealRoomRoute";
-export default function Page() {
-  return <DealRoomRoute view="pipeline" />;
+import { ButtonLink } from "@/features/platform/design-system";
+import { DealBoard, PipelineStatistics } from "@/features/vayon/deal/components/DealBoard";
+import { PipelineService } from "@/features/vayon/deal/services/pipeline.service";
+
+export default async function Page() {
+  const data = await new PipelineService().board();
+  return <main className="mx-auto max-w-[110rem] px-5 py-8"><header className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"><div><p className="text-xs font-semibold uppercase tracking-[.2em] text-vds-primary">Enterprise sales pipeline</p><h1 className="mt-2 text-3xl font-semibold">Pipeline</h1><p className="mt-2 max-w-3xl text-sm text-vds-muted">Move deals through workspace stages, inspect weighted value, and keep forecast changes tenant-scoped and audit-ready.</p></div><div className="flex gap-2"><ButtonLink href="/vayon/deals/analytics" variant="outline">Pipeline reports</ButtonLink><ButtonLink href="/vayon/deals/new">New opportunity</ButtonLink></div></header><section className="mt-6"><PipelineStatistics data={data}/></section><section className="mt-6"><DealBoard data={data}/></section></main>;
 }
