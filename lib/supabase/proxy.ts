@@ -30,6 +30,11 @@ const PUBLIC_ROUTES = [
   "/contact",
 ];
 export async function refreshSession(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  if (path === "/api/webhooks" || path.startsWith("/api/webhooks/")) {
+    return NextResponse.next();
+  }
+
   let response = NextResponse.next({ request });
   const { url, key } = getSupabaseConfig();
   const supabase = createServerClient(url, key, {
@@ -47,7 +52,6 @@ export async function refreshSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const path = request.nextUrl.pathname;
   const isPublic = PUBLIC_ROUTES.some(
     (route) => path === route || path.startsWith(route + "/"),
   );
