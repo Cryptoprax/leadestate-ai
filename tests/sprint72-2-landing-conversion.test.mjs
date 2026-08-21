@@ -1,0 +1,50 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+
+const read = (path) => readFile(path, "utf8");
+
+test("hero prioritizes demo conversion with visible trust", async () => {
+  const source = await read("features/marketing/components/Homepage.tsx");
+  assert.match(source, /Book Demo/);
+  assert.match(source, /Watch Demo/);
+  assert.match(source, /Start Trial/);
+  for (const value of ["Secure by design", "Human approval controls", "Cloud-native infrastructure"]) assert.match(source, new RegExp(value));
+});
+
+test("homepage tells the complete lead-to-revenue workflow", async () => {
+  const source = await read("features/marketing/components/Homepage.tsx");
+  for (const step of ["Lead arrives", "AI responds", "Lead qualifies", "Meeting booked", "Deal tracked", "Revenue generated"]) assert.match(source, new RegExp(step));
+});
+
+test("product preview covers launch modules and AI employee outcomes", async () => {
+  const [homepage, experience] = await Promise.all([read("features/marketing/components/Homepage.tsx"), read("features/marketing/components/EnterpriseExperience.tsx")]);
+  for (const view of ["CRM", "AI Employees", "Pipeline", "Analytics", "Calendar", "Automation"]) assert.match(experience, new RegExp(view));
+  for (const role of ["AI Sales Manager", "AI CRM Assistant", "AI Marketing Agent", "AI Customer Support", "AI Documentation Agent", "AI Reporting Agent"]) assert.match(homepage, new RegExp(role));
+});
+
+test("interactive ROI calculator uses transparent requested inputs and outputs", async () => {
+  const source = await read("features/marketing/components/LandingRoiCalculator.tsx");
+  for (const value of ["Monthly leads", "Conversion rate", "Revenue per deal", "Revenue increase", "Hours saved", "AI cost savings", "Pipeline growth"]) assert.match(source, new RegExp(value));
+  assert.match(source, /directional/i);
+  assert.match(source, /not guarantees/i);
+});
+
+test("customer proof is launch-ready without fabricated endorsements", async () => {
+  const source = await read("features/marketing/components/Homepage.tsx");
+  assert.match(source, /never fabricated endorsements/i);
+  assert.match(source, /pending customer approval/i);
+  assert.match(source, /pending verification/i);
+});
+
+test("footer has complete information architecture and functional newsletter capture", async () => {
+  const source = await read("features/marketing/components/MarketingShell.tsx");
+  for (const value of ["Product", "Resources", "Company", "Legal", "Social", "Enterprise launch notes"]) assert.match(source, new RegExp(value));
+  assert.match(source, /captureLeadAction/);
+  assert.match(source, /name="kind" value="newsletter"/);
+});
+
+test("Sprint 72.2 remains frontend-only", async () => {
+  const source = await read("docs/SPRINT_72_2_LANDING_CONVERSION.md");
+  assert.doesNotMatch(source, /new database|new API|authentication change/i);
+});
