@@ -5,7 +5,7 @@ import { ArrowUp, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
-const prompts = [
+const defaultPrompts = [
   "Find buyers interested in villas below ₹3 Cr",
   "Show today's meetings",
   "Book site visits",
@@ -15,8 +15,10 @@ const prompts = [
 
 export function AICommandBar({
   onBlockedAction,
+  prompts = defaultPrompts,
 }: {
   readonly onBlockedAction?: () => void;
+  readonly prompts?: readonly string[];
 } = {}) {
   const router = useRouter();
   const [query, setQuery] = useState("");

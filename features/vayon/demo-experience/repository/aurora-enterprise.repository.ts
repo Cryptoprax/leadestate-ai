@@ -10,6 +10,7 @@ import type {
   DemoEnterpriseItem,
   DemoEnterpriseProjection,
 } from "../domain/contracts";
+import { convertToUsd } from "@/features/marketing/currency/currency";
 
 const item = (
   id: string,
@@ -17,6 +18,7 @@ const item = (
   detail: string,
   status: string,
   relatedIds: readonly string[] = [],
+  monetaryValueUsd?: number,
 ): DemoEnterpriseItem =>
   Object.freeze({
     id,
@@ -24,6 +26,7 @@ const item = (
     detail,
     status,
     relatedIds: Object.freeze([...relatedIds]),
+    monetaryValueUsd,
   });
 const roles = [
   "CEO",
@@ -141,8 +144,10 @@ export class AuroraEnterpriseDemoRepository {
         item(
           `demo-invoice-${index + 1}`,
           `Invoice VAYON-DEMO-${String(index + 1).padStart(3, "0")}`,
-          `INR ${(14999 + index * 1200).toLocaleString("en-IN")} · Demo payment history`,
+          "Demo payment history",
           index === 5 ? "open" : "paid",
+          [],
+          convertToUsd(14999 + index * 1200, "INR"),
         ),
       ),
     ];

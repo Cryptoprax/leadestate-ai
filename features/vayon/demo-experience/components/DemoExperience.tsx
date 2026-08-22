@@ -22,6 +22,8 @@ import type {
 } from "../domain/contracts";
 import { BrandLogo } from "@/components/brand";
 import { DemoObservabilityService } from "../services/demo-observability.service";
+import { useMarketingCurrency } from "@/features/marketing/currency/CurrencyDisplay";
+import { convertToUsd } from "@/features/marketing/currency/currency";
 
 const tabs = [
   "dashboard",
@@ -53,6 +55,7 @@ export function DemoExperience({
 }: {
   readonly model: DemoExperienceModel;
 }) {
+  const { currency, format, toLocal } = useMarketingCurrency();
   const [tab, setTab] = useState<Tab>("dashboard"),
     [query, setQuery] = useState(""),
     [page, setPage] = useState(0),
@@ -64,6 +67,13 @@ export function DemoExperience({
     if (tab === "dashboard") telemetry.launch(tab);
     else telemetry.view(tab);
   }, [tab, resetCount]);
+  const dashboard = useMemo(() => ({
+    ...model.dashboard,
+    currency,
+    kpis: model.dashboard.kpis.map((metric) => metric.key === "revenue" ? { ...metric, displayValue: format(metric.value, true) } : metric.key === "deals" ? { ...metric, detail: `${format(model.dashboard.pipeline.reduce((sum, item) => sum + item.value, 0), true)} pipeline` } : metric),
+    pipeline: model.dashboard.pipeline.map((item) => ({ ...item, value: toLocal(item.value) })),
+    charts: model.dashboard.charts.map((item) => ({ ...item, revenue: toLocal(item.revenue), pipeline: toLocal(item.pipeline) })),
+  }), [currency, format, model.dashboard, toLocal]);
   const filtered = useMemo(() => {
     if (enterpriseTabs.includes(tab as (typeof enterpriseTabs)[number]))
       return [];
@@ -150,8 +160,9 @@ export function DemoExperience({
       </nav>
       {tab === "dashboard" ? (
         <DashboardShell
-          data={model.dashboard}
+          data={dashboard}
           onBlockedAction={() => setNotice(true)}
+          aiPrompts={[`Find buyers interested in villas below ${format(convertToUsd(30_000_000, "INR"), true)}`, "Show today's meetings", "Book site visits", "Create WhatsApp campaign", "Show highest priority leads"]}
         />
       ) : enterpriseTabs.includes(tab as (typeof enterpriseTabs)[number]) ? (
         <EnterpriseBrowser
@@ -267,6 +278,7 @@ function EnterpriseBrowser({
   title: string;
   records: DemoExperienceModel["enterprise"]["team"];
 }) {
+  const { format } = useMarketingCurrency();
   return (
     <main className="mx-auto max-w-[100rem] px-4 py-8 sm:px-6">
       <p className="text-xs font-semibold uppercase tracking-[.18em] text-vds-primary">
@@ -288,7 +300,7 @@ function EnterpriseBrowser({
                 {record.status.replaceAll("_", " ")}
               </span>
             </div>
-            <p className="mt-2 text-sm text-vds-muted">{record.detail}</p>
+            <p className="mt-2 text-sm text-vds-muted">{record.monetaryValueUsd == null ? record.detail : `${format(record.monetaryValueUsd)} · ${record.detail}`}</p>
             <p className="mt-3 text-[10px] text-vds-subtle">
               {record.relatedIds.length} linked records · Demo data
             </p>
@@ -387,6 +399,7 @@ function DemoBrowser({
 }
 
 function DemoRecordCard({ record }: { readonly record: DemoRecord }) {
+  const { format } = useMarketingCurrency();
   return (
     <article
       className={`overflow-hidden rounded-2xl border border-vds-border bg-vds-surface ${record.kind === "properties" ? "" : "p-4"}`}
@@ -414,6 +427,11 @@ function DemoRecordCard({ record }: { readonly record: DemoRecord }) {
             {record.status.replaceAll("-", " ")}
           </span>
         </div>
+        {record.monetaryRangeUsd && (
+          <p className="mt-3 text-sm font-semibold text-vds-primary">
+            {record.monetaryRangeUsd.minimum == null ? "Price on request" : record.monetaryRangeUsd.maximum == null ? format(record.monetaryRangeUsd.minimum) : `${format(record.monetaryRangeUsd.minimum)} – ${format(record.monetaryRangeUsd.maximum)}`}
+          </p>
+        )}
         <div className="mt-3 flex flex-wrap gap-2">
           {record.meta.slice(0, 4).map((item, index) => (
             <span

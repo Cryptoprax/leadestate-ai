@@ -15,10 +15,12 @@ export function DashboardShell({
   data,
   welcome = false,
   onBlockedAction,
+  aiPrompts,
 }: {
   readonly data: ExecutiveDashboardData;
   readonly welcome?: boolean;
   readonly onBlockedAction?: () => void;
+  readonly aiPrompts?: readonly string[];
 }) {
   const metric = (key: string) => data.kpis.find((item) => item.key === key);
   const online = data.aiWorkforce.filter(
@@ -73,7 +75,7 @@ export function DashboardShell({
           </ButtonLink>
         </div>
       </header>
-      <AICommandBar onBlockedAction={onBlockedAction} />
+      <AICommandBar onBlockedAction={onBlockedAction} prompts={aiPrompts} />
       {data.isEmpty && <EmptyDashboard />}
       <section
         className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"

@@ -11,6 +11,7 @@ import type {
   DemoRecord,
   DemoRepository,
 } from "../domain/contracts";
+import { convertToUsd } from "@/features/marketing/currency/currency";
 
 const frozen = <T>(value: T): T => Object.freeze(value);
 export class AuroraDemoRepository implements DemoRepository {
@@ -24,11 +25,14 @@ export class AuroraDemoRepository implements DemoRepository {
         status: item.status,
         meta: [
           item.propertyType.replaceAll("-", " "),
-          item.priceRange.label,
           `${item.areaSquareFeet.toLocaleString("en-IN")} sq ft`,
           item.assignedSalesTeam,
         ],
         image: item.thumbnailPlaceholder,
+        monetaryRangeUsd: {
+          minimum: item.priceRange.minimum == null ? undefined : convertToUsd(item.priceRange.minimum, "INR"),
+          maximum: item.priceRange.maximum == null ? undefined : convertToUsd(item.priceRange.maximum, "INR"),
+        },
       }),
     );
     const leads = Array.from({ length: 520 }, (_, index) => {
@@ -69,11 +73,14 @@ export class AuroraDemoRepository implements DemoRepository {
         subtitle: contact.name,
         status: item.stage,
         meta: [
-          property.priceRange.label,
           property.city,
           auroraEmployees.find((person) => person.id === item.salesAgentId)
             ?.name ?? "Assigned sales team",
         ],
+        monetaryRangeUsd: {
+          minimum: property.priceRange.minimum == null ? undefined : convertToUsd(property.priceRange.minimum, "INR"),
+          maximum: property.priceRange.maximum == null ? undefined : convertToUsd(property.priceRange.maximum, "INR"),
+        },
       });
     });
     const whatsappBase = auroraBusinessActivity.communications.filter(

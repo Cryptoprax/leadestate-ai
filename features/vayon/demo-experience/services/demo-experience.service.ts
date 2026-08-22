@@ -15,6 +15,7 @@ import type {
 import type { DemoExperienceModel, DemoRepository } from "../domain/contracts";
 import { AuroraDemoRepository } from "../repository/aurora-demo.repository";
 import { AuroraEnterpriseDemoRepository } from "../repository/aurora-enterprise.repository";
+import { convertToUsd, formatMarketingCurrency } from "@/features/marketing/currency/currency";
 
 const stages = [
   "new",
@@ -23,13 +24,8 @@ const stages = [
   "negotiation",
   "closed-won",
 ] as const;
-const money = (value: number) =>
-  new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    notation: "compact",
-    maximumFractionDigits: 2,
-  }).format(value);
+const usd = (value: number) => convertToUsd(value, "INR");
+const money = (valueUsd: number) => formatMarketingCurrency(valueUsd, "USD", true);
 export class DemoExperienceService {
   constructor(
     private readonly repository: DemoRepository = new AuroraDemoRepository(),
@@ -44,8 +40,7 @@ export class DemoExperienceService {
         (item) => !["closed-won", "closed-lost"].includes(item.stage),
       );
     const value = (deal: (typeof auroraDeals)[number]) =>
-      auroraProperties.find((item) => item.id === deal.propertyId)?.priceRange
-        .minimum ?? 0;
+      usd(auroraProperties.find((item) => item.id === deal.propertyId)?.priceRange.minimum ?? 0);
     const pipelineValue = activeDeals.reduce(
         (sum, item) => sum + value(item),
         0,
@@ -152,7 +147,7 @@ export class DemoExperienceService {
     const dashboard: ExecutiveDashboardData = {
       organizationName: "Aurora Realty Group",
       workspaceName: "Demo Environment",
-      currency: "INR",
+      currency: "USD",
       kpis,
       pipeline,
       charts,

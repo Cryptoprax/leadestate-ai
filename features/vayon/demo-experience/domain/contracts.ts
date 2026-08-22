@@ -11,6 +11,7 @@ export interface DemoRecord {
   readonly meta: readonly string[];
   readonly image?: string;
   readonly occurredAt?: string;
+  readonly monetaryRangeUsd?: Readonly<{ minimum?: number; maximum?: number }>;
 }
 export interface DemoInventory {
   readonly organization: "Aurora Realty Group";
@@ -39,7 +40,7 @@ export interface DemoRepository {
   load(): DemoInventory;
 }
 
-export interface DemoEnterpriseItem { readonly id:string;readonly title:string;readonly detail:string;readonly status:string;readonly relatedIds:readonly string[] }
+export interface DemoEnterpriseItem { readonly id:string;readonly title:string;readonly detail:string;readonly status:string;readonly relatedIds:readonly string[];readonly monetaryValueUsd?:number }
 export interface DemoEnterpriseProjection {
   readonly datasetVersion:"aurora-enterprise-v1";
   readonly demoData:true;
