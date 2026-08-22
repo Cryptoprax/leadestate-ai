@@ -6,6 +6,7 @@ import type {
   WorkforceTask,
 } from "../domain/models";
 import { workforceSummary } from "../view-models/workforce";
+import { WorkforceDirectory, WorkforceMemory } from "./WorkforceDirectory";
 const card = "rounded-2xl border border-vds-border bg-vds-surface p-5";
 export function CommandCenter({ snapshot }: { snapshot: WorkforceSnapshot }) {
   return (
@@ -18,6 +19,32 @@ export function CommandCenter({ snapshot }: { snapshot: WorkforceSnapshot }) {
           </article>
         ))}
       </section>
+      <WorkforceDirectory items={snapshot.employees} />
+      <section aria-labelledby="executive-workforce-title">
+        <div className="mb-3"><p className="text-xs font-semibold uppercase tracking-[.18em] text-vds-primary">Executive dashboard</p><h2 id="executive-workforce-title" className="mt-2 font-semibold">AI workforce impact</h2></div>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-7">{[
+          ["AI utilization", snapshot.employees.length ? `${Math.round(snapshot.employees.filter((item) => item.status === "processing").length / snapshot.employees.length * 100)}%` : "Unavailable"],
+          ["Tasks completed", snapshot.tasks.filter((item) => item.status === "completed").length],
+          ["Time saved", "Unavailable"],
+          ["Revenue influenced", "Unavailable"],
+          ["Meetings created", "Unavailable"],
+          ["Emails drafted", "Unavailable"],
+          ["Customer interactions", "Unavailable"],
+        ].map(([label, value]) => <article className={card} key={label}><p className="text-xs text-vds-muted">{label}</p><p className="mt-3 text-lg font-semibold">{value}</p></article>)}</div>
+      </section>
+      <section className="grid gap-5 xl:grid-cols-[1.2fr_.8fr]">
+        <article className={card}>
+          <p className="text-xs font-semibold uppercase tracking-[.18em] text-vds-primary">Multi-agent collaboration</p>
+          <h2 className="mt-2 font-semibold">Governed customer workflow</h2>
+          <div className="mt-5 flex items-center gap-2 overflow-x-auto pb-2" aria-label="AI collaboration workflow">{["Sales Executive", "CRM Manager", "Meeting Coordinator", "Reporting Analyst", "Executive Assistant"].map((role, index) => <div className="flex shrink-0 items-center gap-2" key={role}><span className="rounded-xl border border-vds-border bg-vds-elevated px-3 py-2 text-xs">{role}</span>{index < 4 && <span aria-hidden="true" className="text-vds-primary">→</span>}</div>)}</div>
+          <p className="mt-3 text-xs text-vds-muted">Agents exchange tenant-scoped recommendations only. Approval remains mandatory before sensitive execution.</p>
+          <Link href="/vayon/ai/collaboration" className="mt-4 inline-block text-sm text-vds-primary">Open collaboration graph</Link>
+        </article>
+        <article className={card}>
+          <h2 className="font-semibold">Operating controls</h2>
+          <div className="mt-4 grid grid-cols-2 gap-3 text-sm"><Link href="/vayon/approvals" className="rounded-xl bg-vds-elevated p-3">Approval queue</Link><Link href="/vayon/ai/tasks" className="rounded-xl bg-vds-elevated p-3">Task orchestration</Link><Link href="/vayon/ai/playground" className="rounded-xl bg-vds-elevated p-3">Prompt library</Link><Link href="/vayon/knowledge" className="rounded-xl bg-vds-elevated p-3">Knowledge hub</Link></div>
+        </article>
+      </section>
       <div className="grid gap-6 xl:grid-cols-[1.2fr_.8fr]">
         <section>
           <div className="mb-3 flex justify-between">
@@ -29,7 +56,7 @@ export function CommandCenter({ snapshot }: { snapshot: WorkforceSnapshot }) {
               View workforce
             </Link>
           </div>
-          <EmployeeGrid items={snapshot.employees} />
+          <ActivityList items={snapshot.activity.slice(0, 12)} />
         </section>
         <section>
           <h2 className="mb-3 font-semibold">Upcoming work</h2>
@@ -53,6 +80,7 @@ export function CommandCenter({ snapshot }: { snapshot: WorkforceSnapshot }) {
           ))}
         </dl>
       </section>
+      <section className={card}><div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-semibold uppercase tracking-[.18em] text-vds-primary">Connector readiness</p><h2 className="mt-2 font-semibold">Future employee tools</h2></div><p className="text-xs text-vds-muted">Architecture placeholders · no provider calls</p></div><div className="mt-4 flex flex-wrap gap-2">{["WhatsApp", "Email", "Calendar", "Voice", "Slack", "Microsoft Teams", "Google Drive", "Dropbox", "Stripe", "Razorpay"].map((connector) => <span className="rounded-full border border-dashed border-vds-border px-3 py-1.5 text-xs text-vds-muted" key={connector}>{connector} · future</span>)}</div></section>
     </div>
   );
 }
@@ -114,6 +142,10 @@ export function TaskList({ items }: { items: readonly WorkforceTask[] }) {
               <div>Owner: {item.owner}</div>
               <div>Created: {new Date(item.createdAt).toLocaleString()}</div>
               <div>Duration: {item.duration ?? "Awaiting completion"}</div>
+              <div>Deadline: {item.deadline ? new Date(item.deadline).toLocaleString() : "Not scheduled"}</div>
+              <div>Progress: {item.progress ?? (item.status === "completed" ? 100 : item.status === "running" ? 50 : 0)}%</div>
+              <div>Approval: {item.approvalState ?? "pending"}</div>
+              <div>Dependencies: {item.dependencies?.join(", ") || "None recorded"}</div>
             </dl>
           </article>
         ))
@@ -225,15 +257,13 @@ export function EmployeeProfile({
           </p>
         </Panel>
       </div>
+      <WorkforceMemory item={item} />
       <section>
         <h2 className="mb-3 font-semibold">Activity timeline</h2>
         <ActivityList items={activity} />
       </section>
       <Panel title="Settings">
-        <p>
-          Provider: deterministic rules. External providers and automatic
-          business execution are disabled.
-        </p>
+        <dl className="grid gap-3 sm:grid-cols-2"><div><dt>Memory limit</dt><dd className="text-vds-foreground">Workspace policy</dd></div><div><dt>Creativity</dt><dd className="text-vds-foreground">Governed runtime default</dd></div><div><dt>Response style</dt><dd className="text-vds-foreground">Professional and evidence-based</dd></div><div><dt>Allowed tools</dt><dd className="text-vds-foreground">{item.permissions.join(", ")}</dd></div><div><dt>Allowed data</dt><dd className="text-vds-foreground">Tenant-scoped workspace repositories</dd></div><div><dt>Escalation</dt><dd className="text-vds-foreground">Human approval required</dd></div></dl>
       </Panel>
     </div>
   );

@@ -68,6 +68,16 @@ export const definitions = [
     "EA",
   ],
 ] as const;
+const departments = {
+  "sales-ai": "Sales",
+  "crm-ai": "CRM",
+  "whatsapp-ai": "Support",
+  "voice-ai": "Support",
+  "marketing-ai": "Marketing",
+  "operations-ai": "Operations",
+  "finance-ai": "Finance",
+  "executive-ai": "Executive",
+} as const;
 export const unavailableMetrics = (): readonly WorkforceMetric[] =>
   [
     "Tasks Today",
@@ -85,6 +95,8 @@ export function configuredEmployee(
     code: def[0],
     name: def[1],
     role: def[2],
+    department: departments[def[0]],
+    availability: "unavailable",
     description: def[3],
     avatar: def[4],
     status: "idle",
@@ -99,6 +111,12 @@ export function configuredEmployee(
       learnedPreferences: "No learned preferences recorded.",
       recentOutcomes: "No outcomes recorded.",
       currentObjectives: "No objectives recorded.",
+      conversationCount: 0,
+      assignedCustomers: 0,
+      pendingTasks: 0,
+      completedActions: 0,
+      knowledgeReferences: 0,
+      contextUtilization: 0,
     },
     recentActivity: [],
     health: "unavailable",

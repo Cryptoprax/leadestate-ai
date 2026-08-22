@@ -1,4 +1,4 @@
-import { EmployeeGrid } from "@/features/vayon/operational-workforce/components/WorkforceViews";
+import { WorkforceDirectory } from "@/features/vayon/operational-workforce/components/WorkforceDirectory";
 import { WorkforceShell } from "@/features/vayon/operational-workforce/components/WorkforceShell";
 import { WorkforceService } from "@/features/vayon/operational-workforce/services/workforce.service";
 export default async function Page() {
@@ -6,9 +6,9 @@ export default async function Page() {
   return (
     <WorkforceShell
       title="AI Workforce"
-      description="Eight role-specific operational advisors with explicit health, capabilities, permissions, queues, and availability."
+      description="A live directory of specialized digital employees with governed access, visible workload, workspace memory, and team collaboration."
     >
-      <EmployeeGrid items={snapshot.employees} />
+      <WorkforceDirectory items={snapshot.employees} />
     </WorkforceShell>
   );
 }

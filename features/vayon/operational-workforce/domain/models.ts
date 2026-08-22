@@ -32,12 +32,19 @@ export interface WorkforceTask {
   readonly createdAt: string;
   readonly completedAt?: string;
   readonly duration?: string;
+  readonly deadline?: string;
+  readonly dependencies?: readonly string[];
+  readonly progress?: number;
+  readonly approvalState?: "not_required" | "pending" | "approved" | "rejected";
+  readonly history?: readonly WorkforceActivity[];
 }
 export interface WorkforceEmployee {
   readonly id: string;
   readonly code: string;
   readonly name: string;
   readonly role: string;
+  readonly department: "Sales" | "Marketing" | "Support" | "Operations" | "CRM" | "Finance" | "Executive";
+  readonly availability: "available" | "working" | "unavailable";
   readonly description: string;
   readonly avatar: string;
   readonly status: WorkforceStatus;
@@ -51,6 +58,12 @@ export interface WorkforceEmployee {
     readonly learnedPreferences: string;
     readonly recentOutcomes: string;
     readonly currentObjectives: string;
+    readonly conversationCount: number;
+    readonly assignedCustomers: number;
+    readonly pendingTasks: number;
+    readonly completedActions: number;
+    readonly knowledgeReferences: number;
+    readonly contextUtilization: number;
   };
   readonly recentActivity: readonly WorkforceActivity[];
   readonly permissions: readonly string[];

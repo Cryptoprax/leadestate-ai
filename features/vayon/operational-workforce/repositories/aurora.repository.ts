@@ -38,6 +38,12 @@ export class AuroraWorkforceRepository implements WorkforceRepository {
       currentQueue: tasks.filter(
         (task) => task.employeeId === def[0] && task.status === "pending",
       ).length,
+      availability: index < 6 ? ("available" as const) : ("unavailable" as const),
+      memory: {
+        ...configuredEmployee(def).memory,
+        pendingTasks: tasks.filter((task) => task.employeeId === def[0] && task.status === "pending").length,
+        completedActions: tasks.filter((task) => task.employeeId === def[0] && task.status === "completed").length,
+      },
       recentActivity: this.activityFor(def[0]),
     }));
   }

@@ -34,7 +34,20 @@ export class WorkforceService {
     const employees = storedEmployees.map((employee) => {
       const processing = tasks.some((task) => task.employeeId === employee.id && task.status === "running");
       const status = runtime.health.state === "healthy" ? (processing ? "processing" as const : "online" as const) : runtime.health.state === "degraded" ? "error" as const : "offline" as const;
-      return { ...employee, status, health: runtime.health.state, currentQueue: tasks.filter((task) => task.employeeId === employee.id && (task.status === "pending" || task.status === "running")).length };
+      const employeeTasks = tasks.filter((task) => task.employeeId === employee.id || task.employeeId === employee.code);
+      const currentQueue = employeeTasks.filter((task) => task.status === "pending" || task.status === "running").length;
+      return {
+        ...employee,
+        status,
+        health: runtime.health.state,
+        availability: status === "processing" ? "working" as const : status === "online" ? "available" as const : "unavailable" as const,
+        currentQueue,
+        memory: {
+          ...employee.memory,
+          pendingTasks: currentQueue,
+          completedActions: employeeTasks.filter((task) => task.status === "completed").length,
+        },
+      };
     });
     return {
       employees,

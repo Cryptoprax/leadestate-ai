@@ -1,1 +1,6 @@
-import{AIRuntimeHeader}from"@/features/vayon/ai-runtime/components/AIRuntimeHeader";export default function Page(){return <main className="mx-auto max-w-4xl px-5 py-8"><AIRuntimeHeader title="AI Runtime Playground" description="A controlled future evaluation surface for provider, model, prompt, and policy comparisons."/><section className="mt-7 rounded-3xl border border-dashed border-vds-accent-border bg-vds-primary/[.03] p-12 text-center"><p className="text-lg font-medium">Direct prompt execution is intentionally unavailable</p><p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-vds-muted">The production runtime is invoked through governed AI employee workflows only. This surface will later support mock and evaluation runs without bypassing approvals.</p></section></main>}
+import { AIRuntimeHeader } from "@/features/vayon/ai-runtime/components/AIRuntimeHeader";
+import { PromptLibrary } from "@/features/vayon/ai-runtime/components/PromptLibrary";
+
+export default function Page() {
+  return <main className="mx-auto max-w-6xl px-5 py-8"><AIRuntimeHeader title="Enterprise Prompt Library" description="Versioned role and system prompt templates, tested only through governed workspace-attributed AI employee workflows."/><PromptLibrary /></main>;
+}

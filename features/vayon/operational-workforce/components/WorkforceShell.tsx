@@ -6,6 +6,9 @@ const links = [
   ["Collaboration", "/vayon/ai/collaboration"],
   ["Tasks", "/vayon/ai/tasks"],
   ["History", "/vayon/ai/history"],
+  ["Approvals", "/vayon/approvals"],
+  ["Prompts", "/vayon/ai/playground"],
+  ["Knowledge", "/vayon/knowledge"],
 ] as const;
 export function WorkforceShell({
   title,
