@@ -60,6 +60,11 @@ export function IdentitySecurityDashboard({ data }: { data: Dashboard }) {
           </article>
         ))}
       </div>
+      <div className="grid gap-3 sm:grid-cols-3">
+        <article className={card}><h3 className="font-semibold">Password policy</h3><p className="mt-2 text-sm text-vds-muted">Minimum 12 characters, verified identity, managed reset flow, and session revocation.</p></article>
+        <article className={card}><h3 className="font-semibold">IP restrictions</h3><p className="mt-2 text-sm text-vds-muted">Policy placeholder · no restriction is currently enforced.</p></article>
+        <article className={card}><h3 className="font-semibold">API keys</h3><p className="mt-2 text-sm text-vds-muted">Personal access tokens are managed below. Organization-wide key policy is a prepared placeholder.</p></article>
+      </div>
       <div className="grid gap-5 xl:grid-cols-2">
         <article className={card}>
           <h3 className="font-semibold">MFA &amp; Password Status</h3>
