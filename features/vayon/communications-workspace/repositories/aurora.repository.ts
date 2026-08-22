@@ -41,6 +41,10 @@ export class AuroraCommunicationsRepository implements CommunicationsRepository 
         pinned: false,
         archived: false,
         dealId: item.dealId,
+        opportunityId: item.dealId,
+        tags: item.direction === "inbound" ? ["customer"] : ["follow-up"],
+        aiDraftPending: item.direction === "inbound",
+        closed: false,
         linkedTasks: [],
         lastActivityAt: item.occurredAt,
       }));
@@ -92,5 +96,14 @@ export class AuroraCommunicationsRepository implements CommunicationsRepository 
   }
   async notifications() {
     return [];
+  }
+  async attachments() {
+    return [
+      { id: "attachment-aurora-1", conversationId: auroraBusinessActivity.communications.at(-1)?.id ?? "demo", name: "Aurora Heights brochure.pdf", kind: "brochure" as const, contentType: "application/pdf", sizeBytes: 2480000, permission: "conversation-members" as const },
+      { id: "attachment-aurora-2", conversationId: auroraBusinessActivity.communications.at(-2)?.id ?? "demo", name: "Tower B floor plan.pdf", kind: "floor-plan" as const, contentType: "application/pdf", sizeBytes: 932000, permission: "conversation-members" as const },
+    ];
+  }
+  async notes() {
+    return [{ id: "note-aurora-1", conversationId: auroraBusinessActivity.communications.at(-1)?.id ?? "demo", body: "Customer prefers a weekend site visit and a north-facing residence.", author: "Priya Shah", pinned: true, mentions: ["Arjun Rao"], attachmentIds: [], createdAt: "2026-08-22T09:30:00.000Z" }];
   }
 }

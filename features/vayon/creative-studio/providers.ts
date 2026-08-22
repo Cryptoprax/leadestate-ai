@@ -1,0 +1,19 @@
+import type {CreativeGenerationProvider,CreativePublishingProvider,GrowthPublishingConnector} from "./contracts";
+export class GovernedCreativeProvider implements CreativeGenerationProvider {
+  readonly version="creative-rules-1.0";
+  generate(input:Parameters<CreativeGenerationProvider["generate"]>[0]) {const context=`${input.projectName} by ${input.developer} in ${input.location}; ${input.availableInventory} available units; ${input.priceRange}.`;return {contributions:[
+    {employee:"Marketing Manager" as const,contribution:`Campaign strategy drafted from ${context}`,recommendationOnly:true as const},
+    {employee:"Copywriter" as const,contribution:"Headlines, platform copy, CTA, SEO metadata, hashtags, email, SMS and WhatsApp drafts prepared.",recommendationOnly:true as const},
+    {employee:"Designer" as const,contribution:`Layouts use ${input.brandKit.colors.join(", ")||"approved brand colors"} and the selected project assets.`,recommendationOnly:true as const},
+    {employee:"Campaign Manager" as const,contribution:"Channel versions and campaign timeline prepared for review.",recommendationOnly:true as const},
+    {employee:"Compliance Reviewer" as const,contribution:"Pricing, offer, legal disclaimer and RERA fields require human verification.",recommendationOnly:true as const},
+    {employee:"Brand Guardian" as const,contribution:"Logo, colors, fonts, contact information, QR and brand tone checks prepared.",recommendationOnly:true as const},
+    {employee:"Sales Manager" as const,contribution:"Inventory availability and sales contact details require final sales review.",recommendationOnly:true as const}],variations:[
+    {name:"Version A" as const,headline:`Discover ${input.projectName}`,colorDirection:"Primary brand palette",layout:"Hero property image",cta:"Schedule a visit",offerPlacement:"Upper third",typography:"Brand headline"},
+    {name:"Version B" as const,headline:`A new address at ${input.location}`,colorDirection:"Secondary brand palette",layout:"Inventory-led grid",cta:"Explore availability",offerPlacement:"Center",typography:"Editorial"},
+    {name:"Version C" as const,headline:`Invest in ${input.projectName}`,colorDirection:"High-contrast brand palette",layout:"Benefit-led split",cta:"Request details",offerPlacement:"Footer band",typography:"Bold display"},
+    {name:"Version D" as const,headline:`Your next move: ${input.projectName}`,colorDirection:"Neutral brand palette",layout:"Detail-led editorial",cta:"Talk to our team",offerPlacement:"Lower third",typography:"Refined sans-serif"},
+    {name:"Version E" as const,headline:`Explore life at ${input.projectName}`,colorDirection:"Lifestyle-led brand palette",layout:"Immersive image sequence",cta:"View the project",offerPlacement:"Closing panel",typography:"Contemporary display"}],scores:{overall:82,visual:84,copy:82,brand:88,readability:86,ctaStrength:78,offerVisibility:76,trust:84,suggestions:["Confirm the active offer before approval","Select a preferred variation","Add approved project QR code"],warnings:["RERA and legal text require compliance review","No asset may publish before approval"]}};}
+}
+export class FutureCreativePublishingProvider implements CreativePublishingProvider {readonly livePublishing=false as const;prepare(assetId:string,platform:string){if(!assetId||!platform)throw new Error("Asset and platform are required.");return Object.freeze({assetId,platform,state:"draft" as const,approvalRequired:true as const});}}
+export class DisabledGrowthConnector implements GrowthPublishingConnector {readonly enabled=false as const;constructor(readonly provider:GrowthPublishingConnector["provider"]){ }prepare(campaignId:string){if(!campaignId)throw new Error("Campaign is required.");return Object.freeze({campaignId,state:"future" as const,approvalRequired:true as const});}}

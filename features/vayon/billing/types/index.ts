@@ -1,4 +1,4 @@
-export type BillingMetric="ai_requests"|"tokens"|"storage_gb"|"users"|"whatsapp_messages"|"emails"|"calendar_events"|"api_calls";
+export type BillingMetric="ai_requests"|"tokens"|"storage_gb"|"users"|"whatsapp_messages"|"emails"|"calendar_events"|"api_calls"|"image_generations"|"creative_exports"|"video_projects"|"conversation_summaries"|"future_video_generation_credits";
 export interface PlanRecord{id:string;code:string;name:string;description:string;monthlyPrice:number|null;currency:string;limits:Record<string,number|null>;features:string[];active:boolean}
 export interface SubscriptionRecord{id:string;planId:string;planCode?:string;planName?:string;status:string;trialEndsAt?:string;currentPeriodEndsAt?:string;cancelAtPeriodEnd:boolean;seatQuantity:number;version:number;providerSubscriptionId?:string}
 export interface UsageRecord{metric:string;quantity:number;periodStart:string;periodEnd:string;limit?:number|null}

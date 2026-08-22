@@ -61,6 +61,8 @@ const tour = [
   "Notifications",
   "Billing",
   "Organization",
+  "Creative Studio",
+  "Growth Studio",
 ];
 
 /** Deterministic enterprise projections over the canonical cross-linked Aurora graph. */

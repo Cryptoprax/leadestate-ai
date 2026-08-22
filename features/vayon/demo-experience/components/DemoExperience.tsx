@@ -49,6 +49,15 @@ const enterpriseTabs = [
   "analytics",
 ] as const;
 const pageSize = 24;
+const investorTours = [
+  ["Executive Tour", "dashboard", 0],
+  ["Sales Tour", "deals", 4],
+  ["Marketing Tour", "communications", 7],
+  ["CRM Tour", "leads", 2],
+  ["AI Tour", "ai", 1],
+  ["Creative Studio Tour", "ai", 14],
+  ["Growth Studio Tour", "workflows", 15],
+] as const satisfies readonly (readonly [string, Tab, number])[];
 
 export function DemoExperience({
   model,
@@ -67,13 +76,38 @@ export function DemoExperience({
     if (tab === "dashboard") telemetry.launch(tab);
     else telemetry.view(tab);
   }, [tab, resetCount]);
-  const dashboard = useMemo(() => ({
-    ...model.dashboard,
-    currency,
-    kpis: model.dashboard.kpis.map((metric) => metric.key === "revenue" ? { ...metric, displayValue: format(metric.value, true) } : metric.key === "deals" ? { ...metric, detail: `${format(model.dashboard.pipeline.reduce((sum, item) => sum + item.value, 0), true)} pipeline` } : metric),
-    pipeline: model.dashboard.pipeline.map((item) => ({ ...item, value: toLocal(item.value) })),
-    charts: model.dashboard.charts.map((item) => ({ ...item, revenue: toLocal(item.revenue), pipeline: toLocal(item.pipeline) })),
-  }), [currency, format, model.dashboard, toLocal]);
+  const dashboard = useMemo(
+    () => ({
+      ...model.dashboard,
+      currency,
+      kpis: model.dashboard.kpis.map((metric) =>
+        metric.key === "revenue"
+          ? { ...metric, displayValue: format(metric.value, true) }
+          : metric.key === "deals"
+            ? {
+                ...metric,
+                detail: `${format(
+                  model.dashboard.pipeline.reduce(
+                    (sum, item) => sum + item.value,
+                    0,
+                  ),
+                  true,
+                )} pipeline`,
+              }
+            : metric,
+      ),
+      pipeline: model.dashboard.pipeline.map((item) => ({
+        ...item,
+        value: toLocal(item.value),
+      })),
+      charts: model.dashboard.charts.map((item) => ({
+        ...item,
+        revenue: toLocal(item.revenue),
+        pipeline: toLocal(item.pipeline),
+      })),
+    }),
+    [currency, format, model.dashboard, toLocal],
+  );
   const filtered = useMemo(() => {
     if (enterpriseTabs.includes(tab as (typeof enterpriseTabs)[number]))
       return [];
@@ -162,7 +196,13 @@ export function DemoExperience({
         <DashboardShell
           data={dashboard}
           onBlockedAction={() => setNotice(true)}
-          aiPrompts={[`Find buyers interested in villas below ${format(convertToUsd(30_000_000, "INR"), true)}`, "Show today's meetings", "Book site visits", "Create WhatsApp campaign", "Show highest priority leads"]}
+          aiPrompts={[
+            `Find buyers interested in villas below ${format(convertToUsd(30_000_000, "INR"), true)}`,
+            "Show today's meetings",
+            "Book site visits",
+            "Create WhatsApp campaign",
+            "Show highest priority leads",
+          ]}
         />
       ) : enterpriseTabs.includes(tab as (typeof enterpriseTabs)[number]) ? (
         <EnterpriseBrowser
@@ -195,11 +235,28 @@ export function DemoExperience({
           onPage={setPage}
         />
       )}
-      <div className="fixed bottom-5 left-5 z-50 flex gap-2">
-        <Button variant="secondary" onClick={() => setTourStep(0)}>
-          <Play className="size-4" />
-          Start tour
-        </Button>
+      <div className="fixed bottom-5 left-5 z-50 flex items-end gap-2">
+        <details className="group rounded-xl bg-vds-surface shadow-vds-lg">
+          <summary className="vds-focus flex cursor-pointer list-none items-center gap-2 rounded-xl border border-vds-border px-4 py-2 text-sm">
+            <Play className="size-4" />
+            Start tour · Investor tours
+          </summary>
+          <div className="absolute bottom-12 left-0 grid w-56 gap-1 rounded-xl border border-vds-border bg-vds-surface p-2 shadow-vds-lg">
+            {investorTours.map(([label, nextTab, step]) => (
+              <Button
+                key={label}
+                variant="control"
+                className="justify-start"
+                onClick={() => {
+                  select(nextTab);
+                  setTourStep(step);
+                }}
+              >
+                {label}
+              </Button>
+            ))}
+          </div>
+        </details>
         <Button
           variant="secondary"
           onClick={() => {
@@ -231,11 +288,17 @@ export function DemoExperience({
               Close
             </Button>
             <Button
-              onClick={() => setTourStep((value) => {
-                if (value !== null && value < model.enterprise.tour.length - 1) return value + 1;
-                new DemoObservabilityService().completeTour();
-                return null;
-              })}
+              onClick={() =>
+                setTourStep((value) => {
+                  if (
+                    value !== null &&
+                    value < model.enterprise.tour.length - 1
+                  )
+                    return value + 1;
+                  new DemoObservabilityService().completeTour();
+                  return null;
+                })
+              }
             >
               Next
             </Button>
@@ -300,7 +363,11 @@ function EnterpriseBrowser({
                 {record.status.replaceAll("_", " ")}
               </span>
             </div>
-            <p className="mt-2 text-sm text-vds-muted">{record.monetaryValueUsd == null ? record.detail : `${format(record.monetaryValueUsd)} · ${record.detail}`}</p>
+            <p className="mt-2 text-sm text-vds-muted">
+              {record.monetaryValueUsd == null
+                ? record.detail
+                : `${format(record.monetaryValueUsd)} · ${record.detail}`}
+            </p>
             <p className="mt-3 text-[10px] text-vds-subtle">
               {record.relatedIds.length} linked records · Demo data
             </p>
@@ -429,7 +496,11 @@ function DemoRecordCard({ record }: { readonly record: DemoRecord }) {
         </div>
         {record.monetaryRangeUsd && (
           <p className="mt-3 text-sm font-semibold text-vds-primary">
-            {record.monetaryRangeUsd.minimum == null ? "Price on request" : record.monetaryRangeUsd.maximum == null ? format(record.monetaryRangeUsd.minimum) : `${format(record.monetaryRangeUsd.minimum)} – ${format(record.monetaryRangeUsd.maximum)}`}
+            {record.monetaryRangeUsd.minimum == null
+              ? "Price on request"
+              : record.monetaryRangeUsd.maximum == null
+                ? format(record.monetaryRangeUsd.minimum)
+                : `${format(record.monetaryRangeUsd.minimum)} – ${format(record.monetaryRangeUsd.maximum)}`}
           </p>
         )}
         <div className="mt-3 flex flex-wrap gap-2">

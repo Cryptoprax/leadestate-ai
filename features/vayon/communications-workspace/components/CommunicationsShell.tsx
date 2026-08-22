@@ -7,6 +7,8 @@ const links = [
   ["Templates", "/vayon/communications/templates"],
   ["Campaigns", "/vayon/communications/campaigns"],
   ["Notifications", "/vayon/communications/notifications"],
+  ["Connectors", "/vayon/communications/connectors"],
+  ["Reports", "/vayon/communications/reports"],
 ] as const;
 export function CommunicationsShell({
   title,
@@ -21,7 +23,7 @@ export function CommunicationsShell({
     <main className="mx-auto max-w-[96rem] px-4 py-7 sm:px-6">
       <header>
         <p className="text-xs font-semibold uppercase tracking-[.2em] text-vds-primary">
-          Unified communications · deterministic
+          Unified communications · governed
         </p>
         <h1 className="mt-2 text-3xl font-semibold">{title}</h1>
         <p className="mt-2 max-w-3xl text-sm text-vds-muted">{description}</p>

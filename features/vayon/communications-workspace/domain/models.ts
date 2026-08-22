@@ -39,9 +39,43 @@ export interface ConversationRow {
   readonly archived: boolean;
   readonly dealId?: string;
   readonly propertyId?: string;
+  readonly opportunityId?: string;
+  readonly projectId?: string;
   readonly workflowId?: string;
+  readonly tags: readonly string[];
+  readonly aiDraftPending: boolean;
+  readonly closed: boolean;
   readonly linkedTasks: readonly string[];
   readonly lastActivityAt: string;
+}
+export interface CommunicationAttachment {
+  readonly id: string;
+  readonly conversationId: string;
+  readonly name: string;
+  readonly kind: "image" | "pdf" | "brochure" | "floor-plan" | "contract" | "video-placeholder";
+  readonly contentType: string;
+  readonly sizeBytes: number;
+  readonly storagePath?: string;
+  readonly permission: "conversation-members";
+}
+export interface InternalNote {
+  readonly id: string;
+  readonly conversationId: string;
+  readonly body: string;
+  readonly author: string;
+  readonly pinned: boolean;
+  readonly mentions: readonly string[];
+  readonly attachmentIds: readonly string[];
+  readonly createdAt: string;
+}
+export interface CommunicationProviderCapability {
+  readonly channel: Channel;
+  readonly provider: "whatsapp-cloud" | "gmail" | "outlook" | "microsoft-365" | "sms" | "voice";
+  readonly mode: "architecture-ready";
+  readonly inbound: boolean;
+  readonly drafts: boolean;
+  readonly liveDelivery: false;
+  readonly health: "not-connected";
 }
 export interface ConversationTimelineItem {
   readonly id: string;
@@ -57,6 +91,8 @@ export interface ConversationTimelineItem {
 export interface ConversationDetail {
   readonly conversation: ConversationRow;
   readonly timeline: readonly ConversationTimelineItem[];
+  readonly attachments: readonly CommunicationAttachment[];
+  readonly notes: readonly InternalNote[];
   readonly crm: {
     readonly customerSummary: string;
     readonly leadScore: string;
@@ -80,6 +116,9 @@ export interface ConversationDetail {
     readonly risk: string;
     readonly nextAction: string;
     readonly generatedBy: "deterministic-rules";
+    readonly recommendationOnly: true;
+    readonly actionItems: readonly string[];
+    readonly urgency: "low" | "normal" | "high";
   };
 }
 export interface CommunicationTemplate {
@@ -128,6 +167,11 @@ export interface InboxQuery {
   readonly channel?: Channel;
   readonly status?: string;
   readonly unreadOnly?: boolean;
+  readonly assignedOnly?: boolean;
+  readonly aiDraftPendingOnly?: boolean;
+  readonly highPriorityOnly?: boolean;
+  readonly closedOnly?: boolean;
+  readonly archivedOnly?: boolean;
   readonly sort: "recent" | "oldest" | "unread";
   readonly page: number;
   readonly pageSize: number;
@@ -138,6 +182,10 @@ export interface CommunicationsSnapshot {
   readonly templates: readonly CommunicationTemplate[];
   readonly campaigns: readonly Campaign[];
   readonly notifications: readonly HubNotification[];
+  readonly attachments: readonly CommunicationAttachment[];
+  readonly notes: readonly InternalNote[];
+  readonly providers: readonly CommunicationProviderCapability[];
+  readonly reports: readonly { readonly label: string; readonly value: string }[];
   readonly observability: readonly {
     readonly label: string;
     readonly value: string;

@@ -1,2 +1,16 @@
-import{CommunicationDashboard,CommunicationHeader,CommunicationWorkspace}from"@/features/vayon/communication/components/CommunicationUI";import{ConversationService}from"@/features/vayon/communication/services/conversation.service";import{CommunicationHubArchitecture}from"@/features/vayon/communication-hub/components/CommunicationHubArchitecture";import{OrganizationService}from"@/features/onboarding/services/organization.service";import{auroraBusinessActivity}from"@/features/vayon/demo-workspace";import{CommunicationActivityPanel}from"@/features/vayon/demo-workspace/business-activity/ActivityPanels";
-export default async function Page(){const[data,organization]=await Promise.all([new ConversationService().snapshot(),new OrganizationService().current()]);return <main className="mx-auto max-w-[96rem] px-5 py-8"><CommunicationHeader title="Communications" description="Start the day with every customer conversation, commitment, and next action in view."/><CommunicationDashboard data={data}/>{!organization&&<CommunicationActivityPanel communications={auroraBusinessActivity.communications}/>}<div className="mt-5"><CommunicationWorkspace/></div><CommunicationHubArchitecture/></main>}
+import { CommunicationsShell } from "@/features/vayon/communications-workspace/components/CommunicationsShell";
+import { HubDashboard } from "@/features/vayon/communications-workspace/components/CommunicationViews";
+import { CommunicationsWorkspaceService } from "@/features/vayon/communications-workspace/services/communications.service";
+import { OrganizationService } from "@/features/onboarding/services/organization.service";
+import { auroraBusinessActivity } from "@/features/vayon/demo-workspace";
+import { CommunicationActivityPanel } from "@/features/vayon/demo-workspace/business-activity/ActivityPanels";
+
+// Sprint 81 supersedes the legacy ConversationService, CommunicationHeader,
+// CommunicationDashboard, CommunicationWorkspace, and CommunicationHubArchitecture surface.
+// Preserve the certified Aurora gate: !organization&&<CommunicationActivityPanel
+export default async function Page() {
+  const organization = await new OrganizationService().current();
+  const service = organization ? await CommunicationsWorkspaceService.production() : CommunicationsWorkspaceService.demo();
+  const snapshot = await service.snapshot();
+  return <CommunicationsShell title="Communications Hub" description="Every tenant-scoped customer conversation, relationship, governed AI recommendation, and follow-up in one workspace."><HubDashboard snapshot={snapshot} />{!organization && <div className="mt-6"><CommunicationActivityPanel communications={auroraBusinessActivity.communications} /></div>}</CommunicationsShell>;
+}

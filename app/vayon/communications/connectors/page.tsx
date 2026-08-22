@@ -1,0 +1,6 @@
+import { CommunicationsShell } from "@/features/vayon/communications-workspace/components/CommunicationsShell";
+import { CommunicationsWorkspaceService } from "@/features/vayon/communications-workspace/services/communications.service";
+export default async function Page() {
+  const { providers } = await (await CommunicationsWorkspaceService.production()).snapshot();
+  return <CommunicationsShell title="Connector Readiness" description="Provider-neutral channel adapters. Live authentication and delivery remain disabled until Sprint 82."><div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{providers.map((item) => <article key={item.provider} className="rounded-2xl border border-vds-border bg-vds-surface p-5"><p className="text-xs uppercase tracking-wider text-vds-primary">{item.channel}</p><h2 className="mt-2 text-lg font-semibold capitalize">{item.provider.replaceAll("-", " ")}</h2><p className="mt-3 text-sm text-vds-muted">Inbound model: {item.inbound ? "ready" : "unavailable"} · Draft model: {item.drafts ? "ready" : "unavailable"}</p><p className="mt-2 text-sm text-vds-muted">Live delivery: disabled · Provider health: not connected</p></article>)}</div></CommunicationsShell>;
+}

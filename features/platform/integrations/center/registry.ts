@@ -124,6 +124,17 @@ export const integrationCenterRegistry = Object.freeze([
     settingsHref: "/vayon/settings/billing",
     available: true,
   }),
+  provider("razorpay", "Razorpay", "payments", {
+    featureFlag: "stripe",
+    settingsHref: "/vayon/settings/billing",
+    available: true,
+  }),
+  provider("microsoft_365", "Microsoft 365", "productivity", {
+    featureFlag: "microsoft_identity",
+    requiredScopes: ["Mail.ReadWrite", "Calendars.ReadWrite", "Contacts.Read", "People.Read"],
+    settingsHref: "/vayon/settings/integrations/microsoft",
+    available: true,
+  }),
   provider("dropbox", "Dropbox", "storage"),
   provider("box", "Box", "storage"),
   provider("openai", "OpenAI", "ai", {

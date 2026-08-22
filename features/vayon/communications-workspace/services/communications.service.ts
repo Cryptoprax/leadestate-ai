@@ -8,6 +8,7 @@ import type {
 } from "../domain/models";
 import { AuroraCommunicationsRepository } from "../repositories/aurora.repository";
 import { SupabaseCommunicationsRepository } from "../repositories/supabase.repository";
+import { communicationConnectors } from "../providers/connector.provider";
 const categories = [
   "Welcome",
   "Follow-up",
@@ -46,57 +47,82 @@ export class CommunicationsWorkspaceService {
     );
   }
   async snapshot() {
-    const [conversations, timeline, campaigns, notifications] =
+    const [conversations, timeline, campaigns, notifications, attachments, notes] =
       await Promise.all([
         this.repository.conversations(),
         this.repository.timeline(),
         this.repository.campaigns(),
         this.repository.notifications(),
+        this.repository.attachments(),
+        this.repository.notes(),
       ]);
     const pendingDrafts = timeline.filter((x) => x.state === "draft").length,
-      pendingApprovals = timeline.filter(
-        (x) => x.state === "pending-approval",
-      ).length,
       unread = conversations.reduce(
         (count, item) => count + item.unreadCount,
         0,
       );
+    const open = conversations.filter((item) => !item.closed && !item.archived).length,
+      resolvedToday = conversations.filter((item) => item.closed && item.lastActivityAt.slice(0, 10) === new Date().toISOString().slice(0, 10)).length,
+      channelCounts = new Map<string, number>();
+    conversations.forEach((item) => channelCounts.set(item.channel, (channelCounts.get(item.channel) ?? 0) + 1));
     return {
       conversations,
       timeline,
       templates,
       campaigns,
       notifications,
+      attachments,
+      notes,
+      providers: communicationConnectors.map((connector) => ({
+        channel: connector.provider === "whatsapp-cloud" ? "whatsapp" as const : connector.provider === "gmail" || connector.provider === "outlook" || connector.provider === "microsoft-365" ? "email" as const : connector.provider === "voice" ? "phone" as const : "sms" as const,
+        provider: connector.provider,
+        mode: "architecture-ready" as const,
+        ...connector.capabilities(),
+        health: "not-connected" as const,
+      })),
+      reports: [
+        { label: "Messages by channel", value: [...channelCounts].map(([key, value]) => `${key}: ${value}`).join(" · ") || "No messages" },
+        { label: "Average response time", value: "Unavailable until provider timestamps are connected" },
+        { label: "Agent productivity", value: `${new Set(conversations.map((item) => item.assignedHuman).filter((item) => item !== "Unassigned")).size} assigned agents` },
+        { label: "Conversation volume", value: String(conversations.length) },
+        { label: "Resolution rate", value: conversations.length ? `${Math.round((conversations.filter((item) => item.closed).length / conversations.length) * 100)}%` : "Unavailable" },
+        { label: "AI draft usage", value: `${conversations.filter((item) => item.aiDraftPending).length} pending` },
+      ],
       observability: [
-        { label: "Inbox Health", value: "Deterministic", available: true },
+        { label: "Open Conversations", value: String(open), available: true },
         {
           label: "Pending Drafts",
           value: String(pendingDrafts),
           available: true,
         },
         {
-          label: "Pending Approvals",
-          value: String(pendingApprovals),
+          label: "Resolved Today",
+          value: String(resolvedToday),
           available: true,
         },
         {
-          label: "Unread Conversations",
+          label: "Unread",
           value: String(unread),
           available: true,
         },
         {
-          label: "Average Response Time",
+          label: "Response Time",
           value: "Awaiting data",
           available: false,
         },
         {
-          label: "Queue Length",
-          value: String(pendingDrafts + pendingApprovals),
+          label: "Pending AI Drafts",
+          value: String(conversations.filter((item) => item.aiDraftPending).length),
           available: true,
         },
         {
-          label: "Provider Health",
-          value: "No live providers",
+          label: "Conversations by Channel",
+          value: String(channelCounts.size),
+          available: true,
+        },
+        {
+          label: "Agent Workload",
+          value: `${open} open`,
           available: true,
         },
       ],
@@ -113,7 +139,12 @@ export class CommunicationsWorkspaceService {
           )) &&
         (!query.channel || item.channel === query.channel) &&
         (!query.status || item.status === query.status) &&
-        (!query.unreadOnly || item.unreadCount > 0),
+        (!query.unreadOnly || item.unreadCount > 0) &&
+        (!query.assignedOnly || item.assignedHuman !== "Unassigned") &&
+        (!query.aiDraftPendingOnly || item.aiDraftPending) &&
+        (!query.highPriorityOnly || item.priority === "high" || item.priority === "urgent") &&
+        (!query.closedOnly || item.closed) &&
+        (!query.archivedOnly || item.archived),
     );
     items = [...items].sort((a, b) =>
       query.sort === "oldest"
@@ -141,6 +172,8 @@ export class CommunicationsWorkspaceService {
     return {
       conversation,
       timeline,
+      attachments: snapshot.attachments.filter((item) => item.conversationId === id),
+      notes: snapshot.notes.filter((item) => item.conversationId === id),
       crm: {
         customerSummary: conversation.crmRecord
           ? `Linked to ${conversation.crmRecord}. Open CRM for authoritative context.`
@@ -179,6 +212,9 @@ export class CommunicationsWorkspaceService {
         nextAction:
           "Create a draft, submit it for approval, then request deterministic provider preparation.",
         generatedBy: "deterministic-rules",
+        recommendationOnly: true,
+        actionItems: conversation.unreadCount ? ["Review unread messages", "Confirm the next customer commitment"] : [],
+        urgency: conversation.priority === "urgent" || conversation.unreadCount > 2 ? "high" : conversation.unreadCount ? "normal" : "low",
       },
     };
   }

@@ -9,12 +9,16 @@ import type {
 } from "../domain/contracts";
 import { quickCreateActions } from "../config/quick-create";
 const allScopes: readonly UniversalSearchScope[] = [
+  "projects",
+  "inventory",
   "properties",
   "leads",
   "deals",
   "contacts",
   "companies",
   "campaigns",
+  "creative-assets",
+  "reports",
   "meetings",
   "tasks",
   "documents",
@@ -65,6 +69,13 @@ function matches(
   );
 }
 function scopeFor(href: string): UniversalSearchScope {
+  if (href.includes("properties/projects")) return "projects";
+  if (href.includes("properties/inventory") || href.includes("availability"))
+    return "inventory";
+  if (href.includes("creative-studio/assets")) return "creative-assets";
+  if (href.includes("reports")) return "reports";
+  if (href.includes("creative-studio") || href.includes("campaigns"))
+    return "campaigns";
   if (href.includes("properties")) return "properties";
   if (href.includes("leads")) return "leads";
   if (href.includes("deals")) return "deals";

@@ -15,7 +15,7 @@ export function HubDashboard({
 }) {
   return (
     <div className="space-y-6">
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-7">
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {snapshot.observability.map((x) => (
           <article key={x.label} className={card}>
             <p className="text-xs text-vds-muted">{x.label}</p>
@@ -57,6 +57,18 @@ export function HubDashboard({
               </li>
             ))}
           </ol>
+        </section>
+      </div>
+      <div className="grid gap-5 lg:grid-cols-2">
+        <section className={card}>
+          <h2 className="font-semibold">Channel readiness</h2>
+          <div className="mt-3 space-y-3">
+            {snapshot.providers.map((item) => <div key={item.provider} className="flex items-center justify-between text-sm"><span className="capitalize">{item.provider.replaceAll("-", " ")}</span><span className="text-vds-muted">Architecture ready · not connected</span></div>)}
+          </div>
+        </section>
+        <section className={card}>
+          <h2 className="font-semibold">Communication reporting</h2>
+          <div className="mt-3 space-y-3">{snapshot.reports.slice(0, 4).map((item) => <div key={item.label}><p className="text-xs text-vds-muted">{item.label}</p><p className="mt-1 text-sm">{item.value}</p></div>)}</div>
         </section>
       </div>
     </div>
@@ -137,6 +149,8 @@ export function ConversationView({ detail }: { detail: ConversationDetail }) {
         <Panel title="CRM context" data={detail.crm} />
         <Panel title="AI Workforce" data={detail.ai} />
         <Panel title="Deterministic assistance" data={detail.intelligence} />
+        <Panel title="Internal notes" data={{ count: detail.notes.length, pinned: detail.notes.filter((item) => item.pinned).length, latest: detail.notes[0]?.body ?? "No private notes" }} />
+        <Panel title="Attachments" data={{ count: detail.attachments.length, files: detail.attachments.map((item) => item.name).join(", ") || "No attachments" }} />
       </aside>
     </div>
   );

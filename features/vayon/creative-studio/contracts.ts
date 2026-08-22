@@ -1,0 +1,5 @@
+import type {CreativeAsset,CreativeBrandKit,CreativeCampaign,CampaignBrief} from "./domain";
+export interface CreativeStudioRepository { campaigns():Promise<readonly CreativeCampaign[]>;assets():Promise<readonly CreativeAsset[]>;brandKits():Promise<readonly CreativeBrandKit[]>;saveDraft(input:Readonly<{brief:CampaignBrief;name:string;projectName:string;developer:string;payload:Record<string,unknown>}>):Promise<string>; }
+export interface CreativeGenerationProvider {readonly version:string;generate(input:Readonly<{brief:CampaignBrief;projectName:string;developer:string;location:string;availableInventory:number;priceRange:string;brandKit:CreativeBrandKit}>):Pick<CreativeCampaign,"contributions"|"variations"|"scores">;}
+export interface CreativePublishingProvider {readonly livePublishing:false;prepare(assetId:string,platform:string):Readonly<{assetId:string;platform:string;state:"draft";approvalRequired:true}>;}
+export interface GrowthPublishingConnector {readonly provider:"Meta"|"LinkedIn"|"Google Ads"|"YouTube"|"WhatsApp"|"Email";readonly enabled:false;prepare(campaignId:string):Readonly<{campaignId:string;state:"future";approvalRequired:true}>;}

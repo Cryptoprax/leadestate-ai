@@ -67,10 +67,17 @@ export default async function Page({
         </select>
         <Button type="submit">Apply</Button>
       </form>
-      <div className="mb-3 flex gap-3 text-xs text-vds-muted">
-        <a href="?unread=true">Unread</a>
-        <a href="?status=archived">Archived</a>
-        <span>Saved views use shareable query parameters.</span>
+      <div className="mb-3 flex gap-3 overflow-x-auto text-xs text-vds-muted">
+        <a className="shrink-0" href="?">All Conversations</a>
+        <a className="shrink-0" href="?channel=whatsapp">WhatsApp</a>
+        <a className="shrink-0" href="?channel=email">Email</a>
+        <a className="shrink-0" href="?channel=internal-note">Internal Notes</a>
+        <a className="shrink-0" href="?channel=phone">Calls</a>
+        <a className="shrink-0" href="?channel=sms">SMS</a>
+        <a className="shrink-0" href="?channel=system-notification">System Notifications</a>
+      </div>
+      <div className="mb-3 flex gap-3 overflow-x-auto text-xs text-vds-muted">
+        <a href="?unread=true">Unread</a><a href="?assigned=true">Assigned</a><a href="?aiDraftPending=true">AI Draft Pending</a><a href="?highPriority=true">High Priority</a><a href="?closed=true">Closed</a><a href="?archived=true">Archived</a>
       </div>
       <InboxList items={data.items} />
       <footer className="mt-4 flex justify-between text-sm text-vds-muted">

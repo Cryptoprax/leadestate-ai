@@ -23,6 +23,11 @@ export function toInboxQuery(
       : undefined,
     status: value("status"),
     unreadOnly: value("unread") === "true",
+    assignedOnly: value("assigned") === "true",
+    aiDraftPendingOnly: value("aiDraftPending") === "true",
+    highPriorityOnly: value("highPriority") === "true",
+    closedOnly: value("closed") === "true",
+    archivedOnly: value("archived") === "true",
     sort:
       sort === "oldest" || sort === "unread" ? sort : defaultInboxQuery.sort,
     page: Number.isFinite(page) && page > 0 ? page : 1,
