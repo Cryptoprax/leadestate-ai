@@ -1,0 +1,3 @@
+import type{AgentAvailability,SiteVisit,VisitAudit,VisitFeedback,VisitSnapshot}from"./domain";
+export interface SiteVisitLifecycleRepository{readonly provider:"supabase"|"aurora";visits():Promise<readonly SiteVisit[]>;feedback():Promise<readonly VisitFeedback[]>;audit():Promise<readonly VisitAudit[]>;agents():Promise<readonly AgentAvailability[]>;mutate(input:{visitId:string;expectedVersion:number;action:string;payload?:Record<string,unknown>}):Promise<void>}
+export async function visitSnapshot(repository:SiteVisitLifecycleRepository):Promise<VisitSnapshot>{const[visits,feedback,audit,agents]=await Promise.all([repository.visits(),repository.feedback(),repository.audit(),repository.agents()]);return{visits,feedback,audit,agents,provider:repository.provider}}
