@@ -51,3 +51,23 @@ export interface AnalyticsRawSnapshot {
   readonly providers: readonly Record<string, unknown>[];
   readonly errors: Readonly<Record<string, string>>;
 }
+export interface ExecutiveBIModel {
+  readonly source: "supabase" | "aurora";
+  readonly generatedAt: string;
+  readonly metrics: readonly EvidenceMetric[];
+  readonly forecast: {
+    readonly weighted: number | null;
+    readonly bestCase: number | null;
+    readonly expected: number | null;
+    readonly worstCase: number | null;
+    readonly confidence: number;
+    readonly quarter: number | null;
+    readonly annual: number | null;
+  };
+  readonly leadSources: readonly { label: string; value: number }[];
+  readonly stages: readonly { label: string; value: number; amount: number }[];
+  readonly performers: readonly { label: string; value: number }[];
+  readonly lostReasons: readonly { label: string; value: number }[];
+  readonly benchmarks: readonly { label: string; pipeline: number; wins: number }[];
+  readonly digest: readonly { period: "Yesterday" | "Last Week" | "Last Month" | "Quarter"; achievements: number; risks: number; pendingApprovals: number }[];
+}
