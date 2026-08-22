@@ -9,7 +9,7 @@ export default function ErrorState({
   return (
     <main role="alert" className="mx-auto max-w-2xl px-4 py-16 text-center">
       <p className="text-xs font-semibold uppercase text-vds-warning">
-        AI Growth Studio unavailable
+        Marketing Studio unavailable
       </p>
       <h1 className="mt-3 text-2xl font-semibold">Your drafts remain safe</h1>
       <p className="mt-3 text-sm text-vds-muted">

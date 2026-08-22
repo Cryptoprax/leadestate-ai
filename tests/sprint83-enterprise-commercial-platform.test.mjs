@@ -78,7 +78,7 @@ test("subscription licensing covers every commercial module", () => {
     read("features/vayon/billing/config/commercial-plans.ts") +
     read("features/vayon/billing/services/feature-licensing.service.ts");
   for (const feature of [
-    "creative_studio_beta",
+    "marketing_studio",
     "growth_studio",
     "ai_workforce",
     "property_matching",

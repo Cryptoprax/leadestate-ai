@@ -5,8 +5,8 @@ import { EnterpriseKnowledgeService } from "@/features/platform/knowledge/servic
 const guides = [
   "Admin Guide",
   "User Guide",
-  "Creative Studio Guide",
-  "Growth Studio Guide",
+  "Marketing Studio Guide",
+  "Campaign Growth Guide",
   "Billing Guide",
   "Organization Guide",
   "Developer Notes",

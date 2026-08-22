@@ -48,7 +48,7 @@ export const commercialPlanCatalog = Object.freeze([
       "reports",
       "ai_workforce",
       "property_matching",
-      "creative_studio_beta",
+      "marketing_studio",
       "growth_studio",
     ],
     limits: {
@@ -71,7 +71,7 @@ export const commercialPlanCatalog = Object.freeze([
       "reports",
       "ai_workforce",
       "property_matching",
-      "creative_studio_beta",
+      "marketing_studio",
       "growth_studio",
     ],
     limits: {

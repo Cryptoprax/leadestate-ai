@@ -28,7 +28,7 @@ export class GrowthStudioService {
     if (!growthLanguages.includes(language as never))
       throw new Error("Unsupported campaign language.");
     const studio = await CreativeStudioService.production();
-    if (!studio) throw new Error("Creative Studio Beta access is required.");
+    if (!studio) throw new Error("Marketing Studio subscription access is required.");
     const { inventory } = await studio.projectContext();
     const project = projectId
       ? inventory.projects.find((item) => item.id === projectId)
@@ -81,7 +81,7 @@ export class GrowthStudioService {
       `${project.name} · ${campaignType} growth campaign`,
     );
     const access = await creativeStudioAccess();
-    if (!access) throw new Error("Creative Studio Beta access is required.");
+    if (!access) throw new Error("Marketing Studio subscription access is required.");
     const { error } = await access.client.rpc("create_growth_campaign_pack", {
       p_campaign_id: campaignId,
       p_language: language,
@@ -96,7 +96,7 @@ export class GrowthStudioService {
 
   async dashboard() {
     const access = await creativeStudioAccess();
-    if (!access) throw new Error("Creative Studio Beta access is required.");
+    if (!access) throw new Error("Marketing Studio subscription access is required.");
     const [packsResult, scheduleResult] = await Promise.all([
       access.client
         .from("creative_campaign_packs")

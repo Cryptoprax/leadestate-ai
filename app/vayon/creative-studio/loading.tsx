@@ -2,7 +2,7 @@ export default function Loading() {
   return (
     <main
       aria-busy="true"
-      aria-label="Loading AI Growth Studio"
+      aria-label="Loading Marketing Studio"
       className="mx-auto max-w-[96rem] animate-pulse space-y-5 px-4 py-7 sm:px-6"
     >
       <div className="h-8 w-64 rounded-lg bg-vds-elevated" />

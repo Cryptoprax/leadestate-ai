@@ -125,7 +125,7 @@ test("editor supports movement resize replacement layouts undo redo and draft sa
   ])
     assert.match(source, new RegExp(value));
 });
-test("generation and editor routes stay behind existing beta access", () => {
+test("generation and editor routes stay behind production Marketing access", () => {
   for (const route of [
     "app/vayon/creative-studio/assistant/page.tsx",
     "app/vayon/creative-studio/editor/[assetId]/page.tsx",
@@ -139,10 +139,10 @@ test("generation and editor routes stay behind existing beta access", () => {
     read("features/vayon/creative-studio/editor.service.ts"),
     /creativeStudioAccess/,
   );
-  assert.match(
-    read("lib/infrastructure/feature-flags.ts"),
-    /creative_studio_beta/,
-  );
+  const access = read("features/vayon/creative-studio/access.service.ts");
+  assert.match(access, /FeatureLicensingService/);
+  assert.match(access, /marketing_studio/);
+  assert.doesNotMatch(access, /creative_studio_beta|EnvironmentFeatureFlagProvider/);
 });
 test("migration implements RLS queue retries caching versioned editor and draft timeline", () => {
   const sql = read(

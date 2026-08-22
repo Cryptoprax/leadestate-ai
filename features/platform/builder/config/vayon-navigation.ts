@@ -17,6 +17,7 @@ export const vayonNavigation: readonly NavigationItem[] = [
   { id: "vayon-workforce", label: "Workforce", href: "/vayon/workforce", icon: "W", surface: "sidebar", order: 13, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
   { id: "vayon-runtime", label: "Runtime", href: "/vayon/runtime", icon: "R", surface: "sidebar", order: 14, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
   { id: "vayon-growth", label: "Growth", href: "/vayon/growth", icon: "G", surface: "sidebar", order: 15, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
+  { id: "vayon-marketing", label: "Marketing", href: "/vayon/creative-studio", icon: "M", surface: "sidebar", order: 15.5, visible: true, moduleId: "crm", featureId: "marketing_studio", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
   { id: "vayon-timeline", label: "Business Timeline", href: "/vayon/timeline", icon: "T", surface: "sidebar", order: 16, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
   { id: "vayon-context", label: "Unified Context", href: "/vayon/context", icon: "X", surface: "sidebar", order: 17, visible: true, moduleId: "crm", permission: { anyOf: ["crm.read", "crm.records.manage"] } },
   { id: "vayon-configuration", label: "Configuration", href: "/vayon/settings/configuration", icon: "C", surface: "sidebar", order: 18, visible: true, permission: { anyOf: ["organizations.manage", "users.manage"] } },

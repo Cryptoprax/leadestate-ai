@@ -88,7 +88,7 @@ test("landing sales video and export systems are explicit governed capabilities"
     "Captions",
     "Thumbnail",
     "Music Suggestions",
-    "MP4 rendering placeholder",
+    "MP4 rendering Preview",
     "PNG",
     "JPEG",
     "PDF",
@@ -166,7 +166,7 @@ test("future connectors are provider-neutral and disabled", () => {
   assert.match(providers, /enabled=false/);
   assert.match(providers, /state:"future"/);
 });
-test("growth routes reuse beta access and existing studio service", () => {
+test("growth routes reuse production Marketing access and existing studio service", () => {
   for (const route of ["growth", "packs", "calendar"])
     assert.ok(existsSync(`app/vayon/creative-studio/${route}/page.tsx`));
   const service = read("features/vayon/creative-studio/growth.service.ts");

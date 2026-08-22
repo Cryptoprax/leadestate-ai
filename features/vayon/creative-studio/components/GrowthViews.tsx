@@ -162,7 +162,7 @@ export function GeneratorCatalog() {
       "Sales Presentation",
       "Pricing Presentation",
     ],
-    "AI video projects": [
+    "AI video projects · Preview": [
       "Scene Timeline",
       "Shot List",
       "Motion Suggestions",
@@ -171,7 +171,7 @@ export function GeneratorCatalog() {
       "Captions",
       "Thumbnail",
       "Music Suggestions",
-      "MP4 rendering placeholder",
+      "MP4 rendering Preview",
     ],
     Exports: [
       "PNG",

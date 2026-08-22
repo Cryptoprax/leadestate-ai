@@ -28,8 +28,7 @@ const modules = [
   "WhatsApp AI",
   "Marketing AI",
   "Executive AI",
-  "Creative Studio",
-  "Growth Studio",
+  "Marketing Studio",
   "Subscriptions",
   "Billing",
   "Analytics",
@@ -63,8 +62,7 @@ const journey = [
   "Property Matching",
   "Site Visits",
   "Communications",
-  "Creative Studio",
-  "Growth Studio",
+  "Marketing Studio",
   "Subscriptions",
   "Billing",
   "Analytics",
@@ -309,20 +307,21 @@ export class LaunchReadinessService {
         false,
       );
     for (const item of [
-      "Creative Studio",
-      "Growth Studio",
+      "Marketing Studio",
       "AI Image Generation",
       "Campaign Packs",
-      "Video Projects",
+      "AI Video Generation",
       "Brand Guardian",
       "AI Marketing Brain",
     ])
       add(
-        `beta.${slug(item)}`,
-        "Beta readiness",
+        `marketing.${slug(item)}`,
+        "Marketing provider readiness",
         item,
-        "warning",
-        "Clearly labeled Beta, tenant gated, approval governed, and designed to fail closed when its provider is unavailable.",
+        item === "AI Video Generation" ? "warning" : "pass",
+        item === "AI Video Generation"
+          ? "AI Video Generation remains Preview; storyboards stay editable and approval governed."
+          : "Production Marketing feature is subscription licensed, tenant scoped, approval governed, and remains editable when its AI provider is unavailable.",
         1,
         false,
       );

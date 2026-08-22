@@ -15,8 +15,7 @@ test("launch audit certifies the complete enterprise workflow without claiming b
     "Property Matching",
     "Site Visits",
     "Communications",
-    "Creative Studio",
-    "Growth Studio",
+    "Marketing Studio",
     "Subscriptions",
     "Billing",
     "Analytics",
@@ -54,20 +53,20 @@ test("administrator checklist covers launch infrastructure providers legal and s
     assert.match(source, new RegExp(item));
   assert.match(source, /administratorChecklist/);
 });
-test("beta certification remains labeled governed and fail closed", () => {
+test("Marketing certification is production licensed governed and provider resilient", () => {
   const source = read(
     "features/platform/launch-readiness/services/launch-readiness.service.ts",
   );
   for (const item of [
-    "Creative Studio",
-    "Growth Studio",
+    "Marketing Studio",
     "AI Image Generation",
     "Campaign Packs",
-    "Video Projects",
+    "AI Video Generation",
     "Brand Guardian",
     "AI Marketing Brain",
-    "Clearly labeled Beta",
-    "fail closed",
+    "subscription licensed",
+    "remains editable",
+    "AI Video Generation remains Preview",
   ])
     assert.match(source, new RegExp(item));
 });
@@ -91,8 +90,8 @@ test("Help Center supports search guides FAQ videos and escalation", () => {
     'role="search"',
     "Admin Guide",
     "User Guide",
-    "Creative Studio Guide",
-    "Growth Studio Guide",
+    "Marketing Studio Guide",
+    "Campaign Growth Guide",
     "Billing Guide",
     "Organization Guide",
     "Developer Notes",
