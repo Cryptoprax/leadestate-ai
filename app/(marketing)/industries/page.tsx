@@ -1,1 +1,5 @@
-import type{Metadata}from"next";import{CatalogGrid}from"@/features/marketing/components/AssetPages";import{MarketingAssetsService}from"@/features/marketing/services/marketing-assets.service";export const metadata:Metadata={title:"Industry Solutions",description:"Explore VAYON solutions for nine customer-centric industries.",alternates:{canonical:"/industries"}};export default function Page(){const items=new MarketingAssetsService().catalog().industries.map(x=>({href:`/industries/${x.slug}`,title:x.name,description:x.description}));return <CatalogGrid eyebrow="Industries" title="One governed operating platform. Adapted to your industry." description="Explore workflows, AI recommendations, benefits, and transparent ROI assumptions for your operating model." items={items}/>}
+import { redirect } from "next/navigation";
+
+export default function Page() {
+  redirect("/solutions");
+}

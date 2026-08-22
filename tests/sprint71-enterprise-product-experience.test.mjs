@@ -11,7 +11,7 @@ test("premium hero cycles through every enterprise product view", () => {
 
 test("AI Workforce visualization contains Vayon Core and all eight employees", () => {
   const source = read("features/marketing/components/EnterpriseExperience.tsx");
-  for (const item of ["VAYON CORE", "Sales AI", "Marketing AI", "CRM AI", "Finance AI", "Voice AI", "Knowledge AI", "Operations AI", "Executive AI"]) assert.match(source, new RegExp(item));
+  for (const item of ["VAYON CORE", "AI Sales Assistant", "AI CRM Manager", "AI Marketing Strategist", "AI WhatsApp Assistant", "AI Voice Agent", "AI Property Advisor", "AI Operations Manager", "AI Executive Assistant"]) assert.match(source, new RegExp(item));
   assert.match(source, /whileHover/);
 });
 
@@ -35,6 +35,6 @@ test("FAQ, metadata, schema and footer contracts remain accessible", () => {
 
 test("experience preserves evidence boundaries and introduces no backend artifacts", () => {
   const homepage = read("features/marketing/components/Homepage.tsx"), docs = read("docs/SPRINT_71_ENTERPRISE_PRODUCT_EXPERIENCE.md");
-  assert.match(homepage, /Illustrative case study/); assert.match(homepage, /Availability target/); assert.match(homepage, /customer logo placeholders/i); assert.match(docs, /database schema.*untouched/i);
+  assert.match(homepage, /Illustrative case study/); assert.match(homepage, /Availability target/); assert.match(homepage, /real estate customer story placeholders/i); assert.match(docs, /database schema.*untouched/i);
   assert.equal(existsSync("supabase/migrations/20260903000000_sprint71.sql"), false);
 });

@@ -6,7 +6,6 @@ const routes = [
   "/product",
   "/features",
   "/solutions",
-  "/industries",
   "/ai-workforce",
   "/crm",
   "/properties",
@@ -37,8 +36,15 @@ const routes = [
   "/investors",
 ] as const;
 export default function sitemap(): MetadataRoute.Sitemap {
-  const documentation = new DocumentationService().all().map((article) => `/docs/${article.slug}`);
-  const assets = new MarketingAssetsService().catalog(), marketing = [...assets.industries.map(x=>`/industries/${x.slug}`),...assets.comparisons.map(x=>`/compare/${x.slug}`),...assets.assets.map(x=>`/sales-assets/${x.slug}`),...assets.stories.map(x=>`/customers/${x.slug}`)];
+  const documentation = new DocumentationService()
+    .all()
+    .map((article) => `/docs/${article.slug}`);
+  const assets = new MarketingAssetsService().catalog(),
+    marketing = [
+      ...assets.comparisons.map((x) => `/compare/${x.slug}`),
+      ...assets.assets.map((x) => `/sales-assets/${x.slug}`),
+      ...assets.stories.map((x) => `/customers/${x.slug}`),
+    ];
   return [...routes, ...documentation, ...marketing].map((path) => ({
     url: `https://vayon.app${path}`,
     changeFrequency: path === "/blog" ? "weekly" : "monthly",

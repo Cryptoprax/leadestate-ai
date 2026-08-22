@@ -12,13 +12,13 @@ test("VDS owns the permanent enterprise palette and expanded tokens", () => {
 
 test("launch homepage communicates the operating system positioning and complete experience", () => {
   const source = read("features/marketing/components/Homepage.tsx");
-  for (const item of ["The AI operating system", "AI Workforce explorer", "Sales AI", "Marketing AI", "CRM AI", "Executive AI", "Knowledge AI", "Voice AI", "Finance AI", "Operations AI", "Traditional software", "One operating system", "Connected platform", "Enterprise security", "Lead arrives", "AI qualification", "Approval", "Start free trial", "Book demo", "Launch workspace"]) assert.match(source, new RegExp(item, "i"));
+  for (const item of ["The AI operating system", "AI Workforce explorer", "AI Lead Qualification", "Marketing Automation", "Real Estate CRM", "Real Estate AI Employees", "AI Voice Agents", "Property Intelligence", "Sales Pipeline", "Traditional software", "One operating system", "Connected platform", "Secure Workspaces", "Lead arrives", "AI qualification", "Approval", "Start free trial", "Book Real Estate Demo", "Launch workspace"]) assert.match(source, new RegExp(item, "i"));
   assert.match(source, /SoftwareApplication/);
 });
 
 test("global navigation and footer expose enterprise information architecture", () => {
   const shell = read("features/marketing/components/MarketingShell.tsx");
-  for (const item of ["Platform", "Solutions", "AI Workforce", "Pricing", "Enterprise", "Resources", "Developers", "Documentation", "Login", "Get started", "Company", "Legal", "Trust Center"]) assert.match(shell, new RegExp(item));
+  for (const item of ["Platform", "Solutions", "AI Workforce", "Pricing", "Real Estate", "Resources", "Developers", "Documentation", "Login", "Get started", "Company", "Legal", "Trust Center"]) assert.match(shell, new RegExp(item));
   assert.match(shell, /sticky top-0/); assert.match(shell, /backdrop-blur/); assert.match(shell, /aria-label="Mobile"/);
 });
 

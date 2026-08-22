@@ -6,9 +6,9 @@ const read = (path) => readFile(path, "utf8");
 
 test("hero prioritizes demo conversion with visible trust", async () => {
   const source = await read("features/marketing/components/Homepage.tsx");
-  assert.match(source, /Book Demo/);
-  assert.match(source, /Watch Demo/);
-  assert.match(source, /Start Trial/);
+  assert.match(source, /Book Real Estate Demo/);
+  assert.match(source, /Watch Real Estate Demo/);
+  assert.match(source, /Start Free Trial/);
   for (const value of ["Secure by design", "Human approval controls", "Cloud-native infrastructure"]) assert.match(source, new RegExp(value));
 });
 
@@ -39,7 +39,7 @@ test("customer proof is launch-ready without fabricated endorsements", async () 
 
 test("footer has complete information architecture and functional newsletter capture", async () => {
   const source = await read("features/marketing/components/MarketingShell.tsx");
-  for (const value of ["Product", "Resources", "Company", "Legal", "Social", "Enterprise launch notes"]) assert.match(source, new RegExp(value));
+  for (const value of ["Product", "Resources", "Company", "Legal", "Social", "Real estate product notes"]) assert.match(source, new RegExp(value));
   assert.match(source, /captureLeadAction/);
   assert.match(source, /name="kind" value="newsletter"/);
 });
