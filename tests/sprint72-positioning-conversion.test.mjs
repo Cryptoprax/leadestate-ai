@@ -6,7 +6,7 @@ const read = path => readFileSync(path, "utf8");
 test("hero defines the AI operating system category for real estate", () => {
   const source = read("features/marketing/components/Homepage.tsx");
   assert.match(source, /The AI Operating System for Modern Real Estate Companies/);
-  for (const item of ["AI Employees", "Real Estate CRM", "WhatsApp Automation", "AI Voice Agents", "Marketing Automation", "Property Intelligence", "Deal & Revenue Tracking", "Secure Workspaces", "Start Free Trial", "Book Real Estate Demo", "Watch Real Estate Demo"]) assert.match(source, new RegExp(item));
+  for (const item of ["AI Employees", "Real Estate CRM", "WhatsApp Automation", "AI Voice Agents", "Marketing Automation", "Property Intelligence", "Deal & Revenue Tracking", "Secure Workspaces", "Start Free Trial", "Book Demo", "Watch Demo"]) assert.match(source, new RegExp(item));
 });
 
 test("product preview shows actual real estate operating modules", () => {
@@ -20,14 +20,15 @@ test("workforce roles explain real estate outcomes and daily work", () => {
   for (const capability of ["Lead scoring", "Campaigns", "Data health", "Qualification", "Call prep", "Briefings", "Matching", "Bottlenecks"]) assert.match(source, new RegExp(capability));
 });
 
-test("story covers feature grid comparison audiences workflow wins and ecosystem", () => {
+test("story covers one feature grid audience workflow ROI and customer proof", () => {
   const source = read("features/marketing/components/Homepage.tsx");
-  for (const item of ["Everything Your Real Estate Company Needs", "Stop Paying For 15 Different Tools", "Traditional Stack", "Built Specifically For Real Estate", "Residential Agencies", "Commercial Brokerages", "Property Management", "How Vayon Works", "AI Recommends Properties", "AI Drafts WhatsApp", "Deal Closed", "Reduce response time", "Never lose a lead", "Scale without hiring", "Product ecosystem", "Property Intelligence"]) assert.match(source, new RegExp(item));
+  for (const item of ["Core features", "Built for Every Real Estate Business", "Residential Agencies", "Commercial Brokerages", "Property Management", "Product demo", "Lead arrives", "Revenue generated", "Business case", "Customer proof", "Property Intelligence"]) assert.match(source, new RegExp(item));
+  for (const removed of ["Stop Paying For 15 Different Tools", "Built Specifically For Real Estate", "Product ecosystem"]) assert.doesNotMatch(source, new RegExp(removed));
 });
 
 test("enterprise trust pricing FAQ navigation and SEO are preserved", () => {
   const homepage = read("features/marketing/components/Homepage.tsx"), pricing = read("features/marketing/components/PricingTable.tsx"), shell = read("features/marketing/components/MarketingShell.tsx"), layout = read("app/layout.tsx");
-  for (const item of ["Workspace Isolation", "Role Based Access", "Approval Workflows", "Audit Logs", "Encrypted Credentials", "Enterprise APIs", "Multi Tenant Architecture"]) assert.match(homepage, new RegExp(item));
+  for (const item of ["Secure by design", "Human approval controls", "Cloud-native infrastructure", "Encrypted Credentials"]) assert.match(homepage, new RegExp(item));
   for (const plan of ["Starter", "Growth", "Enterprise"]) assert.match(pricing, new RegExp(plan));
   for (const nav of ["Product", "AI Employees", "Solutions", "Residential Sales", "Commercial Real Estate", "Property Developers", "Customers", "Pricing", "Resources", "Developers"]) assert.match(shell, new RegExp(nav));
   assert.match(homepage, /FAQPage/); assert.match(homepage, /SoftwareApplication/); assert.match(layout, /real estate/i);

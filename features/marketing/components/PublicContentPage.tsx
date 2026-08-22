@@ -36,7 +36,7 @@ export function PublicContentPage({ page }: { page: PublicPage }) {
             className="rounded-xl border border-vds-border px-5 py-3 font-semibold"
             href="/contact"
           >
-          Book Real Estate Demo
+          Book Demo
           </Link>
         </div>
       </section>

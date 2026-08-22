@@ -92,7 +92,7 @@ export function MarketingShell({ children }: { readonly children: ReactNode }) {
               Login
             </Link>
             <ButtonLink href="/signup" size="sm">
-              Get started <ArrowRight className="size-4" aria-hidden="true" />
+              Start Free Trial <ArrowRight className="size-4" aria-hidden="true" />
             </ButtonLink>
           </div>
           <details className="relative ml-auto xl:hidden">
@@ -134,7 +134,7 @@ export function MarketingShell({ children }: { readonly children: ReactNode }) {
                 Login
               </Link>
               <ButtonLink href="/signup" size="sm" fullWidth>
-                Get started
+                Start Free Trial
               </ButtonLink>
             </nav>
           </details>
